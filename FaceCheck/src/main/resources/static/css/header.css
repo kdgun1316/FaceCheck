@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Chosunilbo_myungjo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Chosunilbo_myungjo';
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ✅ 헤더 (topbar) */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 85px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* ✅ 메인 컨테이너 (사이드바 + 콘텐츠 포함) */
+.container {
+  display: flex;
+  
+  padding-top: 85px;  /* 헤더 높이만큼 여백 추가 */
+}
+
+/* ✅ 사이드바 */
+.sidebar {
+  width: 250px;
+  background-color: #6D8BA3;
+  color: white;
+  padding: 20px;
+  height: calc(100vh - 85px);
+  position: fixed;
+  left: 0;
+  top: 85px; /* 헤더 높이만큼 내려줌 */
+}
+
+.logo img {
+    height: 85px; /* 헤더 높이에 맞춤 */
+    width: auto; /* 비율 유지 */
+}
+
+.submenu {
+    display: none;
+}
+.dropdown.active .submenu {
+    display: block;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid white;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffcc00;
+  transform: translateX(5px); 
+}
+
+/* ✅ 메인 콘텐츠 (index.css 포함) */
+.main-content {
+  flex-grow: 1;
+  margin-left: 250px; /* 사이드바 너비만큼 이동 */
+  background-color: #f8f9fa;
+  padding: 20px;
+}

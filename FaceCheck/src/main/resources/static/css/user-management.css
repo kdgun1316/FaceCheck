@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.user-management h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.user-management h2 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.user-management ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.user-management ul li {
+  margin-bottom: 5px;
+}
+
+/* 표 스타일 */
+.management {
+    padding-top: 10px; /* ✅ 너무 큰 여백 줄이기 */
+    max-width: 1200px; /* ✅ 너무 큰 값(5000px) 조정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    min-height: 100vh; /* ✅ 화면 전체 높이 유지 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-center; /* ✅ 중앙 정렬 */
+}
+
+
+.user-table {
+  width: 1500px;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.user-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.user-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 점 3개 스타일 */
+.dots {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px;
+  display: inline-block;
+}
+
+/* 드롭다운 스타일 */
+.dropdown- {
+  position: relative;
+  display: inline-block;
+}
+
+/* 드롭다운 스타일 */
+.dropdown-menu {
+  display: none; /* 기본적으로 숨김 */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 5px; /* 여백 추가 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.dropdown-menu button {
+  border: none;
+  background: none;
+  text-align: center;
+  cursor: pointer;
+  color: black;
+  padding: 8px 12px;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
