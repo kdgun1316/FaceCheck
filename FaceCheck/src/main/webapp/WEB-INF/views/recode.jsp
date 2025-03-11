@@ -15,7 +15,7 @@
 	
 	 <main class="management">
                 <section class="user-management">
-                    <h1>사용자 관리</h1>
+                    <h1>출입 기록 관리</h1>
 
                     <table class="user-table">
                         <thead>
