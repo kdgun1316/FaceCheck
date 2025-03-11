@@ -16,7 +16,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #2c3e50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -25,7 +25,7 @@
 }
 
 #capture-button:hover {
-    background-color: #45a049;
+    background-color: #34495e;
 }
 
 /* 캡처된 이미지 컨테이너 */
@@ -52,7 +52,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #2c3e50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -65,7 +65,7 @@ a {
 }
 
 #next-button:hover {
-    background-color: #0056b3;
+    background-color: #34495e;
 }
 
 .face-guidance {
