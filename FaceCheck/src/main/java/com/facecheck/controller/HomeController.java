@@ -1,11 +1,16 @@
 package com.facecheck.controller;
 
+import java.util.List;
+
+import org.eclipse.tags.shaded.org.apache.xml.utils.SystemIDResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.facecheck.entity.Admin;
+import com.facecheck.entity.Employee;
 import com.facecheck.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +31,16 @@ public class HomeController {
 	    } else {
 	        return "redirect:/login?error=true";
 	    }
+
+	}
+
+	@GetMapping("/recode")
+	public String select(Model model) {
+		   List<Employee> emp = adminservice.empselect();
+		   
+		   System.out.println(emp.toString());
+		   model.addAttribute("empselect", emp);
+		   return "recode";
 
 	}
 	
@@ -76,11 +91,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@GetMapping("recode")
-	public String recode() {
-		
-		return "recode";
-	}
 	
 	
 }
