@@ -11,7 +11,6 @@
 
 
 <link rel="stylesheet" href="css/index.css" />
-<script defer src="js/index.js"></script>
 
 
 </head>
@@ -33,7 +32,6 @@
 		<div id="image-container"></div>
 		<!-- 캡처된 이미지를 표시할 영역 추가 -->
 		<button id="next-button" style="display: none;">다음</button>
-		<!-- 폼 제출 버튼 -->
 
 
 	</section>
