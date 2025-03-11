@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class Admin {
 	private String admin_id;
 	private String admin_pw;
-	private String created_at;
 	
 
 }
