@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script defer src="js/header.js"></script>
+
 <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
