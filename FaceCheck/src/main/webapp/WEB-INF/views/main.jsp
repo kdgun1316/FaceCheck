@@ -19,7 +19,6 @@
 	<div class="chart1">
 		<canvas id="doughnutChart"></canvas>
 	</div>
-
 <script defer src="js/main.js"></script>
 <script defer src="js/header.js"></script>
 
