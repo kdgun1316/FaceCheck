@@ -1,0 +1,65 @@
+#camera-feed {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    background: black;
+}
+
+/* 촬영 버튼 */
+#capture-button {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#capture-button:hover {
+    background-color: #45a049;
+}
+
+/* 캡처된 이미지 컨테이너 */
+#image-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+/* 캡처된 이미지 스타일 */
+#image-container img {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* 다음 버튼 */
+#next-button {
+    display: none;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next-button:hover {
+    background-color: #0056b3;
+}

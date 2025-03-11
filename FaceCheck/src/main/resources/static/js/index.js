@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
+
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         const imageData = canvas.toDataURL("image/png"); // Base64 이미지 데이터
@@ -57,3 +58,4 @@ document.addEventListener("DOMContentLoaded", async function () {
         imageForm.submit(); // 폼 제출 (POST 요청)
     });
 });
+
