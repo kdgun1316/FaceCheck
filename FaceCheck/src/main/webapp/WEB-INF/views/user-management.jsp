@@ -25,6 +25,7 @@
 						<th>생년월일</th>
 						<th>연락처</th>
 						<th>출입시각</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>

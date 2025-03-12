@@ -41,6 +41,7 @@
 					<td><%=emp.getDept()%></td>
 					<td><%=emp.getEmp_birthdate()%></td>
 					<td><%=emp.getEmp_phone()%></td>
+					<td></td>
 				</tr>
 				<%
 				}
