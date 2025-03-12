@@ -1,13 +1,16 @@
 package com.facecheck.controller;
 
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
-import org.eclipse.tags.shaded.org.apache.xml.utils.SystemIDResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
@@ -20,6 +23,19 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 	@Autowired
 	private AdminService adminservice;
+	
+	@PostMapping("/register-user")
+	public String emp_insert(Employee emp, @RequestParam("emp_face_img") String base64Image) {
+		System.out.println(emp.toString());
+		if (base64Image == null || base64Image.isEmpty()) {
+		    System.out.println("데이터가 없습니다!");
+		} else {
+		    System.out.println(base64Image.substring(0,50));
+		}
+
+		return "";
+	}
+	 
 	
 	
 	@PostMapping("/login")

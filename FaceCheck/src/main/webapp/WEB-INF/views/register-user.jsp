@@ -55,38 +55,33 @@
                 <form id="user-form" class="register-form" action="register-user" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">이름</label>
-                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <input type="text" id="name" name="emp_name" placeholder="이름을 입력하세요" required>
                     </div>
                     <div class="form-group">
                         <label for="id">사번</label>
-                        <input type="text" id="id" name="id" placeholder="사번을 입력하세요" required>
+                        <input type="text" id="id" name="emp_num" placeholder="사번을 입력하세요" required>
                     </div>
+                    <div class="form-group">
+                        <label for="dept">부서</label>
+                        <select id="gender" name="dept" required>
+                            <option value="accountion">회계</option>
+                            <option value="personnel">인사</option>
+                        </select>
+                    </div>
+                    
+                    
                     <div class="form-group">
                         <label for="birth">생년월일</label>
-                        <select id="birth-year" name="birth-year" required>
-                            <option value="">년도 선택</option>
-                        </select>
-                        <select id="birth-month" name="birth-month" required>
-                            <option value="">월 선택</option>
-                        </select>
-                        <select id="birth-day" name="birth-day" required>
-                            <option value="">일 선택</option>
-                        </select>
+                        <input type="date" name="emp_birthdate" placeholder="생년울일" required>
                     </div>
-                    <div class="form-group">
-                        <label for="gender">성별</label>
-                        <select id="gender" name="gender" required>
-                            <option value="male">남성</option>
-                            <option value="female">여성</option>
-                        </select>
-                    </div>
+
                     <div class="form-group">
                         <label for="phone">연락처</label>
-                        <input type="tel" id="phone" name="phone" placeholder="연락처를 입력하세요" required>
+                        <input type="tel" id="phone" name="emp_phone" placeholder="연락처를 입력하세요" required>
                     </div>
 
                     <!-- 📌 카메라에서 찍은 이미지를 hidden input에 포함시켜서 전송 -->
-                    <input type="hidden" name="capturedImage" id="capturedImageInput">
+                    <input type="hidden" name="emp_face_img" id="capturedImageInput">
 
                     <button type="submit" class="register-btn">등록</button>
                 </form>
