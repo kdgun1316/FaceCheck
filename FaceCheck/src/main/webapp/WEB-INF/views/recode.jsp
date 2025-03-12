@@ -1,3 +1,4 @@
+<%@page import="com.facecheck.entity.recode"%>
 <%@page import="java.util.List"%>
 <%@page import="com.facecheck.entity.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,6 +23,7 @@
 
 			<table class="user-table">
 				<tr>
+					<th>index</th>
 					<th>이름</th>
 					<th>사번</th>
 					<th>부서</th>
@@ -29,25 +31,30 @@
 					<th>연락처</th>
 					<th>출입기록</th>
 				</tr>
-				<%
-				List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
-				if (empList != null) {
-					for (Employee emp : empList) {
-				%>
-				<tr>
-					
-					<td><%=emp.getEmp_name()%></td>
-					<td><%=emp.getEmp_num()%></td>
-					<td><%=emp.getDept()%></td>
-					<td><%=emp.getEmp_birthdate()%></td>
-					<td><%=emp.getEmp_phone()%></td>
-					<td></td>
-				</tr>
-				<%
-				}
-				}
-				%>
-			</table>
+
+					<%
+					List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
+					List<recode> recList = (List<recode>) request.getAttribute("recselect");
+
+					if (empList != null && recList != null) {
+						for (int i = 0; i < empList.size(); i++) {
+							Employee emp = empList.get(i);
+							recode rec = recList.get(i);
+					%>
+					<tr>
+						<td><%=rec.getLog_idx()%></td>
+						<td><%=emp.getEmp_name()%></td>
+						<td><%=emp.getEmp_num()%></td>
+						<td><%=emp.getDept()%></td>
+						<td><%=emp.getEmp_birthdate()%></td>
+						<td><%=emp.getEmp_phone()%></td>
+						<td><%=rec.getLog_time()%></td>
+					</tr>
+					<%
+					}
+					}
+					%>
+				</table>
 		</section>
 	</main>
 
