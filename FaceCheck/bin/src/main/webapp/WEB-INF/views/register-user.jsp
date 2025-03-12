@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/register-user.css" />
+<script defer src="${pageContext.request.contextPath}/js/register-user.js"></script>
 <script defer src="/js/header.js"></script>
 </head>
 <body>
@@ -55,7 +56,7 @@
                             <label for="phone">연락처</label>
                             <input type="tel" id="phone" name="phone" placeholder="연락처를 입력하세요" required>
                         </div>
-                        <a href="#"><button type="submit" class="register-btn">등록</button></a>
+                        <a href="user-management"><button type="submit" class="register-btn">등록</button></a>
                     </form>
                 </div>
             </div>

@@ -16,7 +16,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #8fb7df;
     color: white;
     border: none;
     border-radius: 5px;
@@ -25,7 +25,7 @@
 }
 
 #capture-button:hover {
-    background-color: #45a049;
+    background-color: #34495e;
 }
 
 /* 캡처된 이미지 컨테이너 */
@@ -52,7 +52,7 @@
     margin-left: auto;
     margin-right: auto;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #8fb7df;
     color: white;
     border: none;
     border-radius: 5px;
@@ -65,7 +65,7 @@ a {
 }
 
 #next-button:hover {
-    background-color: #0056b3;
+    background-color: #34495e;
 }
 
 .face-guidance {
@@ -78,9 +78,8 @@ a {
 .face-guidance-text {
     font-size: 20px;
     font-weight: bold;
-    color: #fff; /* 흰색으로 가독성 향상 */
+    color: #black; /* 흰색으로 가독성 향상 */
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); /* 반투명 검은 배경 */
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 살짝 그림자 효과 */
