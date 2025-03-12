@@ -1,77 +1,112 @@
-
-
-
 document.addEventListener("DOMContentLoaded", async function () {
     const video = document.getElementById("camera-feed");
     const captureButton = document.getElementById("capture-button");
-    const nextButton = document.getElementById("next-button"); // 폼 제출 버튼
+    const nextButton = document.getElementById("next-button");
+    const submitButton = document.getElementById("submit-btn");
     const canvas = document.getElementById("canvas");
-    const imageContainer = document.getElementById("image-container"); // HTML에서 가져옴
-    const imageForm = document.getElementById("image-form"); // 폼 요소
-    const capturedImagesInput = document.getElementById("capturedImageInput"); // 숨겨진 input
-    const previewImage = document.getElementById('preview-image'); // 프로필 이미지 미리보기
+    const imageContainer = document.getElementById("image-container");
+    const previewImage = document.getElementById("preview-image");
 
-    let captureCount = 0;
-    const maxCaptures = 1;
-    let capturedImages = []; // 촬영된 이미지 저장 배열
+    const maxCaptures = 5;
+    let capturedImages = [];
 
+    // ✅ 카메라 활성화
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
     } catch (err) {
-        console.error("카메라를 활성화할 수 없습니다:", err);
+        alert("카메라를 활성화할 수 없습니다!");
+        console.error("카메라 오류:", err);
     }
 
-    captureButton.addEventListener("click", function() {
-        if (captureCount < maxCaptures) {
+    // ✅ 촬영 버튼 클릭 시 최대 5장까지 저장
+    captureButton.addEventListener("click", function () {
+        if (capturedImages.length < maxCaptures) {
             captureImage();
-            captureCount++;
-          } else{
-                captureButton.style.display = "none"; // 촬영 버튼 숨김
-                nextButton.style.display = "block"; // '다음' 버튼 표시
+
+            if (capturedImages.length === maxCaptures) {
+                captureButton.style.display = "none";
+                nextButton.style.display = "block";
                 video.style.display = "none";
             }
-        console.log("이미지 데이터:", capturedImages);
+        }
+        console.log(`현재까지 촬영된 이미지 수: ${capturedImages.length}`);
     });
 
+    // ✅ 이미지 캡처 및 저장
     function captureImage() {
         const context = canvas.getContext("2d");
-
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = canvas.toDataURL("image/png"); // Base64 이미지 데이터
-        capturedImages.push(imageData); // 배열에 저장
 
-        // 첫 번째 촬영된 이미지를 미리보기 이미지로 설정
+        const imageData = canvas.toDataURL("image/png"); // 🔥 Base64 변환
+        capturedImages.push(imageData);
+
+        // 첫 번째 이미지를 미리보기로 설정
         if (capturedImages.length === 1) {
-            previewImage.src = imageData; // 첫 번째 이미지를 미리보기 영역에 설정
+            previewImage.src = imageData;
         }
 
-        // 새로운 이미지 태그 생성 (미리보기 용)
+        // 이미지 미리보기 추가
         const imgElement = document.createElement("img");
         imgElement.src = imageData;
         imageContainer.appendChild(imgElement);
-
     }
 
+    // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
+    nextButton.addEventListener("click", function () {
+        document.querySelector(".register-section").style.display = "block";
+        nextButton.style.display = "none";
+    });
 
+    // ✅ "등록" 버튼 클릭 시, 데이터 서버 전송
+    submitButton.addEventListener("click", function () {
+        if (capturedImages.length !== maxCaptures) {
+            alert("5장의 사진을 모두 촬영해야 합니다!");
+            return;
+        }
 
+        const formData = new FormData();
+        formData.append("emp_name", document.getElementById("name").value);
+        formData.append("emp_num", document.getElementById("id").value);
+        formData.append("dept", document.getElementById("gender").value); 
+        formData.append("emp_birthdate", document.querySelector("[name='emp_birthdate']").value);
+        formData.append("emp_phone", document.getElementById("phone").value);
 
-    // 버튼 클릭 시 촬영한 이미지 데이터를 폼에 추가 후 제출
-    nextButton.addEventListener("click", function() {
-       // 동건씨가 작성해야할 코드
-       // 1. capturedImages 배열 안에 들어있는 base64형태의 이미지파일을 images 폴더 안에 저장 (5개 데이터 들어가기) 
-       
-       // 2. 저장이 무사히 되었을 때, true 값을 capturedImageInput 태그에 value로 부여 
-              
-       // 3. (될 수도 있고 안될수도 있음) base64형태의 이미지파일 5장을 바로 flask send(fetch == ajax 사용해서)
-       // --> flask에서 base64 형태의 이미지가 잘 들어오는 지 check 
-       
-       // 4. flask에서 true 값을 보내주면(동건씨가 check) vector값을 emp_face_img에 매칭시킨다 생각하고 데이터베이스에 저장하는 흐름 
-       
-       // capturedImagesInput.value = JSON.stringify(capturedImages);
-       // imageForm.submit(); // 폼 제출 (POST 요청)
+        // ✅ Base64 → Blob 변환 후 `FormData`에 추가
+        capturedImages.forEach((base64, index) => {
+            const byteString = atob(base64.split(",")[1]);
+            const mimeString = base64.split(",")[0].split(":")[1].split(";")[0];
+            const arrayBuffer = new Uint8Array(byteString.length);
+
+            for (let i = 0; i < byteString.length; i++) {
+                arrayBuffer[i] = byteString.charCodeAt(i);
+            }
+
+            const blob = new Blob([arrayBuffer], { type: mimeString });
+            formData.append("emp_face_imgs", new File([blob], `${document.getElementById("id").value}_${index + 1}.png`));
+        });
+
+        fetch("/FaceCheck/register-user", {
+            method: "POST",
+            body: formData,
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error(`서버 응답 오류: ${res.status}`);
+            return res.json();
+        })
+        .then((result) => {
+            if (result.success) {
+                alert("등록 성공!");
+                location.href = "/FaceCheck/user-management"; 
+            } else {
+                alert("등록 실패!");
+            }
+        })
+        .catch((err) => {
+            console.error("서버 전송 오류:", err);
+            alert("서버 오류 발생");
+        });
     });
 });

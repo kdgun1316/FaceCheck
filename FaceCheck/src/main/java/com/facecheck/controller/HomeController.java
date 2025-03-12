@@ -1,6 +1,10 @@
 package com.facecheck.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
@@ -20,21 +26,63 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 	@Autowired
 	private AdminService adminservice;
+
+
+
 	@PostMapping("/register-user")
-	public String emp_insert(Employee emp, @RequestParam("emp_face_img") String base64Image) {
+	@ResponseBody
+	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
+
 		System.out.println(emp.toString());
-		if (base64Image == null || base64Image.isEmpty()) {
-		    System.out.println("데이터가 없습니다!");
-		} else {
-		    System.out.println(base64Image.substring(0,50));
+
+		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+
+		for (MultipartFile img : images) {
+			String filename = emp.getEmp_num() + "_" + img.getOriginalFilename(); // 사번 + 파일명 System.out.println("파일명: "
+																					// + filename);
+
+			try {
+				File file = new File(uploadDir, filename);
+				img.transferTo(file);
+				System.out.println("경로: " + file.getAbsolutePath());
+			} catch (IOException e) {
+				System.out.println("저장 실패");
+				e.printStackTrace();
+			}
 		}
 
-		return "";
+		Map<String, Object> result = new HashMap<>();
+		result.put("success", true);
+		return result;
 	}
 	 
-	
-	
+//	
+//	@PostMapping("/register-user")
+//	@ResponseBody
+//	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images){
+//
+//	    System.out.println("✅ 사용자 정보 확인 ✅");
+//	    System.out.println(emp.toString());
+//
+//	    System.out.println(images.get(2).getOriginalFilename());
+//	    System.out.println("✅ 촬영된 이미지 파일 개수: " + images.size());
+//	    for(MultipartFile file : images){
+//	        System.out.println("파일 이름: " + file.getOriginalFilename());
+//	        System.out.println("파일 크기: " + file.getSize());
+//	    }
+//	    
+//	    emmployee.insert(emp, images);
+//	    
+//
+//	    Map<String, Object> response = new HashMap<>();
+//	    response.put("success", true);
+//	    return response;
+//	}
+//
 
+	
+	
+	
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
 		Admin result = adminservice.login(admin);
@@ -66,10 +114,6 @@ public class HomeController {
 		model.addAttribute("empselect", emp);
 		return "recode";
 	}
-	
-	
-	
-	
 
 	@GetMapping("/login")
 	public String loginpage() {
