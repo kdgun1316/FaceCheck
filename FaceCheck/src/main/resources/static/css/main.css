@@ -1,8 +1,149 @@
 @charset "UTF-8";
+/* 기본 레이아웃 */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-.chart{
-	margin-top : 50px;
-	margin-left: 500px;
-	width : 1000px;
-	height: 450px;
+/* 상단 통계 카드 */
+.stats-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 메인 콘텐츠 영역 */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* 가로로 넘치는 경우 줄 바꿈 */
+}
+
+/* 좌측 영역: 성공/실패/인식률 */
+.metrics-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 calc(50% - 20px); /* 두 개의 카드 공간을 차지 */
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.metric-title {
+    font-weight: bold;
+}
+
+.metric-value.green {
+    color: green;
+}
+
+.metric-value.red {
+    color: red;
+}
+
+.metric-value.blue {
+    color: blue;
+}
+
+/* 중앙 영역: 검은색 선 */
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: transparent;
+    margin: 0px ;
+}
+
+/* 우측 영역: 출입 로그 수 차트 */
+.chart-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    flex: 1 1 calc(50% - 20px); /* 두 개의 카드 공간을 차지 */
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+.chart-header {
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 우측 실시간 알림 */
+.notice-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 calc(50% - 20px); /* 두 개의 카드 공간을 차지 */
+}
+
+.notice-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.notice-item {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notice-item:last-child {
+    border-bottom: none;
+}
+
+.notice-profile img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notice-content {
+    flex: 1;
+}
+
+.notice-status button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.notice-status button:hover {
+    background: #c82333;
 }
