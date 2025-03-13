@@ -43,6 +43,7 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
             <!-- 중앙 영역: 검은색 선 -->
             <div class="divider"></div>
 
@@ -56,6 +57,13 @@
                     <div class="chart-legend"></div>
                 </div>
             </div>
+=======
+	<div class="chart1">
+		<canvas id="doughnutChart"></canvas>
+	</div>
+<script defer src="js/main.js"></script>
+<script defer src="js/header.js"></script>
+>>>>>>> branch 'master' of https://github.com/kdgun1316/FaceCheck.git
 
             <!-- 우측 실시간 알림 -->
             <div class="section-card notice-section">

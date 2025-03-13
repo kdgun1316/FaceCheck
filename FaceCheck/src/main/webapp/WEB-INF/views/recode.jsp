@@ -1,5 +1,10 @@
+<%@page import="com.facecheck.entity.recode"%>
+<%@page import="java.util.List"%>
+<%@page import="com.facecheck.entity.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@page isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,71 +15,48 @@
 <script defer src="/js/header.js"></script>
 </head>
 <body>
+	<%@ include file="header.jsp"%>
 
-	<%@ include file="header.jsp" %>
-	
-	 <main class="management">
-                <section class="user-management">
-                    <h1>사용자 관리</h1>
+	<main class="management">
+		<section class="user-management">
+			<h1>출입 기록 관리</h1>
 
-                    <table class="user-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>이름</th>
-                                <th>사번</th>
-                                <th>부서</th>
-                                <th>생년월일</th>
-                                <th>성별</th>
-                                <th>연락처</th>
-                                <th>출입기록</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>홍길동</td>
-                                <td>1234</td>
-                                <td>경영관리부</td>
-                                <td>1999.06.07</td>
-                                <td>남성</td>
-                                <td>010-1234-5678</td>
-                                <td>2025-03-10 AM 07:10</td>
-                            </tr>
-                                   <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>홍길동</td>
-                                <td>1234</td>
-                                <td>경영관리부</td>
-                                <td>1999.06.07</td>
-                                <td>남성</td>
-                                <td>010-1234-5678</td>
-                                <td>2025-03-10 AM 07:10</td>
-                            </tr>
-                                   <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>홍길동</td>
-                                <td>1234</td>
-                                <td>경영관리부</td>
-                                <td>1999.06.07</td>
-                                <td>남성</td>
-                                <td>010-1234-5678</td>
-                                <td>2025-03-10 AM 07:10</td>
-                            </tr>
-                                   <tr>
-                                <td><input type="checkbox" name=""></td>
-                                <td>홍길동</td>
-                                <td>1234</td>
-                                <td>경영관리부</td>
-                                <td>1999.06.07</td>
-                                <td>남성</td>
-                                <td>010-1234-5678</td>
-                                <td>2025-03-10 AM 07:10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-            
+			<table class="user-table">
+				<tr>
+					<th>index</th>
+					<th>이름</th>
+					<th>사번</th>
+					<th>부서</th>
+					<th>생년월일</th>
+					<th>연락처</th>
+					<th>출입기록</th>
+				</tr>
+
+					<%
+					List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
+					List<recode> recList = (List<recode>) request.getAttribute("recselect");
+
+					if (empList != null && recList != null) {
+						for (int i = 0; i < empList.size(); i++) {
+							Employee emp = empList.get(i);
+							recode rec = recList.get(i);
+					%>
+					<tr>
+						<td><%=rec.getLog_idx()%></td>
+						<td><%=emp.getEmp_name()%></td>
+						<td><%=emp.getEmp_num()%></td>
+						<td><%=emp.getDept()%></td>
+						<td><%=emp.getEmp_birthdate()%></td>
+						<td><%=emp.getEmp_phone()%></td>
+						<td><%=rec.getLog_time()%></td>
+					</tr>
+					<%
+					}
+					}
+					%>
+				</table>
+		</section>
+	</main>
+
 </body>
 </html>

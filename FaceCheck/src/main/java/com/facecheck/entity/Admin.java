@@ -11,5 +11,5 @@ public class Admin {
 	private String admin_id;
 	private String admin_pw;
 	
-
 }
+

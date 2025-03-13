@@ -7,6 +7,10 @@ import com.facecheck.entity.Admin;
 
 @Mapper
 public interface AdminMapper {
-	@Select("select * from admin_info where admin_id=#{admin_id} and admin_pw=#{admin_pw}")
+	
+		
+	
+	@Select("SELECT * FROM admin_info WHERE admin_id = #{admin_id} AND admin_pw = SHA2(#{admin_pw}, 512)")
 	public Admin login(Admin admin);
+
 }
