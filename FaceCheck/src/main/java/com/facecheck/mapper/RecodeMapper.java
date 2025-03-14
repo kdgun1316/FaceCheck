@@ -11,6 +11,6 @@ import com.facecheck.entity.recode;
 @Mapper
 public interface RecodeMapper {
 
-	@Select("SELECT * FROM log_info")
+	@Select("SELECT * FROM emp_info AS e INNER JOIN log_info AS l ON e.emp_num = l.emp_num")
 	List<recode> recselect();
 }

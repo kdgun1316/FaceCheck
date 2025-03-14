@@ -2,6 +2,7 @@ package com.facecheck.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +14,7 @@ public interface EmployeeMapper {
 
 	@Select("SELECT * FROM emp_info")
 	List<Employee> empselect();
+
 	
 	// emp_num의 개수를 카운트하는 메서드
     @Select("SELECT COUNT(emp_num) FROM emp_info")
@@ -21,5 +23,7 @@ public interface EmployeeMapper {
 
 	
 
+	@Delete("DELETE FROM emp_info WHERE emp_num = #{emp_num}")
+	    void delete(String emp_num); 
 	
 }

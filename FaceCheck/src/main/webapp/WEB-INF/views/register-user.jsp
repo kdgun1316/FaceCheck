@@ -79,8 +79,6 @@
 				
 				    <button type="button" id="submit-btn" class="register-btn">등록</button>
 				</form>
-
-
             </div>
         </div>
     </section>

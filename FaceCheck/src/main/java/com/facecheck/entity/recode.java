@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class recode {
+public class recode extends Employee {
 	private int log_idx;
     private String log_time;
     private int emp_num;
