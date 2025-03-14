@@ -151,6 +151,9 @@ public class HomeController {
 	
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
+		
+		
+		
 		Admin result = adminservice.login(admin);
 		if (result != null) {
 			session.setAttribute("admin", result);

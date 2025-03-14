@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="css/index.css" />
-<script defer src="js/index.js"></script>
-<script defer src="js/header.js"></script>
+<script defer src="/js/index.js"></script>
+<script defer src="/js/header.js"></script>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
