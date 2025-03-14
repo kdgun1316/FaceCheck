@@ -19,7 +19,7 @@
 
 	<main class="management">
 		<section class="user-management">
-			<h1>출입 기록 관리</h1>
+			<h1 class="manage">출입 기록 관리</h1>
 
 			<table class="user-table">
 				<tr>

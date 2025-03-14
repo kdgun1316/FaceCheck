@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: 'Chosunilbo_myungjo';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
-    font-weight: normal;
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -11,7 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Chosunilbo_myungjo';
+  font-family: 'Pretendard-Regular';
 }
 
 body {
@@ -70,6 +70,11 @@ body {
   list-style: none;
 }
 
+.sidebar ul li {
+    margin-bottom: 15px; /* 각 항목 사이의 간격 조정 */
+}
+
+
 .sidebar ul li a {
   color: white;
   text-decoration: none;
@@ -91,4 +96,17 @@ body {
   margin-left: 250px; /* 사이드바 너비만큼 이동 */
   background-color: #f8f9fa;
   padding: 20px;
+}
+
+.icons span {
+    cursor: pointer; /* 클릭 가능하도록 변경 */
+    transition: transform 0.2s ease, color 0.2s ease; /* 부드러운 효과 */
+}
+
+.icons span:hover {
+    transform: scale(1.2); /* 아이콘 크기 확대 */
+    color: #007bff; /* 색상 변경 (선택 사항) */
+}
+.manage {
+	padding-left: 20px;
 }
