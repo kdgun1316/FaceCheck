@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
@@ -21,6 +26,7 @@ import com.facecheck.entity.recode;
 import com.facecheck.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
+import reactor.core.publisher.Mono;
 
 @Controller
 public class HomeController {
@@ -29,33 +35,93 @@ public class HomeController {
 
 
 
-	@PostMapping("/register-user")
-	@ResponseBody
-	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
+	
+	
+	private final WebClient webClient = WebClient.builder().baseUrl("http://127.0.0.1:5000").build();
 
-		System.out.println(emp.toString());
+    @PostMapping("/register-user")
+    @ResponseBody
+    public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
 
-		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+        Map<String, Object> result = new HashMap<>();
 
-		for (MultipartFile img : images) {
-			String filename = emp.getEmp_num() + "_" + img.getOriginalFilename(); // 사번 + 파일명 System.out.println("파일명: "
-																					// + filename);
+        try {
+            MultipartBodyBuilder builder = new MultipartBodyBuilder();
 
-			try {
-				File file = new File(uploadDir, filename);
-				img.transferTo(file);
-				System.out.println("경로: " + file.getAbsolutePath());
-			} catch (IOException e) {
-				System.out.println("저장 실패");
-				e.printStackTrace();
-			}
-		}
+            // 여러 이미지를 Flask로 추가
+            for (MultipartFile img : images) {
+                builder.part("images", new ByteArrayResource(img.getBytes()))
+                        .filename(img.getOriginalFilename())
+                        .contentType(MediaType.IMAGE_JPEG);
+            }
 
-		Map<String, Object> result = new HashMap<>();
-		result.put("success", true);
-		return result;
-	}
-	 
+            // Flask로 요청 전송
+            ResponseEntity<String> response = webClient.post()
+                    .uri("/upload-image")
+                    .contentType(MediaType.MULTIPART_FORM_DATA)
+                    .bodyValue(builder.build()) // Multipart 데이터 전송
+                    .retrieve()
+                    .toEntity(String.class)
+                    .block();  // 동기 처리
+
+            System.out.println("Flask 응답: " + response.getBody());
+
+            // 응답 확인
+            result.put("success", true);
+            result.put("flask_response", response.getBody());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("success", false);
+            result.put("message", "Flask 서버로 요청 중 오류 발생");
+        }
+
+        return result;
+    }	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@PostMapping("/register-user")
+//	@ResponseBody
+//	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
+//
+//		System.out.println(emp.toString());
+//
+//		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+//
+//		for (MultipartFile img : images) {
+//			String filename = emp.getEmp_num() + "_" + img.getOriginalFilename(); // 사번 + 파일명 System.out.println("파일명: "
+//																					// + filename);
+//
+//			try {
+//				File file = new File(uploadDir, filename);
+//				img.transferTo(file);
+//				System.out.println("경로: " + file.getAbsolutePath());
+//			} catch (IOException e) {
+//				System.out.println("저장 실패");
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		Map<String, Object> result = new HashMap<>();
+//		result.put("success", true);
+//		return result;
+//	}
+	
+	
+//	 
 //	
 //	@PostMapping("/register-user")
 //	@ResponseBody
