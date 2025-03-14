@@ -14,6 +14,11 @@ public interface EmployeeMapper {
 	@Select("SELECT * FROM emp_info")
 	List<Employee> empselect();
 	
+	// emp_num의 개수를 카운트하는 메서드
+    @Select("SELECT COUNT(emp_num) FROM emp_info")
+    int countEmpNum();
+
+
 	
 
 	
