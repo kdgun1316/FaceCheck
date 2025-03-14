@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 public class recode extends Employee {
 	private int log_idx;
     private String log_time;
-    private String emp_num;
+    private int emp_num;
     private String admin_id;
 }

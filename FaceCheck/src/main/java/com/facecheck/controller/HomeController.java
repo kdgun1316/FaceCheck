@@ -147,7 +147,15 @@ public class HomeController {
 		}
 
 	}
-
+	
+	@GetMapping("/main")
+	public String main(Model model) {
+		int empNumCount = adminservice.getEmpNumCount();
+        model.addAttribute("empNumCount", empNumCount); // JSP로 데이터 전달
+        return "main"; // main.jsp로 매핑
+	}
+	
+	
 	@GetMapping("/user-management")
 	public String select(Model model) {
 		List<Employee> emp = adminservice.empselect();
@@ -220,10 +228,10 @@ public class HomeController {
 		return "revise";
 	}
 
-	@GetMapping("main")
-	public String main() {
+	//@GetMapping("main")
+	//public String main() {
 
-		return "main";
-	}
+	//	return "main";
+	//}
 
 }

@@ -29,11 +29,9 @@ public class AdminService {
 		
 	}
 
-
-	public List<Employee> empselect() {
-
-		return employee.empselect();
-	}
+    public List<Employee> empselect() {
+        return employee.empselect();
+    }
 
 
 	public List<recode> recselect() {
@@ -47,6 +45,8 @@ public class AdminService {
 	}
 	
 	
-
-
+    // 새로 추가: emp_num의 개수를 카운트하는 메서드
+    public int getEmpNumCount() {
+        return employee.countEmpNum();
+    }
 }
