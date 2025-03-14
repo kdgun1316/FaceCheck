@@ -57,12 +57,6 @@
                     <div class="chart-legend"></div>
                 </div>
             </div>
-
-
-
-<script defer src="js/header.js"></script>
-
-
             <!-- 우측 실시간 알림 -->
             <div class="section-card notice-section">
                 <div class="notice-header">
