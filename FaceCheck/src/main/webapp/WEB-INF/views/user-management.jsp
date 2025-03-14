@@ -46,7 +46,7 @@
 							<span class="dots" onclick="toggleDropdown(this)">⋮</span>
 							<div class="dropdown-menu">
 								<a href="revise"><button onclick="editUser()">수정</button></a>
-								<button onclick="deleteUser()">삭제</button>
+								<a href="deleteUser?emp_num=<%=emp.getEmp_num()%>"><button>삭제</button></a>
 							</div>
 						</div>
 					</td>

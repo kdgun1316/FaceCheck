@@ -17,7 +17,6 @@ public class AdminService {
 	@Autowired
 	private AdminMapper adminmapper;
 	
-	
 	@Autowired
 	private EmployeeMapper employee;
 	
@@ -39,6 +38,12 @@ public class AdminService {
 
 	public List<recode> recselect() {
 		return recode.recselect();
+	}
+
+
+	public void delete(String emp_num) {
+        System.out.println("🛠 Mapper에서 삭제 실행: " + emp_num);
+        employee.delete(emp_num);  
 	}
 	
 	

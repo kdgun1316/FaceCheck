@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,9 +35,6 @@ public class HomeController {
 	@Autowired
 	private AdminService adminservice;
 
-
-
-	
 	
 	private final WebClient webClient = WebClient.builder().baseUrl("http://127.0.0.1:5000").build();
 
@@ -78,19 +77,6 @@ public class HomeController {
 
         return result;
     }	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 //	@PostMapping("/register-user")
@@ -147,8 +133,6 @@ public class HomeController {
 //
 
 	
-	
-	
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
 		
@@ -175,15 +159,30 @@ public class HomeController {
 
 	@GetMapping("/recode")
 	public String select2(Model model) {
+		
 		List<recode> rec = adminservice.recselect();
-		List<Employee> emp = adminservice.empselect();
-
+		// List<Employee> emp = adminservice.empselect();
+		
+		// 1. SQL구문으로 join해서 불러오는 방법 1개 (java 로직으로 해결하는 것도 방법)
+		
 		System.out.println(rec.toString());
 		model.addAttribute("recselect", rec);
-		model.addAttribute("empselect", emp);
+		// model.addAttribute("empselect", emp);
 		return "recode";
 	}
+	
+	@GetMapping("/deleteUser")
+	public String deleteEmployee(@RequestParam String emp_num) {
+	    System.out.println("🛠 삭제 요청 도착! empNum: " + emp_num);
 
+	    // 인스턴스를 통해 delete 메소드 호출
+	    adminservice.delete(emp_num);  // static 방식이 아닌 인스턴스 방식으로 호출
+
+	    System.out.println("✅ 삭제 완료!");
+	    return "redirect:/user-management";
+	}
+	
+	
 	@GetMapping("/login")
 	public String loginpage() {
 
