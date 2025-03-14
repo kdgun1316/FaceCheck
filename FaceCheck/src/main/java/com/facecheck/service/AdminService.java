@@ -41,10 +41,7 @@ public class AdminService {
 		return recode.recselect();
 	}
 	
-	// ✅ 새로운 사용자 수 조회 메서드 추가
-    public int getTotalUserCount() {
-        return employee.getUserCount(); // EmployeeMapper에서 가져온 데이터 반환
-    }
+	
 
 
 }
