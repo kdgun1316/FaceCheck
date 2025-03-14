@@ -27,7 +27,7 @@
         </aside>
         <main class="content">
             <header class="topbar">
-                <a href="#" class="logo"><img src="${pageContext.request.contextPath}/images/logo.jpg" alt="로고"></a>
+                <a href="main" class="logo"><img src="${pageContext.request.contextPath}/images/logo.jpg" alt="로고"></a>
                 <div class="icons">
                     <input type="text" placeholder="Search">
                     <span class="notification-icon">🔔</span>

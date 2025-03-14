@@ -15,7 +15,7 @@
 	<%@ include file="header.jsp"%>
 	<main class="management">
 		<section class="user-management">
-			<h1>사용자 관리</h1>
+			<h1 class="manage">사용자 관리</h1>
 
 			<table class="user-table">
 				<tr>
