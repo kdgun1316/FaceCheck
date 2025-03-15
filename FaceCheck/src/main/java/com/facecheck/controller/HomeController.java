@@ -75,13 +75,8 @@ public class HomeController {
             result.put("message", "Flask 서버로 요청 중 오류 발생");
         }
         
-        
-        	
         adminservice.insert(emp);
         
-        
-        
-
         return result;
     }
 
