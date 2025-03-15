@@ -233,5 +233,12 @@ public class HomeController {
 
 	//	return "main";
 	//}
+	
+	@GetMapping("/api/dashboard-data")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getDashboardData() {
+	    Map<String, Object> data = adminservice.getDashboardData();
+	    return ResponseEntity.ok(data);
+	}
 
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,8 @@
             <div class="stat-card">
                 <h3>사용자 수</h3>
                 <div class="stat-value">
-                	<c:out value="${empNumCount}" />
+                    <c:out value="${empNumCount}" />
+                </div>
             </div>
             <div class="stat-card">
                 <h3>장치 관리</h3>
@@ -45,40 +46,39 @@
                 </div>
             </div>
 
-
-            <!-- 중앙 영역: 검은색 선 -->
-            <div class="divider"></div>
-
-            <!-- 우측 영역: 출입 로그 수 차트 -->
-            <div class="section-card chart-section">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <span class="chart-title">출입 로그 수</span>
+            <!-- 우측 영역: 차트와 실시간 알림을 나란히 배치 -->
+            <div class="right-section">
+                <!-- 출입 로그 수 차트 -->
+                <div class="section-card chart-section">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">출입 로그 수</span>
+                        </div>
+                        <canvas id="accessLogChart"></canvas>
+                        <div class="chart-legend"></div>
                     </div>
-                    <canvas id="accessLogChart"></canvas>
-                    <div class="chart-legend"></div>
                 </div>
-            </div>
-            <!-- 우측 실시간 알림 -->
-            <div class="section-card notice-section">
-                <div class="notice-header">
-                    <span class="notice-title">실시간 알림</span>
-                </div>
-                <div class="notice-list">
-                    <% for(int i=0; i<8; i++) { %>
-                    <div class="notice-item">
-                        <div class="notice-profile">
-                            <img src="images/face_recognition.jpg" alt="얼굴인식">
-                        </div>
-                        <div class="notice-content">
-                            <div class="notice-text">얼굴 인증 성공</div>
-                            <div class="notice-date">2022-03-26 16:22:05</div>
-                        </div>
-                        <div class="notice-status">
-                            <button class="notice-close">닫기</button>
-                        </div>
+                <!-- 실시간 알림 -->
+                <div class="section-card notice-section">
+                    <div class="notice-header">
+                        <span class="notice-title">실시간 알림</span>
                     </div>
-                    <% } %>
+                    <div class="notice-list">
+                        <% for(int i=0; i<8; i++) { %>
+                        <div class="notice-item">
+                            <div class="notice-profile">
+                                <img src="images/face_recognition.jpg" alt="얼굴인식">
+                            </div>
+                            <div class="notice-content">
+                                <div class="notice-text">얼굴 인증 성공</div>
+                                <div class="notice-date">2022-03-26 16:22:05</div>
+                            </div>
+                            <div class="notice-status">
+                                <button class="notice-close">닫기</button>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </div>
