@@ -76,61 +76,7 @@ public class HomeController {
         }
 
         return result;
-    }	
-	
-	
-//	@PostMapping("/register-user")
-//	@ResponseBody
-//	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
-//
-//		System.out.println(emp.toString());
-//
-//		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images/";
-//
-//		for (MultipartFile img : images) {
-//			String filename = emp.getEmp_num() + "_" + img.getOriginalFilename(); // 사번 + 파일명 System.out.println("파일명: "
-//																					// + filename);
-//
-//			try {
-//				File file = new File(uploadDir, filename);
-//				img.transferTo(file);
-//				System.out.println("경로: " + file.getAbsolutePath());
-//			} catch (IOException e) {
-//				System.out.println("저장 실패");
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		Map<String, Object> result = new HashMap<>();
-//		result.put("success", true);
-//		return result;
-//	}
-	
-	
-//	 
-//	
-//	@PostMapping("/register-user")
-//	@ResponseBody
-//	public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images){
-//
-//	    System.out.println("✅ 사용자 정보 확인 ✅");
-//	    System.out.println(emp.toString());
-//
-//	    System.out.println(images.get(2).getOriginalFilename());
-//	    System.out.println("✅ 촬영된 이미지 파일 개수: " + images.size());
-//	    for(MultipartFile file : images){
-//	        System.out.println("파일 이름: " + file.getOriginalFilename());
-//	        System.out.println("파일 크기: " + file.getSize());
-//	    }
-//	    
-//	    emmployee.insert(emp, images);
-//	    
-//
-//	    Map<String, Object> response = new HashMap<>();
-//	    response.put("success", true);
-//	    return response;
-//	}
-//
+    }
 
 	
 	@PostMapping("/login")
@@ -190,6 +136,14 @@ public class HomeController {
 	    return "redirect:/user-management";
 	}
 	
+	@PostMapping("/user_update")
+	public String update(Employee emp) {
+		adminservice.update(emp);
+		
+		return "redirect:/user-management";
+	}
+	
+	
 	
 	@GetMapping("/login")
 	public String loginpage() {
@@ -197,11 +151,6 @@ public class HomeController {
 		return "login";
 	}
 
-	@GetMapping("/index")
-	public String index() {
-
-		return "index";
-	}
 
 	@GetMapping("/register-user")
 	public String next() {
@@ -215,24 +164,11 @@ public class HomeController {
 		return "header";
 	}
 
-//	@GetMapping("/user-management")
-//	public String user() {
-//		
-//		return "user-management";
-//
-//	}
-
 	@GetMapping("revise")
 	public String revise() {
 
 		return "revise";
 	}
-
-	//@GetMapping("main")
-	//public String main() {
-
-	//	return "main";
-	//}
 	
 	@GetMapping("/api/dashboard-data")
 	@ResponseBody
