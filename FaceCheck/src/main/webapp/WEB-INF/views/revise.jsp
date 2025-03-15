@@ -9,6 +9,7 @@
 <script defer src="/js/header.js"></script>
 </head>
 <body>
+
    <%@ include file="header.jsp"%>
    
    <%
