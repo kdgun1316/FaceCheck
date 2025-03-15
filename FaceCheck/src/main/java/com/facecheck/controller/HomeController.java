@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class HomeController {
 
     @PostMapping("/register-user")
     @ResponseBody
-    public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
+    public Map<String, Object> emp_insert(@ModelAttribute Employee emp, @RequestParam(value = "emp_face_imgs", required=false) List<MultipartFile> images) {
 
         Map<String, Object> result = new HashMap<>();
         
