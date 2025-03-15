@@ -32,8 +32,9 @@ public interface EmployeeMapper {
 	int update(Employee emp);
 
 
-	@Insert("INSERT INTO emp_info values(emp_num = #{emp_num}, dept = #{dept}, emp_name = #{emp_name}, emp_birthdate= #{emp_birthdate}, emp_phone= #{emp_phone})")
-	Employee insert(Employee emp);
+	@Insert("INSERT INTO emp_info (emp_num, dept, emp_name, emp_birthdate, emp_phone) " +
+	        "VALUES (#{emp_num}, #{dept}, #{emp_name}, #{emp_birthdate}, #{emp_phone})")
+	void insert(Employee emp);
 
 
 	

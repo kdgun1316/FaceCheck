@@ -43,6 +43,8 @@ public class HomeController {
     public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
 
         Map<String, Object> result = new HashMap<>();
+        
+        System.out.println(emp.toString());
 
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
