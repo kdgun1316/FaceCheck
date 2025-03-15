@@ -121,10 +121,9 @@ public class AdminService {
 	}
 
 
-	public Employee insert(Employee emp) {
+	public void insert(Employee emp) {
 		
-		Employee result = employee.insert(emp);
-		return result;
+		employee.insert(emp);
 		
 	}
 
