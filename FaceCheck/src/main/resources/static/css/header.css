@@ -135,6 +135,7 @@ body {
 
 .menu__text {
   flex: 1;
+  font-size: 15px;
 }
 
 /* 새로운 드롭다운 스타일 */
