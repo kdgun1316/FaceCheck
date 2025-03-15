@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.facecheck.entity.Employee;
 
@@ -24,6 +25,12 @@ public interface EmployeeMapper {
 	
 
 	@Delete("DELETE FROM emp_info WHERE emp_num = #{emp_num}")
-	    void delete(String emp_num); 
+	    void delete(String emp_num);
+
+
+	@Update("UPDATE emp_info SET emp_name = #{emp_name}, dept = #{dept}, emp_birthdate = #{emp_birthdate}, emp_phone = #{emp_phone} WHERE emp_num = #{emp_num};")
+	int update(Employee emp);
+
+
 	
 }

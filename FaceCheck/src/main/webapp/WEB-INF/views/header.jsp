@@ -18,7 +18,7 @@
                 <li class="dropdown">
                     <a href="#" class="toggle">등록사용자 관리 <span class="arrow">▼</span></a>
                     <ul class="submenu">
-                        <li><a href="index" class="toggle">사용자 등록</a></li>
+                        <li><a href="register-user" class="toggle">사용자 등록</a></li>
                         <li><a href="user-management">사용자 관리</a></li>
                     </ul>
                 </li>

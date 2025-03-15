@@ -112,4 +112,12 @@ public class AdminService {
     public int getEmpNumCount() {
         return employee.countEmpNum();
     }
+
+
+	public int update(Employee emp) {
+		int updatedRows = employee.update(emp);
+        return updatedRows; 
+	}
+
+	
 }
