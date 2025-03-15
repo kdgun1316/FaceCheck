@@ -87,7 +87,7 @@ public class HomeController {
 		Admin result = adminservice.login(admin);
 		if (result != null) {
 			session.setAttribute("admin", result);
-			return "redirect:/index";
+			return "redirect:/main";
 		} else {
 			return "redirect:/login?error=true";
 		}

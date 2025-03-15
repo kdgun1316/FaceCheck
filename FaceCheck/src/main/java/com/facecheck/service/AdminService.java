@@ -17,6 +17,7 @@ import com.facecheck.entity.recode;
 import com.facecheck.mapper.AdminMapper;
 import com.facecheck.mapper.EmployeeMapper;
 import com.facecheck.mapper.RecodeMapper;
+import com.facecheck.mapper.RecordMapper;
 
 @Service
 public class AdminService {

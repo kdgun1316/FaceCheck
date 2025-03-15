@@ -1,4 +1,4 @@
-package com.facecheck.service;
+package com.facecheck.mapper;
 
 import java.util.List;
 import java.util.Map;
