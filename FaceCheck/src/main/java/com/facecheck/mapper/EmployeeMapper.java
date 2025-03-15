@@ -28,8 +28,12 @@ public interface EmployeeMapper {
 	    void delete(String emp_num);
 
 
-	@Update("UPDATE emp_info SET emp_name = #{emp_name}, dept = #{dept}, emp_birthdate = #{emp_birthdate}, emp_phone = #{emp_phone} WHERE emp_num = #{emp_num};")
+	@Update("UPDATE emp_info SET emp_name = #{emp_name}, dept = #{dept}, emp_birthdate = #{emp_birthdate}, emp_phone = #{emp_phone} WHERE emp_num = #{emp_num}")
 	int update(Employee emp);
+
+
+	@Insert("INSERT INTO emp_info values(emp_num = #{emp_num}, dept = #{dept}, emp_name = #{emp_name}, emp_birthdate= #{emp_birthdate}, emp_phone= #{emp_phone})")
+	Employee insert(Employee emp);
 
 
 	

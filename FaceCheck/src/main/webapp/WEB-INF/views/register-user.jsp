@@ -52,32 +52,32 @@
  -->                </div>
             </div>
             <div class="form-section">
-				<form id="user-form" class="register-form" enctype="multipart/form-data">
+				<form id="user-form" class="register-form" action="register-user" method="post" enctype="multipart/form-data">
 				    <div class="form-group">
 				        <label for="name">이름</label>
-				        <input type="text" id="name" name="emp_name" placeholder="이름을 입력하세요" required>
+				        <input class="form-control" type="text" id="name" name="emp_name" placeholder="이름을 입력하세요" required>
 				    </div>
 				    <div class="form-group">
 				        <label for="id">사번</label>
-				        <input type="text" id="id" name="emp_num" placeholder="사번을 입력하세요" required>
+				        <input class="form-control" type="text" id="id" name="emp_num" placeholder="사번을 입력하세요" required>
 				    </div>
 				    <div class="form-group">
 				        <label for="dept">부서</label>
-				        <select id="gender" name="dept" required>
+				        <select class="form-control" id="gender" name="dept" required>
 				            <option value="accountion">회계</option>
 				            <option value="personnel">인사</option>
 				        </select>
 				    </div>
 				    <div class="form-group">
 				        <label for="birth">생년월일</label>
-				        <input type="date" name="emp_birthdate" required>
+				        <input class="form-control" type="date" name="emp_birthdate" required>
 				    </div>
 				    <div class="form-group">
 				        <label for="phone">연락처</label>
-				        <input type="tel" id="phone" name="emp_phone" required>
+				        <input class="form-control" type="tel" id="phone" name="emp_phone" required>
 				    </div>
 				
-				    <button type="button" id="submit-btn" class="register-btn">등록</button>
+				    <button type="submit" id="submit-btn" class="register-btn">등록</button>
 				</form>
             </div>
         </div>

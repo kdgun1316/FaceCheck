@@ -120,5 +120,13 @@ public class AdminService {
         return updatedRows; 
 	}
 
+
+	public Employee insert(Employee emp) {
+		
+		Employee result = employee.insert(emp);
+		return result;
+		
+	}
+
 	
 }

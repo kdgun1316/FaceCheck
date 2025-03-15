@@ -24,8 +24,6 @@
 					<th>부서</th>
 					<th>생년월일</th>
 					<th>연락처</th>
-					<th>이미지</th>
-					<th>이미지벡터</th>
 					<th></th>
 				</tr>
 				<%
@@ -39,8 +37,6 @@
 					<td><%=emp.getDept()%></td>
 					<td><%=emp.getEmp_birthdate()%></td>
 					<td><%=emp.getEmp_phone()%></td>
-					<td><%=emp.getEmp_face_img()%></td>
-					<td><%=emp.getEmp_face_vector()%></td>
 					<td>
 						<div class="dropdown-">
 							<span class="dots" onclick="toggleDropdown(this)">⋮</span>

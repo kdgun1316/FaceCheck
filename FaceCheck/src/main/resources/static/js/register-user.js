@@ -54,11 +54,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         imageContainer.appendChild(imgElement);
     }
 
-    // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
-    nextButton.addEventListener("click", function () {
-        document.querySelector(".register-section").style.display = "block";
-        nextButton.style.display = "none";
-    });
+// ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
+nextButton.addEventListener("click", function () {
+    const registerSection = document.querySelector(".register-section");
+    registerSection.style.display = "flex"; // "block"이 아닌 "flex"로 변경
+    nextButton.style.display = "none";
+    
+    // 카메라 섹션 숨기기 (선택적)
+    document.querySelector(".main-content").style.display = "none";
+});
 
     // ✅ "등록" 버튼 클릭 시, 데이터 서버 전송
     submitButton.addEventListener("click", function () {
