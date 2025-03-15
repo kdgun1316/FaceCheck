@@ -37,3 +37,5 @@ try {
 } catch (e) {
   console.error("Header.js 오류:", e);
 }
+
+
