@@ -10,55 +10,47 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	
+	<%
+    // GET 또는 POST 요청에서 emp_num 값 가져오기
+    String empNum = request.getParameter("emp_num");
+    if (empNum == null) {
+        empNum = ""; // 값이 없을 경우 빈 문자열 처리
+    }
+%>
 	<section class="register-section">
 		<div class="register-container">
-			<div class="profile-section">
-				<div class="profile-image">
-					<!-- 이미지 미리보기 영역 -->
-					<img id="preview-image" src="./images/crayon-shin.png"
-						alt="프로필 이미지">
-					<!-- 파일 선택 입력 -->
-					<input type="file" id="image-upload" accept="image/*"
-						style="display: none;">
-					<!-- 파일 선택 버튼 -->
-					<button type="button"
-						onclick="document.getElementById('image-upload').click()">이미지
-						선택</button>
-				</div>
-			</div>
+
 			<div class="form-section">
-				<form class="register-form">
-					<div class="form-group">
-						<label for="name">이름</label> <input type="text" id="name"
-							name="name" placeholder="이름을 입력하세요" required>
-					</div>
-					<div class="form-group">
-						<label for="id">사번</label> <input type="text" id="id" name="id"
-							placeholder="사번을 입력하세요" required>
-					</div>
-					<div class="form-group">
-						<label for="birth">생년월일</label> <select id="birth-year"
-							name="birth-year" required>
-							<option value="">년도 선택</option>
-						</select> <select id="birth-month" name="birth-month" required>
-							<option value="">월 선택</option>
-						</select> <select id="birth-day" name="birth-day" required>
-							<option value="">일 선택</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="gender">성별</label> <select id="gender" name="gender"
-							required>
-							<option value="male">남성</option>
-							<option value="female">여성</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="phone">연락처</label> <input type="tel" id="phone"
-							name="phone" placeholder="연락처를 입력하세요" required>
-					</div>
-					<button type="submit" class="register-btn">등록</button>
+				<form id="user-form" class="register-form" action="user_update" method="post">
+				    <div class="form-group">
+				        <label for="name">이름</label>
+				        <input type="text" id="name" name="emp_name" placeholder="이름을 입력하세요" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="id">사번</label>
+				        <input type="text" id="id" name="emp_num" value="<%= empNum %>" readonly>
+
+				    </div>
+				    <div class="form-group">
+				        <label for="dept">부서</label>
+				        <select id="gender" name="dept" required>
+				            <option value="accountion">회계</option>
+				            <option value="personnel">인사</option>
+				        </select>
+				    </div>
+				    <div class="form-group">
+				        <label for="birth">생년월일</label>
+				        <input type="date" name="emp_birthdate" required>
+				    </div>
+				    <div class="form-group">
+				        <label for="phone">연락처</label>
+				        <input type="tel" id="phone" name="emp_phone" required>
+				    </div>
+				
+				    <button type="submit" class="register-btn">등록</button>
 				</form>
+
 			</div>
 		</div>
 	</section>
