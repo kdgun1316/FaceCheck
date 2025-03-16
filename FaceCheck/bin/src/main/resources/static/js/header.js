@@ -1,32 +1,33 @@
-       document.addEventListener("DOMContentLoaded", function () {
-    const menuItems = document.querySelectorAll(".sidebar ul li a");
-
-    menuItems.forEach((item) => {
-        item.addEventListener("click", function () {
-            // 클릭한 메뉴 항목에 active-hover 클래스를 토글
-            item.classList.toggle("active-hover");
-        });
+document.addEventListener('DOMContentLoaded', function() {
+  // 드롭다운 토글 기능
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  
+  if (dropdownToggle) {
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.closest('.dropdown-wrapper');
+      parent.classList.toggle('active');
     });
-
-    const dropdowns = document.querySelectorAll(".dropdown");
-
-    dropdowns.forEach((dropdown) => {
-        const toggle = dropdown.querySelector(".toggle");
-        const arrow = toggle.querySelector(".arrow");
-
-        toggle.addEventListener("click", function (event) {
-            event.preventDefault();
-            
-            dropdown.classList.toggle("active");
-
-            // 화살표 보이기/숨기기
-            if (dropdown.classList.contains("active")) {
-                arrow.style.display = "inline";
-            } else {
-                arrow.style.display = "none";
-            }
-        });
-    });
+  }
+  
+  // 현재 페이지 메뉴 아이템 활성화
+  const currentPath = window.location.pathname;
+  const menuItems = document.querySelectorAll('.menu__item');
+  
+  menuItems.forEach(item => {
+    if (item.getAttribute('href') && currentPath.includes(item.getAttribute('href'))) {
+      item.classList.add('menu__item--active');
+    }
+  });
+  
+  // 하위 메뉴 항목이 현재 경로와 일치하면 드롭다운을 열어둠
+  const submenuLinks = document.querySelectorAll('.dropdown-content a');
+  
+  submenuLinks.forEach(link => {
+    if (currentPath.includes(link.getAttribute('href'))) {
+      link.closest('.dropdown-wrapper').classList.add('active');
+    }
+  });
 });
 
 
@@ -37,3 +38,5 @@ try {
 } catch (e) {
   console.error("Header.js 오류:", e);
 }
+
+
