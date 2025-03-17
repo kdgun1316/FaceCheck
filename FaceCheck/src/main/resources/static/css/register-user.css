@@ -1,18 +1,19 @@
 @charset "UTF-8";
 
 
+/* ====== 회원가입 섹션 기본 스타일 ====== */
 .register-section {
-  display: none; /* 처음에는 숨겨져 있음 */
+  display: none; /* 처음에는 숨김 */
   justify-content: center;
   align-items: center;
   height: calc(100vh - 60px); /* 헤더 높이 제외 */
   background-color: #f8f9fa;
   padding: 20px;
-  position: absolute; /* 추가 */
+  position: absolute;
   top: 60px; /* 헤더 높이만큼 아래로 */
-  left: 0; /* 왼쪽에서 시작 */
-  right: 0; /* 오른쪽까지 확장 */
-  width: 100%; /* 전체 너비 사용 */
+  left: 0;
+  right: 0;
+  width: 100%;
 }
 
 .register-container {
@@ -25,6 +26,7 @@
   overflow: hidden;
 }
 
+/* ====== 프로필 섹션 스타일 ====== */
 .profile-section {
   width: 40%;
   display: flex;
@@ -47,26 +49,69 @@
   object-fit: contain; /* 이미지 비율 유지 */
 }
 
+#preview-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover; /* 이미지 비율 유지 */
+}
 
+/* ====== 폼 섹션 스타일 ====== */
 .form-section {
   width: 60%;
   padding: 40px;
 }
 
+/* ====== 폼 스타일 ====== */
 .register-form {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* 제목 스타일 */
+.register-form .title {
+  font-size: 28px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.register-form .title::before,
+.register-form .title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: royalblue;
+}
+
+.register-form .title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.register-form .title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+/* 입력 필드 스타일 */
 .form-group {
   margin-bottom: 20px;
-  
-}
-
-.form-control{
-  background-color: #f8f9fa;
-  padding: 20px;
-  padding: 25px 15px;
-  margin-bottom: 1.3rem;
+  position: relative;
 }
 
 .form-group label {
@@ -76,88 +121,85 @@
   color: #495057;
 }
 
-.form-group input,
+.form-group .form-control {
+  width: 100%;
+  padding: 12px 10px;
+  outline: none;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  transition: 0.3s ease;
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+/* 입력 필드 placeholder 애니메이션 */
+.form-group label .form-control + span {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form-group .form-control:focus + span,
+.form-group .form-control:valid + span {
+  top: 5px;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: royalblue;
+}
+
 .form-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 16px;
-}
-.form-group select {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
+/* 버튼 스타일 */
 .register-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #8fb7df;
-  color: white;
   border: none;
-  border-radius: 4px;
+  outline: none;
+  background-color: royalblue;
+  padding: 12px;
+  border-radius: 10px;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  
+  transition: 0.3s ease;
 }
 
-
 .register-btn:hover {
-  background-color: #34495e;
+  background-color: rgb(56, 90, 194);
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .register-container {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .profile-section,
   .form-section {
-      width: 100%;
+    width: 100%;
   }
 }
 
-.profile-image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px; /* 요소 사이 간격 */
+/* 애니메이션 */
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
-
-#preview-image {
-  width: 300px;
-  height: 400px;
-  object-fit: cover; /* 이미지 비율 유지 */
-}
-
-button {
-  padding: 8px 16px;
-  background-color: #8fb7df;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -173,24 +215,6 @@ button:hover {
     background: black;
 }
 
-/* 촬영 버튼 */
-#capture-button {
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 20px;
-    background-color: #8fb7df;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#capture-button:hover {
-    background-color: #34495e;
-}
 
 /* 캡처된 이미지 컨테이너 */
 #image-container {
@@ -209,28 +233,6 @@ button:hover {
     object-fit: cover;
 }
 
-/* 다음 버튼 */
-#next-button {
-    display: none;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 20px;
-    background-color: #8fb7df;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-a {
-	text-decoration : none;
-}
-
-#next-button:hover {
-    background-color: #34495e;
-}
 
 .face-guidance {
     width: 100%;
@@ -251,4 +253,96 @@ a {
 
 
 
+
+.button {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #b1dae7;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+.button span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #234567;
+}
+
+.button svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #234567;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.button:hover:before {
+  width: 100%;
+  background: #b1dae7;
+}
+
+.button:hover svg {
+  transform: translateX(0);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* 텍스트와 아이콘 간 간격 추가 */
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #7e97b8;
+  background-color: #e0e8ef;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.333);
+  border-radius: 40px;
+  padding: 16px 24px 16px 28px;
+  transform: translate(0px, 0px) rotate(0deg);
+  transition: 0.2s;
+  box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgba(95, 157, 231, 0.48);
+}
+
+.submit-btn:hover {
+  color: #516d91;
+  background-color: #E5EDF5;
+  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgba(95, 157, 231, 0.48);
+}
+
+.submit-btn:active {
+  box-shadow: none;
+}
 
