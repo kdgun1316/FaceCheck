@@ -1,0 +1,422 @@
+@charset "UTF-8";
+
+ body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+        margin: 0;
+        overflow: hidden;
+    }
+    section {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .circle1, .circle2 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+    }
+    .circle1:before, .circle2:after {
+        position: absolute;
+        content: "";
+        box-sizing: border-box;
+        z-index: 10;
+    }
+    .circle1:before {
+        height: 100%;
+        border-left: 6px double grey;
+        animation: move-diameter-left 1.5s infinite;
+        animation-delay: 0.5s;
+    } 
+    .circle2:after {
+        height: 100%;
+        border-right: 6px double grey;
+        animation: move-diameter-right 1.5s infinite;
+        animation-delay: 0.5s;
+    }
+    video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        z-index: 5;
+    }
+    h2 {
+        position: absolute;
+        top: 15px;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 28px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 12px 0;
+        border-radius: 10px;
+        z-index: 15;
+    }
+
+    /* ✅ "REC" 빨간 점 추가 */
+    .recording {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: red;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        z-index: 20;
+    }
+    .recording::before {
+        content: "●";
+        font-size: 14px;
+        margin-right: 5px;
+        animation: blink 1s infinite;
+    }
+
+    /* ✅ 녹화 점 깜빡이는 애니메이션 */
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    /* ✅ 촬영 진행 원형 카운트다운 */
+    .countdown {
+        position: absolute;
+        bottom: 50px;
+        width: 80px;
+        height: 80px;
+        border: 6px solid white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* ✅ 카운트다운 애니메이션 */
+    .countdown.active {
+        transform: scale(1.2);
+    }
+
+    @keyframes move-diameter-right {
+        0% { width: 50%; }
+        100% { width: 100%; border-radius: 50%; }
+    }
+    @keyframes move-diameter-left {
+        0% { width: 100%; left: 50%; }
+        100% { width: 100%; left: 0; border-radius: 50%; }
+    }
+    
+    
+    
+    
+    
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard-Regular';
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ✅ 헤더 (topbar) */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 85px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* ✅ 메인 컨테이너 (사이드바 + 콘텐츠 포함) */
+.container {
+  display: flex;
+  padding-top: 85px;  /* 헤더 높이만큼 여백 추가 */
+}
+
+/* ✅ 사이드바 */
+.sidebar {
+  width: 250px;
+  background-color: white;
+  color: #A8B2B9;
+  box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
+  height: calc(100vh - 85px);
+  position: fixed;
+  left: 0;
+  top: 85px; /* 헤더 높이만큼 내려줌 */
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  padding: 20px;
+  text-align: center;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+/* Avatar 스타일 */
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.avatar__img > img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.avatar__name {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 메뉴 스타일 */
+.menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 20px;
+}
+
+.menu__item {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 16px 20px;
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid transparent;
+}
+
+.menu__item:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu__item--active {
+  border-left: 4px solid #ED5454;
+  box-shadow: inset 10px 0px 17px -13px #ED5454;
+}
+
+.menu__item--active .menu__icon {
+  color: #ED5454;
+}
+
+.menu__item--active .menu__text {
+  color: black;
+}
+
+.menu__icon {
+  font-size: 1rem;
+  margin-right: 15px;
+  width: 20px;
+  text-align: center;
+}
+
+.menu__text {
+  flex: 1;
+  font-size: 15px;
+}
+
+/* 새로운 드롭다운 스타일 */
+.dropdown-wrapper {
+  width: 100%;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 16px 20px;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.arrow {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-wrapper.active .arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+.dropdown-wrapper.active .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  color: #A8B2B9;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 12px 20px 12px 55px;
+  transition: all 0.3s ease;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-content a:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 로그아웃 버튼 */
+.sidebar-logout {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.sidebar-logout a {
+  display: flex;
+  align-items: center;
+  color: #A8B2B9;
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  border-top: 1px solid #e1e1e1;
+}
+
+.sidebar-logout a:hover {
+  color: #ED5454;
+}
+
+/* Copyright */
+.copyright {
+  text-align: center;
+  font-size: 0.7rem;
+  padding: 15px;
+  color: #A8B2B9;
+}
+
+
+/* 아이콘 스타일 */
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icons input {
+  padding: 8px 12px;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+}
+
+.notification-icon, .user-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.notification-icon:hover, .user-icon:hover {
+  transform: scale(1.1);
+}
+
+/* 기타 드롭다운 메뉴 */
+.user-icon-container {
+  position: relative;
+}
+
+.dropdown-menu1 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.user-icon-container:hover .dropdown-menu1 {
+  display: block;
+}
+
+.dropdown-menu1 a {
+  color: #333;
+  text-decoration: none;
+  padding: 8px 12px;
+  display: block;
+  white-space: nowrap;
+}
+
+.dropdown-menu1 a:hover {
+  background-color: #f0f0f0;
+}
+
+/* 링크 스타일 재정의 */
+.sidebar a, 
+.sidebar a:visited, 
+.sidebar a:hover, 
+.sidebar a:active {
+  text-decoration: none !important;
+}
+
+/* Font Awesome CDN 추가 필요 */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

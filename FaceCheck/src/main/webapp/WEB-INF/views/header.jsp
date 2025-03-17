@@ -15,7 +15,7 @@
             <div class="avatar__img">
                 <img src="https://picsum.photos/70" alt="avatar">
             </div>
-            <div class="avatar__name">사용자</div>
+            <div class="avatar__name">관리자</div>
         </div>
         <nav class="menu">
             <a class="menu__item" href="main">
