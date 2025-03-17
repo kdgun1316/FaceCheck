@@ -81,6 +81,10 @@ public class HomeController {
         return result;
     }
     
+    @GetMapping("/user_before")
+    public String hi() {
+    	return "user_before";
+    }
     
     
     //실시간 사용자 얼굴인식!!!
