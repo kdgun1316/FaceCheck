@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 서버에서 대시보드 데이터 가져오기
-    fetch('/api/dashboard-data')
+    fetch('/FaceCheck/api/dashboard-data')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
