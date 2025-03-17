@@ -38,9 +38,11 @@ public class HomeController {
     @ResponseBody
     public Map<String, Object> emp_insert(@ModelAttribute Employee emp, @RequestParam(value = "emp_face_imgs", required=false) List<MultipartFile> images) {
 
+    	System.out.println(emp.toString());
+    	
+    	adminservice.insert(emp);
         Map<String, Object> result = new HashMap<>();
         
-        System.out.println(emp.toString());
 
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
