@@ -43,7 +43,6 @@ public class HomeController {
 
     	System.out.println(emp.toString());
     	
-    	adminservice.insert(emp);
         Map<String, Object> result = new HashMap<>();
         
 
