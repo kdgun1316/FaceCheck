@@ -64,8 +64,8 @@
 				    <div class="form-group">
 				        <label for="dept">부서</label>
 				        <select class="form-control" id="gender" name="dept" required>
-				            <option value="accountion">회계</option>
-				            <option value="personnel">인사</option>
+				            <option value="회계">회계</option>
+				            <option value="인사">인사</option>
 				        </select>
 				    </div>
 				    <div class="form-group">
