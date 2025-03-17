@@ -42,9 +42,11 @@ public class HomeController {
     @ResponseBody
     public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
 
+    	System.out.println(emp.toString());
+    	
+    	adminservice.insert(emp);
         Map<String, Object> result = new HashMap<>();
         
-        System.out.println(emp.toString());
 
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
@@ -79,7 +81,7 @@ public class HomeController {
         
         
         	
-        adminservice.insert(emp);
+        
         
         
         
