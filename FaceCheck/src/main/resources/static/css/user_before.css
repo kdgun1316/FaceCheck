@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#poly-face {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 25%;
+  margin-top: 5%;
+}
+
+body{
+  background: #01070A;
+  background-size: cover;
+}
