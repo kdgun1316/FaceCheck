@@ -44,14 +44,14 @@ public class AdminService {
 
         // 직원 출입자 수 데이터
         Map<String, Integer> employeeCounts = new HashMap<>();
-        for (Map<String, Object> row : recordMapper.getEmployeeAccessCount()) { // recordMapper로 변경
+        for (Map<String, Object> row : recordMapper.getEmployeeAccessCount(0)) { // recordMapper로 변경
             String date = ((java.sql.Date) row.get("date")).toLocalDate().format(formatter);
             employeeCounts.put(date, ((Long) row.get("count")).intValue());
         }
 
         // 게스트 출입자 수 데이터
         Map<String, Integer> guestCounts = new HashMap<>();
-        for (Map<String, Object> row : recordMapper.getGuestAccessCount()) { // recordMapper로 변경
+        for (Map<String, Object> row : recordMapper.getGuestAccessCount(0)) { // recordMapper로 변경
             String date = ((java.sql.Date) row.get("date")).toLocalDate().format(formatter);
             guestCounts.put(date, ((Long) row.get("count")).intValue());
         }

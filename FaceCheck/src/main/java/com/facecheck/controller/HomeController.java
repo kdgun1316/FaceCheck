@@ -32,6 +32,7 @@ import jakarta.servlet.http.HttpSession;
 import reactor.core.publisher.Mono;
 
 @Controller
+
 public class HomeController {
 	@Autowired
 	private AdminService adminservice;
