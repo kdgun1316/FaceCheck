@@ -18,16 +18,41 @@ function editUser() {
     alert("수정 페이지로 이동합니다.");
 }
 
-// 삭제 기능 (예제)
-function deleteUser() {
-    alert("삭제되었습니다.");
+
+
+
+
+
+
+
+
+
+
+function deleteUser(emp_num) {
+    fetch(`/deleteUser${emp_num}`, {   // Spring Controller의 URL 경로와 일치하는지 확인
+        method: 'DELETE',  // HTTP DELETE 요청
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("삭제되었습니다.");
+            // 삭제 후 페이지 갱신 등 추가 작업
+        } else {
+            alert("삭제 실패");
+        }
+    })
+    .catch(error => {
+        console.error("삭제 중 오류 발생:", error);
+        alert("삭제 중 오류가 발생했습니다.");
+    });
 }
 
-// 클릭하면 드롭다운 닫기
-document.addEventListener("click", function(event) {
-    if (!event.target.matches(".dots")) {
-        document.querySelectorAll(".dropdown-menu").forEach(menu => {
-            menu.style.display = "none";
-        });
-    }
-});
+
+
+
+
+
+
+
+
+
+

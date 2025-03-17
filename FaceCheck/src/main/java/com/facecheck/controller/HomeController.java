@@ -1,7 +1,5 @@
 package com.facecheck.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +25,6 @@ import com.facecheck.entity.recode;
 import com.facecheck.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
-import reactor.core.publisher.Mono;
 
 @Controller
 public class HomeController {
@@ -40,7 +36,7 @@ public class HomeController {
 
     @PostMapping("/register-user")
     @ResponseBody
-    public Map<String, Object> emp_insert(Employee emp, @RequestParam("emp_face_imgs") List<MultipartFile> images) {
+    public Map<String, Object> emp_insert(@ModelAttribute Employee emp, @RequestParam(value = "emp_face_imgs", required=false) List<MultipartFile> images) {
 
     	System.out.println(emp.toString());
     	
@@ -50,7 +46,8 @@ public class HomeController {
 
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
-
+            
+            builder.part("name", emp.getEmp_name());
             // 여러 이미지를 Flask로 추가
             for (MultipartFile img : images) {
                 builder.part("images", new ByteArrayResource(img.getBytes()))
@@ -79,15 +76,65 @@ public class HomeController {
             result.put("message", "Flask 서버로 요청 중 오류 발생");
         }
         
+        adminservice.insert(emp);
         
-        	
-        
-        
-        
-        
+        return result;
+    }
+    
+    
+    
+    //실시간 사용자 얼굴인식!!!
+    @GetMapping("/user")
+    public String user() {
+    	
+    	return "user";
+    }
+    
+    
+    @PostMapping("/user") 
+    @ResponseBody
+    public Map<String, Object> recognizeUser(@RequestParam(value = "face_imgs", required = false) List<MultipartFile> images) {
+        Map<String, Object> result = new HashMap<>();
+
+        try {
+            if (images == null || images.isEmpty()) {
+                System.out.println("❌ 오류: 받은 이미지가 없음!");
+                result.put("success", false);
+                result.put("message", "이미지 파일이 없습니다.");
+                return result;
+            }
+
+            System.out.println("✅ 받은 이미지 개수: " + images.size());
+
+            for (MultipartFile img : images) {
+                System.out.println("✅ 받은 이미지 이름: " + img.getOriginalFilename());
+                System.out.println("✅ 받은 이미지 크기: " + img.getSize() + " bytes");
+                System.out.println("✅ 이미지 타입: " + img.getContentType());
+            }
+
+            result.put("success", true);
+            result.put("message", "Spring Boot에서 이미지 수신 성공");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("success", false);
+            result.put("message", "Spring Boot에서 이미지 수신 실패");
+        }
 
         return result;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 	
 	@PostMapping("/login")

@@ -18,6 +18,20 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  justify-content: center; /* 중앙 정렬 추가 */
+}
+
+.form-control{
+  background-color: #f8f9fa;
+  padding: 20px;
+  padding: 25px 15px;
+  margin-bottom: 1.3rem;
+}
+
+.form-section {
+  width: 100%; /* 60%에서 100%로 수정 */
+  max-width: 600px; /* 최대 너비 제한 */
+  padding: 40px;
 }
 
 .profile-section {

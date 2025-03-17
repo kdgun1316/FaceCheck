@@ -77,7 +77,7 @@
 				        <input class="form-control" type="tel" id="phone" name="emp_phone" required>
 				    </div>
 				
-				    <button type="submit" id="submit-btn" class="register-btn">등록</button>
+				    <button type="button" id="submit-btn" class="register-btn">등록</button>
 				</form>
             </div>
         </div>
