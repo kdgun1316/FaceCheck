@@ -111,3 +111,36 @@ html, body {
   background-color: #f0f0f0;
 }
 
+/* 버튼 컨테이너를 위한 새로운 클래스 */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* 우측 정렬 */
+    margin-bottom: 10px; /* 테이블과의 간격 */
+    width: 100%;
+}
+
+.cta-button {
+    background-color: #16a4fa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-right: -300px;
+    
+}
+
+.cta-button:hover {
+    background-color: #0f8dd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
