@@ -44,7 +44,7 @@ body {
 
 /* ✅ 사이드바 */
 .sidebar {
-  width: 250px;
+  width: 300px;
   background-color: white;
   color: #A8B2B9;
   box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
