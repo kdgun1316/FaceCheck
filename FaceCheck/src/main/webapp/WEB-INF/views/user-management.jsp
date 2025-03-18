@@ -20,7 +20,7 @@
 			<!-- 검색 필드와 버튼 -->
 			<div class="search-container">
 				<input type="text" id="searchInput" placeholder="이름 또는 사번 입력" />
-				
+
 			</div>
 
 			<table class="user-table">
@@ -35,31 +35,33 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%
-				List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
-				if (empList != null) {
-					for (Employee emp : empList) {
-				%>
-				<tr>
-					<td><%=emp.getEmp_name()%></td>
-					<td><%=emp.getEmp_num()%></td>
-					<td><%=emp.getDept()%></td>
-					<td><%=emp.getEmp_birthdate()%></td>
-					<td><%=emp.getEmp_phone()%></td>
-					<td>
-						<div class="dropdown-">
-							<span class="dots" onclick="toggleDropdown(this)">⋮</span>
-							<div class="dropdown-menu">
-								<a href="revise?emp_num=<%=emp.getEmp_num()%>""><button>수정</button></a>
-								<a href="deleteUser?emp_num=<%=emp.getEmp_num()%>" id="deleteLink"><button>삭제</button></a>
+					<%
+					List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
+					if (empList != null) {
+						for (Employee emp : empList) {
+					%>
+					<tr>
+						<td><%=emp.getEmp_name()%></td>
+						<td><%=emp.getEmp_num()%></td>
+						<td><%=emp.getDept()%></td>
+						<td><%=emp.getEmp_birthdate()%></td>
+						<td><%=emp.getEmp_phone()%></td>
+						<td>
+							<div class="user-action-dropdown">
+								<span class="user-action-dots"
+									onclick="toggleUserActionDropdown(this)">⋮</span>
+								<div class="user-action-dropdown-menu">
+									<a href="revise?emp_num=<%=emp.getEmp_num()%>"><button>수정</button></a>
+									<a href="deleteUser?emp_num=<%=emp.getEmp_num()%>"
+										id="deleteLink"><button>삭제</button></a>
+								</div>
 							</div>
-						</div>
-					</td>
-				</tr>
-				<%
+						</td>
+					</tr>
+					<%
 					}
-				}
-				%>
+					}
+					%>
 				</tbody>
 			</table>
 		</section>
