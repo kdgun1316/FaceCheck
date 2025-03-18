@@ -27,37 +27,29 @@
 			</div>
 		</div>
 
-		<!-- 메인 콘텐츠 영역 -->
-		
+		<!-- ✅ 수정된 메인 콘텐츠 영역 (한 줄에 4개 배치) -->
 		<div class="content-wrapper">
+			<!-- 시간대별 출입 인원 -->
 			<div class="section-box">
 				<h3 class="chart-header">시간대별 출입 인원</h3>
 				<canvas id="timeBarChart"></canvas>
 			</div>
+
+			<!-- 부서별 출입 비율 -->
 			<div class="section-box">
 				<h3 class="chart-header">부서별 출입 비율</h3>
 				<canvas id="deptPieChart"></canvas>
 			</div>
-		</div>
 
-		<!-- 우측 영역: 차트와 실시간 알림을 나란히 배치 -->
-		<div class="right-section">
-			<!-- 출입 로그 수 차트 -->
-			<div class="section-card chart-section">
-				<div class="chart-container">
-					<div class="chart-header">
-						<span class="chart-title">출입 로그 수</span>
-					</div>
-					<canvas id="accessLogChart"></canvas>
-					<div class="chart-legend"></div>
-				</div>
+			<!-- 출입 로그 수 -->
+			<div class="section-box">
+				<h3 class="chart-header">출입 로그 수</h3>
+				<canvas id="accessLogChart"></canvas>
 			</div>
 
 			<!-- 실시간 알림 -->
-			<div class="section-card notice-section">
-				<div class="notice-header">
-					<span class="notice-title">실시간 알림</span>
-				</div>
+			<div class="section-box notice-section">
+				<h3 class="chart-header">실시간 알림</h3>
 				<div class="notice-list">
 					<%
 					for (int i = 0; i < 8; i++) {
@@ -80,7 +72,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<script src="js/main.js"></script>

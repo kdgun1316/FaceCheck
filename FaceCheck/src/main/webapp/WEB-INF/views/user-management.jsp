@@ -50,18 +50,18 @@
 						<td><%=emp.getEmp_birthdate()%></td>
 						<td><%=emp.getEmp_phone()%></td>
 						<td>
-<<<<<<< HEAD
+
 							<div class="dropdown-">
 								<span class="dots" onclick="toggleDropdown(this)">⋮</span>
 								<div class="dropdown-menu">
 									<a href="revise?emp_num=<%=emp.getEmp_num()%>""><button>수정</button></a>
-=======
+
 							<div class="user-action-dropdown">
 								<span class="user-action-dots"
 									onclick="toggleUserActionDropdown(this)">⋮</span>
 								<div class="user-action-dropdown-menu">
 									<a href="revise?emp_num=<%=emp.getEmp_num()%>"><button>수정</button></a>
->>>>>>> branch 'master' of https://github.com/kdgun1316/FaceCheck.git
+
 									<a href="deleteUser?emp_num=<%=emp.getEmp_num()%>"
 										id="deleteLink"><button>삭제</button></a>
 								</div>
