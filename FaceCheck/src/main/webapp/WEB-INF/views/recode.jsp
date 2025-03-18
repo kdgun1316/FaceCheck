@@ -20,6 +20,10 @@
 	<main class="management">
 		<section class="user-management">
 			<h1 class="manage">출입 기록 관리</h1>
+			<div class="button-container">
+				<button id="customButton" class="cta-button"
+					onclick="handleButtonClick()">CSV로 내보내기</button>
+			</div>
 
 			<table class="user-table">
 				<tr>
@@ -31,30 +35,30 @@
 					<th>연락처</th>
 					<th>출입기록</th>
 				</tr>
-					<%
-					// List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
-					List<recode> recList = (List<recode>) request.getAttribute("recselect");
+				<%
+				// List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
+				List<recode> recList = (List<recode>) request.getAttribute("recselect");
 
-					//if (empList != null && recList != null) {
-					if (recList != null) {
-						//for (int i = 0; i < empList.size(); i++) {
-						for (int i = 0; i < recList.size(); i++) {
-							recode rec = recList.get(i);
-					%>
-					<tr>
-						<td><%=rec.getLog_idx()%></td>
-						<td><%=rec.getEmp_name()%></td>
-						<td><%=rec.getEmp_num()%></td>
-						<td><%=rec.getDept()%></td>
-						<td><%=rec.getEmp_birthdate()%></td>
-						<td><%=rec.getEmp_phone()%></td>
-						<td><%=rec.getLog_time()%></td>
-					</tr>
-					<%
-					}
-					}
-					%>
-				</table>
+				//if (empList != null && recList != null) {
+				if (recList != null) {
+					//for (int i = 0; i < empList.size(); i++) {
+					for (int i = 0; i < recList.size(); i++) {
+						recode rec = recList.get(i);
+				%>
+				<tr>
+					<td><%=rec.getLog_idx()%></td>
+					<td><%=rec.getEmp_name()%></td>
+					<td><%=rec.getEmp_num()%></td>
+					<td><%=rec.getDept()%></td>
+					<td><%=rec.getEmp_birthdate()%></td>
+					<td><%=rec.getEmp_phone()%></td>
+					<td><%=rec.getLog_time()%></td>
+				</tr>
+				<%
+				}
+				}
+				%>
+			</table>
 		</section>
 	</main>
 

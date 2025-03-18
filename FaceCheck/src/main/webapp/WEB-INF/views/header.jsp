@@ -11,12 +11,12 @@
 <body>
 	<div class="container">
     <aside class="sidebar">
-        <div class="avatar">
+<!--         <div class="avatar">
             <div class="avatar__img">
                 <img src="https://picsum.photos/70" alt="avatar">
             </div>
             <div class="avatar__name">관리자</div>
-        </div>
+        </div> -->
         <nav class="menu">
             <a class="menu__item" href="main">
                 <i class="menu__icon fa fa-home"></i>
