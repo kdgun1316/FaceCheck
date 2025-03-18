@@ -229,7 +229,6 @@ body {
   flex-grow: 1;
   margin-left: 250px; /* 사이드바 너비만큼 이동 */
   background-color: #FCFBFC;
-  padding: 20px;
 }
 
 /* 아이콘 스타일 */

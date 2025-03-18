@@ -1,18 +1,19 @@
 @charset "UTF-8";
 
 
+/* ====== 회원가입 섹션 기본 스타일 ====== */
 .register-section {
-  display: none; /* 처음에는 숨겨져 있음 */
+  display: none; /* 처음에는 숨김 */
   justify-content: center;
   align-items: center;
   height: calc(100vh - 60px); /* 헤더 높이 제외 */
   background-color: #f8f9fa;
   padding: 20px;
-  position: absolute; /* 추가 */
+  position: absolute;
   top: 60px; /* 헤더 높이만큼 아래로 */
-  left: 0; /* 왼쪽에서 시작 */
-  right: 0; /* 오른쪽까지 확장 */
-  width: 100%; /* 전체 너비 사용 */
+  left: 0;
+  right: 0;
+  width: 100%;
 }
 
 .register-container {
@@ -25,6 +26,7 @@
   overflow: hidden;
 }
 
+/* ====== 프로필 섹션 스타일 ====== */
 .profile-section {
   width: 40%;
   display: flex;
@@ -45,28 +47,72 @@
   max-width: 100%;
   max-height: 400px;
   object-fit: contain; /* 이미지 비율 유지 */
+  border-radius: 15px;
 }
 
+#preview-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover; /* 이미지 비율 유지 */
+}
 
+/* ====== 폼 섹션 스타일 ====== */
 .form-section {
   width: 60%;
   padding: 40px;
 }
 
+/* ====== 폼 스타일 ====== */
 .register-form {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* 제목 스타일 */
+.register-form .title {
+  font-size: 28px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.register-form .title::before,
+.register-form .title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: royalblue;
+}
+
+.register-form .title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.register-form .title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+/* 입력 필드 스타일 */
 .form-group {
   margin-bottom: 20px;
-  
-}
-
-.form-control{
-  background-color: #f8f9fa;
-  padding: 20px;
-  padding: 25px 15px;
-  margin-bottom: 1.3rem;
+  position: relative;
 }
 
 .form-group label {
@@ -76,121 +122,120 @@
   color: #495057;
 }
 
-.form-group input,
+.form-group .form-control {
+  width: 100%;
+  padding: 12px 10px;
+  outline: none;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  transition: 0.3s ease;
+  font-size: 16px;
+  background-color: #f8f9fa;
+}
+
+/* 입력 필드 placeholder 애니메이션 */
+.form-group label .form-control + span {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form-group .form-control:focus + span,
+.form-group .form-control:valid + span {
+  top: 5px;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: royalblue;
+}
+
 .form-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 16px;
-}
-.form-group select {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
+/* 버튼 스타일 */
 .register-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #8fb7df;
-  color: white;
   border: none;
-  border-radius: 4px;
+  outline: none;
+  background-color: royalblue;
+  padding: 12px;
+  border-radius: 10px;
+  color: #fff;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  
+  transition: 0.3s ease;
 }
 
-
 .register-btn:hover {
-  background-color: #34495e;
+  background-color: rgb(56, 90, 194);
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .register-container {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .profile-section,
   .form-section {
-      width: 100%;
+    width: 100%;
   }
 }
 
-.profile-image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px; /* 요소 사이 간격 */
+/* 애니메이션 */
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
-#preview-image {
-  width: 300px;
-  height: 400px;
-  object-fit: cover; /* 이미지 비율 유지 */
-}
-
-button {
-  padding: 8px 16px;
-  background-color: #8fb7df;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#camera-feed {
+/* ====== 카메라 컨테이너 스타일 ====== */
+.camera-container {
+    position: relative;
     width: 100%;
+    max-width: 800px;
+    height: 500px;
+    margin: 20px auto;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow: 6px 6px 12px #cfcfcf, -6px -6px 12px #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* #camera-feed {
     max-width: 1000px;
     height: auto;
     display: block;
     margin: 0 auto;
-    border: 2px solid black;
     border-radius: 10px;
     background: black;
+} */
+#camera-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 촬영 버튼 */
-#capture-button {
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 20px;
-    background-color: #8fb7df;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#capture-button:hover {
-    background-color: #34495e;
-}
 
 /* 캡처된 이미지 컨테이너 */
 #image-container {
@@ -209,46 +254,131 @@ button:hover {
     object-fit: cover;
 }
 
-/* 다음 버튼 */
-#next-button {
-    display: none;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 20px;
-    background-color: #8fb7df;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-a {
-	text-decoration : none;
-}
-
-#next-button:hover {
-    background-color: #34495e;
-}
-
 .face-guidance {
-    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 380px;
+    border: 3px dashed rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin-top: 10px; /* 필요하면 조절 */
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
-.face-guidance-text {
+/* .face-guidance-text {
     font-size: 20px;
     font-weight: bold;
-    color: #black; /* 흰색으로 가독성 향상 */
+    color: #black; 흰색으로 가독성 향상
     text-align: center;
     padding: 10px 15px;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* 살짝 그림자 효과 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 살짝 그림자 효과
+} */
+.face-guidance-text {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: rgb(255 255 255 / 60%);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.capture-button,
+.next-button {
+  height: 50px;
+  width: 200px;
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 30px;
+  color: #333;
+  transition: all 0.5s ease-in-out;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}
+
+.btn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.capture-button::after,
+.next-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  background-color: #e4e9ff;
+  border-radius: 30px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+}
+
+.capture-button:hover,
+.next-button:hover {
+  box-shadow: 1px 1px 200px #252525;
+  color: #fff;
+  border: none;
+}
+
+.capture-button:hover::after,
+.next-button:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
+}
+
+#next-button {
+  display: none;
 }
 
 
+
+.submit-btn {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 10px;
+ font-family: inherit;
+ font-size: 13px;
+ font-weight: 500;
+ text-transform: uppercase;
+ letter-spacing: 0.4px;
+ color: #7e97b8;
+ background-color: #e0e8ef;
+ border-style: solid;
+ border-width: 2px 2px 2px 2px;
+ border-color: rgba(255, 255, 255, 0.333);
+ border-radius: 40px 40px 40px 40px;
+ padding: 16px 24px 16px 28px;
+ transform: translate(0px, 0px) rotate(0deg);
+ transition: 0.2s;
+ box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
+}
+
+.submit-btn:hover {
+ color: #516d91;
+ background-color: #E5EDF5;
+ box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
+}
+
+.submit-btn:active {
+ box-shadow: none;
+}
 
 
