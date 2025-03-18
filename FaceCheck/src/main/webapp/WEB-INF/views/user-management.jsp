@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사용자 관리</title>
 <link rel="stylesheet" href="css/user-management.css" />
 <script defer src="js/user-management.js"></script>
 <script defer src="/js/header.js"></script>
@@ -17,15 +17,24 @@
 		<section class="user-management">
 			<h1 class="manage">사용자 관리</h1>
 
+			<!-- 검색 필드와 버튼 -->
+			<div class="search-container">
+				<input type="text" id="searchInput" placeholder="이름 또는 사번 입력" />
+				
+			</div>
+
 			<table class="user-table">
-				<tr>
-					<th>이름</th>
-					<th>사번</th>
-					<th>부서</th>
-					<th>생년월일</th>
-					<th>연락처</th>
-					<th></th>
-				</tr>
+				<thead>
+					<tr>
+						<th>이름</th>
+						<th>사번</th>
+						<th>부서</th>
+						<th>생년월일</th>
+						<th>연락처</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
 				<%
 				List<Employee> empList = (List<Employee>) request.getAttribute("empselect");
 				if (empList != null) {
@@ -41,22 +50,19 @@
 						<div class="dropdown-">
 							<span class="dots" onclick="toggleDropdown(this)">⋮</span>
 							<div class="dropdown-menu">
-
 								<a href="revise?emp_num=<%=emp.getEmp_num()%>""><button>수정</button></a>
-								 <a href="deleteUser?emp_num=<%=emp.getEmp_num()%>" id="deleteLink"><button>삭제</button></a>
+								<a href="deleteUser?emp_num=<%=emp.getEmp_num()%>" id="deleteLink"><button>삭제</button></a>
 							</div>
 						</div>
 					</td>
 				</tr>
 				<%
-				}
+					}
 				}
 				%>
+				</tbody>
 			</table>
 		</section>
 	</main>
-
-
-
 </body>
 </html>
