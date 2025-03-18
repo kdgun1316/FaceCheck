@@ -1,20 +1,23 @@
 @charset "UTF-8";
+
 /* 기본 레이아웃 */
 .dashboard-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
+
 /* 상단 통계 카드 */
 .stats-cards {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* 기존보다 간격 증가 */
     margin-bottom: 20px;
 }
 .stat-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
     flex: 1;
@@ -24,83 +27,103 @@
     font-size: 24px;
     font-weight: bold;
 }
+
 /* 메인 콘텐츠 영역 */
 .content-wrapper {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* 기존보다 간격 증가 */
     flex-wrap: wrap;
+    justify-content: space-between; /* 차트 사이 균등 간격 */
+    margin-top: 20px;
 }
+
 /* 좌측 영역: 성공/실패/인식률 */
 .metrics-section {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     flex: 1 1 calc(50% - 10px);
-    position: relative; /* 위치 기준점 추가 */
-    z-index: 1; /* z-index 추가 */
+    position: relative;
+    z-index: 1;
 }
+
 /* 우측 영역: 차트와 실시간 알림을 나란히 배치 */
 .right-section {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 25px;
     flex: 1 1 calc(50% - 10px);
 }
+
 /* 출입 로그 수 컨테이너 */
 .chart-section {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     flex: 1 1 50%;
-    height: 350px; /* 고정 높이 */
-    position: relative; /* 위치 기준점 추가 */
-    z-index: 0; /* 좌측 메뉴보다 낮은 z-index */
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
 .chart-container {
     position: relative;
     height: 300px;
 }
 .chart-header {
-    margin-bottom: 20px;
-}
-.chart-title {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #ddd; /* 제목 아래 구분선 추가 */
+    padding-bottom: 10px;
 }
+
 /* 실시간 알림 컨테이너 */
 .notice-section {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     flex: 1 1 50%;
-    height: 350px; /* 고정 높이 */
-    min-height: 350px; /* 알림이 없어도 최소 높이 유지 */
+    height: 350px;
+    min-height: 350px;
 }
+
 .notice-list {
-    max-height: 300px; /* notice-section 높이에서 padding 등을 고려 */
+    max-height: 300px;
     overflow-y: auto;
 }
+
 .notice-item {
     display: flex;
     gap: 15px;
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
+
 .notice-item:last-child {
     border-bottom: none;
 }
+
 .notice-profile img {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .notice-content {
     flex: 1;
 }
+
 .notice-status button {
     background: #dc3545;
     color: white;
@@ -109,44 +132,47 @@
     padding: 5px 10px;
     cursor: pointer;
 }
+
 .notice-status button:hover {
     background-color: #c82333;
 }
+
 /* 좌측 메트릭 스타일 */
 .metric-row {
-   display: flex; 
-   justify-content: space-between; 
-   margin-bottom: 10px; 
-   padding-bottom: 10px; 
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 10px;
+   padding-bottom: 10px;
    border-bottom: 1px solid #eee;
 }
+
 .metric-title {
    font-weight: bold;
 }
+
 .metric-value.green {color: green;}
 .metric-value.red {color: red;}
 .metric-value.blue {color: blue;}
-/* 화면 너비가 작을 때 대응하는 미디어 쿼리 추가 */
+
+/* 📌 개별 차트 컨테이너 스타일 */
+.section-box {
+    width: 48%; /* 두 개의 차트가 한 줄에 정렬되도록 조정 */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 400px; /* 차트 높이 일정하게 유지 */
+}
+
+/* 📌 화면이 작아질 경우 (태블릿 & 모바일) */
 @media (max-width: 1024px) {
-   .content-wrapper {
-      flex-direction: column;
-   }
-   .metrics-section,
-   .right-section {
-      flex: 1 1 100%;
-   }
-   .right-section {
-      flex-direction: column;
-   }
-   .chart-section,
-   .notice-section {
-      width: 100%; 
-      height: auto; 
-      min-height: auto;
-   }
-   .chart-container,
-   .notice-list {
-      height: auto; 
-      max-height: none;
-   }
+    .content-wrapper {
+        flex-direction: column; /* 세로 배치로 변경 */
+        align-items: center;
+    }
+    .section-box {
+        width: 90%;
+    }
 }
