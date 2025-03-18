@@ -29,28 +29,13 @@
 			</div>
 		</div>
 		<!-- <button id="capture-button">촬영</button> -->
-		<button id="capture-button" class="button">
-			<span>촬영</span>
-			<svg width="15px" height="10px" viewBox="0 0 13 10">
-    <path d="M1,5 L11,5"></path>
-    <polyline points="8 1 12 5 8 9"></polyline>
-  </svg>
-		</button>
+		<button id="capture-button" class="capture-button">
+		<span class="btn-txt">촬영</span></button>
 		<canvas id="canvas" style="display: none;"></canvas>
 		<div id="image-container"></div>
-		<!-- 캡처된 이미지를 표시할 영역 추가 -->
-		<button id="next-button" class="button" style="display: none;">
-			<span>다음</span>
-			<svg width="15px" height="10px" viewBox="0 0 13 10">
-    <path d="M1,5 L11,5"></path>
-    <polyline points="8 1 12 5 8 9"></polyline>
-  </svg>
-		</button>
-
-
+		<button id="next-button" class="next-button">
+		  <span class="btn-txt">다음</span></button>
 	</section>
-
-
 
 	<!-- 2. 사용자 정보 입력 섹션 -->
 	<section class="register-section">
@@ -96,17 +81,11 @@
 							type="tel" id="phone" name="emp_phone" required>
 					</div>
 
-					<!-- <button type="button" id="submit-btn" class="submit-btn">등록</button> -->
-					<button class="submit-btn">
-					  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					 <button type="button" id="submit-btn" class="submit-btn">등록</button>
-					<!-- <button class="submit-btn">
-					  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
->>>>>>> branch 'master' of https://github.com/kdgun1316/FaceCheck.git
-					    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-					  </svg>
-					  등록
-					</button> -->
+					<button type="button" id="submit-btn" class="submit-btn">
+					<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+				    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+				  	</svg> 등록</button>
+					
 				</form>
 			</div>
 		</div>
