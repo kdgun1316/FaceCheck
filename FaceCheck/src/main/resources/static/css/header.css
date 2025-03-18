@@ -46,7 +46,7 @@ body {
 .sidebar {
   width: 300px;
   background-color: white;
-  color: #A8B2B9;
+  color: #595959;
   box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
   height: calc(100vh - 85px);
   position: fixed;
@@ -182,7 +182,7 @@ body {
 
 .dropdown-content a {
   display: block;
-  color: #A8B2B9;
+  color: #595959;
   text-decoration: none;
   font-size: 0.75rem;
   padding: 12px 20px 12px 55px;

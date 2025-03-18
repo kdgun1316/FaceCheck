@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return dates;
     }
 
-    // 차트 생성 함수
+// 차트 생성 함수
     function createChart(labels, datasets) {
         const ctx = document.getElementById('accessLogChart').getContext('2d');
         new Chart(ctx, {
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     x: {
                         title: {
-                            display: true,
-                            text: '날짜'
+                            display: true
+                            
                         }
                     }
                 }
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 서버에서 대시보드 데이터 가져오기
+// 서버에서 대시보드 데이터 가져오기
     fetch('/FaceCheck/api/dashboard-data')
         .then(response => {
             if (!response.ok) {
@@ -98,4 +98,126 @@ document.addEventListener('DOMContentLoaded', function() {
             item.style.display = 'none';
         });
     });
+});
+
+// 시간대별 출입인원 그래프
+document.addEventListener("DOMContentLoaded", function () {
+    // MySQL 데이터 가져오기 (AJAX 요청)
+    fetch("/getTimeLogData")
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(entry => entry.hour);
+            const counts = data.map(entry => entry.count);
+
+            const timeData = {
+                labels: labels,
+                datasets: [{
+                    label: "출입 인원 수",
+                    data: counts,
+                    backgroundColor: "rgba(54, 162, 235, 0.6)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }]
+            };
+
+            // 시간대별 출입 현황 차트 생성
+            const ctx = document.getElementById("timeBarChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: timeData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("데이터 로딩 오류:", error));
+        
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("/FaceCheck/api/getTimeLogData")
+        .then(response => response.json())
+        .then(data => {
+            console.log("📊 받은 데이터:", data);
+
+            // X축: 0시 ~ 23시
+            const labels = data.map(entry => entry.hour + ":00");
+            const counts = data.map(entry => entry.count);
+
+            const timeData = {
+                labels: labels,
+                datasets: [{
+                    label: "출입 인원 수",
+                    data: counts,
+                    backgroundColor: "rgba(54, 162, 235, 0.6)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }]
+            };
+
+            // 차트 생성
+            const ctx = document.getElementById("timeBarChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: timeData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1, // Y축을 정수 단위로 설정
+                                callback: function(value) { return Number.isInteger(value) ? value : null; }
+                            },
+                            title: { display: true, text: "출입 인원 수" }
+                        },
+                        x: {
+                            title: { display: true, text: "시간대" }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("❌ 데이터 로딩 오류:", error));
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("/FaceCheck/api/getDeptLogData")
+        .then(response => response.json())
+        .then(data => {
+            console.log("📊 부서별 출입 데이터:", data);
+
+            const labels = data.map(entry => entry.department); // 부서 이름
+            const counts = data.map(entry => entry.count); // 출입 횟수
+
+            const pieData = {
+                labels: labels,
+                datasets: [{
+                    label: "부서별 출입 횟수",
+                    data: counts,
+                    backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"]
+                }]
+            };
+
+            // 차트 생성
+            const ctx = document.getElementById("deptPieChart").getContext("2d");
+            new Chart(ctx, {
+                type: "pie",
+                data: pieData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: "bottom" }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("❌ 부서별 데이터 로딩 오류:", error));
 });
