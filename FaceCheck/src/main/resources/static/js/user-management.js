@@ -46,13 +46,64 @@ function deleteUser(emp_num) {
     });
 }
 
+function handleButtonClick() {
+    // 테이블 선택
+    const table = document.querySelector('table');
+    if (!table) {
+        console.error('테이블이 존재하지 않습니다.');
+        return;
+    }
+    
+    // CSV 데이터 초기화
+    let csvData = [];
 
+    // 테이블 헤더 추출 (한 번만 추가)
+    const headers = [];
+    const thead = table.querySelector('thead');
 
+    if (thead) {
+        // thead가 있는 경우, 헤더 추출
+        const headerCells = thead.querySelectorAll('th');
+        headerCells.forEach(cell => headers.push(cell.textContent.trim()));
+    } else {
+        // thead가 없는 경우, 첫 번째 tbody 행에서 헤더 추출
+        const firstRow = table.querySelector('tbody tr:first-child');
+        if (firstRow) {
+            const firstRowCells = firstRow.querySelectorAll('th, td');
+            firstRowCells.forEach(cell => headers.push(cell.textContent.trim()));
+        }
+    }
 
+    // 헤더가 존재할 때만 추가
+    if (headers.length > 0) {
+        csvData.push(headers);
+    }
 
+    // 테이블 데이터 추출 (tbody에서만 가져오기)
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const rowData = [];
+        const cells = row.querySelectorAll('td'); // 데이터는 td만 포함
+        cells.forEach(cell => rowData.push(cell.textContent.trim()));
+        csvData.push(rowData);
+    });
 
+    // CSV 문자열로 변환
+    const csvString = csvData.map(row => row.join(',')).join('\n');
 
+    // CSV 파일 다운로드
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', '출입기록_' + new Date().toISOString().slice(0,10) + '.csv');
+    link.style.visibility = 'hidden';
 
+    document.body.appendChild(link);
+    link.click();
 
-
-
+    // 정리 작업
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
