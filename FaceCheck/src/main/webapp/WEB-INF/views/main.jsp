@@ -26,7 +26,6 @@
 				<div class="stat-value">1</div>
 			</div>
 		</div>
-
 		<!-- ✅ 수정된 메인 콘텐츠 영역 (한 줄에 4개 배치) -->
 		<div class="content-wrapper">
 			<!-- 시간대별 출입 인원 -->
@@ -34,21 +33,18 @@
 				<h3 class="chart-header">시간대별 출입 인원</h3>
 				<canvas id="timeBarChart"></canvas>
 			</div>
-
 			<!-- 부서별 출입 비율 -->
 			<div class="section-box">
 				<h3 class="chart-header">부서별 출입 비율</h3>
 				<canvas id="deptPieChart"></canvas>
 			</div>
-
 			<!-- 출입 로그 수 -->
 			<div class="section-box">
 				<h3 class="chart-header">출입 로그 수</h3>
 				<canvas id="accessLogChart"></canvas>
 			</div>
-
-			<!-- 실시간 알림 -->
-			<div class="section-box notice-section">
+			<!-- 실시간 알림 - section-box 클래스 제거 -->
+			<div class="notice-section">
 				<h3 class="chart-header">실시간 알림</h3>
 				<div class="notice-list">
 					<%
@@ -73,8 +69,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="js/main.js"></script>
-
 </body>
 </html>
