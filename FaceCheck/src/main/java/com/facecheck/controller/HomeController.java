@@ -97,33 +97,45 @@ public class HomeController {
     }
     
     
-
-    @PostMapping("/user")
+    @PostMapping("/user") 
     @ResponseBody
-    public Map<String, Object> recognizeUser(@RequestParam("face_imgs") List<MultipartFile> images) {
+    public Map<String, Object> recognizeUser(@RequestParam(value = "face_imgs", required = false) List<MultipartFile> images) {
         Map<String, Object> result = new HashMap<>();
 
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
 
-            // ✅ 여러 이미지를 Flask로 추가
-            for (MultipartFile img : images) {
-                builder.part("images", new ByteArrayResource(img.getBytes()))
-                        .filename(img.getOriginalFilename())
-                        .contentType(MediaType.IMAGE_JPEG);
+            // ✅ 받은 이미지 로그 출력 (디버깅)
+            if (images == null || images.isEmpty()) {
+                System.out.println("❌ 오류: 받은 이미지 없음!");
+                result.put("success", false);
+                result.put("message", "이미지 파일이 없습니다.");
+                return result;
             }
 
-            // ✅ Flask로 요청 전송
+            System.out.println("✅ 받은 이미지 개수: " + images.size());
+
+            for (MultipartFile img : images) {
+                System.out.println("✅ 받은 이미지 이름: " + img.getOriginalFilename());
+                System.out.println("✅ 받은 이미지 크기: " + img.getSize() + " bytes");
+                System.out.println("✅ 이미지 타입: " + img.getContentType());
+                builder.part("images", new ByteArrayResource(img.getBytes()))
+                       .filename(img.getOriginalFilename())
+                       .contentType(MediaType.IMAGE_JPEG);
+            }
+
+            // ✅ Flask로 전송 및 응답 받기
             ResponseEntity<String> response = webClient.post()
                     .uri("/userFace")
                     .contentType(MediaType.MULTIPART_FORM_DATA)
-                    .bodyValue(builder.build())  // 🚨 multipart/form-data 형식으로 Flask에 전송
+                    .bodyValue(builder.build()) // Multipart 데이터 전송
                     .retrieve()
                     .toEntity(String.class)
-                    .block();
+                    .block();  // 동기 처리
 
             System.out.println("📡 Flask 응답: " + response.getBody());
 
+            // 응답 확인
             result.put("success", true);
             result.put("flask_response", response.getBody());
 
@@ -136,6 +148,7 @@ public class HomeController {
         return result;
     }
 
+    
     
     
     
@@ -239,6 +252,13 @@ public class HomeController {
 
 		return "revise";
 	}
+	
+	@GetMapping("/sctest")
+	public String sctest() {
+
+		return "sctest";
+	}
+	
 	
 
 
