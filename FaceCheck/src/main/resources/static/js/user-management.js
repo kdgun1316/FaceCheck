@@ -107,3 +107,32 @@ function handleButtonClick() {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
+    const tableRows = document.querySelectorAll(".user-table tbody tr");
+
+
+
+    // 실시간 입력 필터링
+    searchInput.addEventListener("input", () => {
+        filterTable();
+    });
+
+    function filterTable() {
+        const query = searchInput.value.toLowerCase();
+        tableRows.forEach(row => {
+            const name = row.children[0].textContent.toLowerCase(); // 이름
+            const empNum = row.children[1].textContent.toLowerCase(); // 사번
+
+            // 이름 또는 사번이 검색어와 일치하면 표시, 그렇지 않으면 숨김
+            if (name.includes(query) || empNum.includes(query)) {
+                row.style.display = ""; // 행 표시
+            } else {
+                row.style.display = "none"; // 행 숨김
+            }
+        });
+    }
+});
+
