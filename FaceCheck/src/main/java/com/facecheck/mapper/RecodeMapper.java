@@ -25,4 +25,9 @@ public interface RecodeMapper {
 	        "WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL #{days} DAY) " +
 	        "GROUP BY DATE(created_at)")
 	List<Map<String, Object>> getGuestAccessCount(@Param("days") int days);
+
+	
+	@Select("SELECT * FROM emp_info AS e INNER JOIN log_info AS l ON e.emp_num = l.emp_num WHERE e.emp_num = #{empNum}")
+	List<recode> logSelect(Integer empNum);
+
 }

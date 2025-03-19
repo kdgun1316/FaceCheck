@@ -193,25 +193,36 @@ public class HomeController {
 		return "recode";
 	}
 	
-	 @Autowired
-	    private LogInfoService logInfoService; // @Autowired로 의존성 주입
+	/*
+	 * @Autowired private LogInfoService logInfoService; // @Autowired로 의존성 주입
+	 * 
+	 * @GetMapping("/entry_log") public String log(@RequestParam(value = "empNum",
+	 * required = false) Integer empNum, Model model) { // List<recode> rec; // //
+	 * if (empNum != null) { // rec = logInfoService.getLogsByEmpNum(empNum); // }
+	 * else { // rec = logInfoService.getAllLogs(); // } //
+	 * model.addAttribute("logList", rec); // logList를 모델에 추가 return "entry_log"; //
+	 * entry_log.jsp로 데이터 전달
+	 * 
+	 * }
+	 */
+	    
+	@Autowired
+	private LogInfoService logInfoService;
 
-	    @GetMapping("/entry_log")
-	    public String log(@RequestParam(value = "empNum", required = false) Integer empNum, Model model) {
-//	        List<recode> rec;
-//
-//	        if (empNum != null) {
-//	            rec = logInfoService.getLogsByEmpNum(empNum);
-//	        } else {
-//	            rec = logInfoService.getAllLogs();
-//	        }
-//	        model.addAttribute("logList", rec); // logList를 모델에 추가
-	        return "entry_log"; // entry_log.jsp로 데이터 전달
-	           
-	    }
-
-    
 	
+	@GetMapping("/entry_log")
+	public String log(@RequestParam(value = "emp_num", required = false) Integer empNum, Model model) {
+	    System.out.println(empNum);  
+
+	        List<recode> logList = adminservice.logSelect(empNum);
+	        
+	        System.out.println(logList.toString());
+	        model.addAttribute("logList", logList); 
+
+	    return "entry_log";  
+	}
+
+
 	@GetMapping("/deleteUser")
 	public String deleteEmployee(@RequestParam String emp_num) {
 	    System.out.println("🛠 삭제 요청 도착! empNum: " + emp_num);
