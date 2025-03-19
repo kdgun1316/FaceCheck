@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* ✅ 모든 내용 오른쪽 정렬 */
-    padding-right: -10px; /* ✅ 오른쪽 여백 조정 */
+    padding-right: 0; /* ✅ 음수 값은 작동하지 않으므로 0으로 수정 */
     padding-left: 320px;
     margin-top: 30px;
 }
@@ -47,10 +47,10 @@
     margin-top: 20px;
 }
 
-/* ✅ 개별 차트 컨테이너 스타일 */
+/* ✅ 개별 차트 컨테이너 스타일 (수정) */
 .section-box {
     flex: 1; /* ✅ 자동 크기 조정 */
-    max-width: calc(25% - 15px); /* ✅ 한 줄에 4개 배치 */
+    max-width: calc(33.33% - 15px); /* ✅ 한 줄에 3개 배치로 변경 (기존 25%에서 33.33%로 확대) */
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -59,6 +59,13 @@
     text-align: center;
     height: 400px;
     box-sizing: border-box;
+    position: relative; /* ✅ 내부 요소 위치 조정 가능하도록 */
+}
+
+/* ✅ 차트 내부 날짜 레이블 조정 (차트 라이브러리 의존) */
+.section-box canvas {
+    width: 100% !important; /* ✅ 차트가 컨테이너에 맞게 조정 */
+    height: auto; /* ✅ 높이 자동 조정 */
 }
 
 /* ✅ 차트 제목 스타일 */
@@ -74,7 +81,7 @@
 /* ✅ 실시간 알림 컨테이너 스타일 */
 .notice-section {
     flex: 1; /* ✅ 자동 크기 조정 */
-    max-width: calc(25% - 15px);
+    max-width: calc(33.33% - 15px); /* ✅ 한 줄에 3개 배치로 변경 */
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -107,9 +114,38 @@
     border-bottom: none;
 }
 
+/* ✅ 등록 버튼 스타일 */
+.submit-btn {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    gap: 8px; /* SVG와 텍스트 간 간격 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    border: none;
+    border-radius: 20px; /* 둥근 모서리 */
+    background-color: #e6f0fa; /* 버튼 배경색 */
+    color: #333; /* 텍스트 색상 */
+    font-size: 16px; /* 텍스트 크기 */
+    cursor: pointer;
+    transition: background-color 0.3s; /* 호버 효과 부드럽게 */
+}
+
+.submit-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #333; /* SVG 색상 텍스트와 맞춤 */
+}
+
+.submit-btn:hover {
+    background-color: #d1e0f5; /* 호버 시 색상 변화 */
+}
+
 /* ✅ 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
     .section-box {
+        flex: 1 1 calc(50% - 10px); /* ✅ 한 줄에 2개 배치 */
+    }
+    .notice-section {
         flex: 1 1 calc(50% - 10px); /* ✅ 한 줄에 2개 배치 */
     }
 }
@@ -117,6 +153,9 @@
 /* ✅ 모바일 (768px 이하) */
 @media (max-width: 768px) {
     .section-box {
+        flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
+    }
+    .notice-section {
         flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
     }
 }
