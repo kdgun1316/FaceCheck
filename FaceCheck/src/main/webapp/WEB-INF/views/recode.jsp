@@ -13,31 +13,9 @@
 <link rel="stylesheet" href="css/user-management.css" />
 <script defer src="js/user-management.js"></script>
 <script defer src="/js/header.js"></script>
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<style>
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-.modal-content {
-  padding: 10px;
-}
-.close {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-}
-</style>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -88,70 +66,53 @@
 	</main>
 
 
-<!-- ✅ WebSocket 메시지를 표시할 모달창 -->
-<div id="alertModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p id="modalMessage">🚨 여기에 메시지가 들어갑니다!</p>
-  </div>
-</div>
 
 
-<script>
-    let socket;
+<h2>WebSocket 연결 테스트</h2>
+    <button onclick="sendMessage()">메시지 보내기</button>
+    <p id="status">🔄 WebSocket 연결 상태: 대기 중...</p>
+    <p id="messages">📩 수신 메시지:</p>
 
-    function connectWebSocket() {
-        socket = new WebSocket("ws://localhost:8083/FaceCheck/ws/alert");
+    <script>
+        let socket;
 
-        socket.onopen = function () {
-            console.log("✅ WebSocket 연결 성공!");
-            document.getElementById("status").innerText = "✅ WebSocket 연결 성공!";
-        };
+        function connectWebSocket() {
+            socket = new WebSocket("ws://localhost:8083/FaceCheck/ws/alert");
 
-        socket.onmessage = function (event) {
-            console.log("📩 서버로부터 메시지:", event.data);
+            socket.onopen = function() {
+                console.log("✅ WebSocket 연결 성공!");
+                document.getElementById("status").innerText = "✅ WebSocket 연결 성공!";
+            };
 
+            socket.onmessage = function(event) {
+                console.log("📩 서버로부터 메시지:", event.data);
+                alert("🚨 경고 메시지 도착                                          ! \n" + event.data);
+                document.getElementById("messages").innerHTML += "<br>" + event.data;
+            };
 
-            // ✅ 모달창 메시지 업데이트
-            document.getElementById("modalMessage").innerText = event.data;
+            socket.onerror = function(error) {
+                console.error("❌ WebSocket 오류 발생:", error);
+                document.getElementById("status").innerText = "❌ WebSocket 오류 발생";
+            };
 
-            // ✅ 모달창 표시
-            document.getElementById("alertModal").style.display = "block";
-
-            // ✅ 메시지 로그 업데이트
-            document.getElementById("messages").innerHTML += "<br>" + event.data;
-        };
-
-        socket.onerror = function (error) {
-            console.error("❌ WebSocket 오류 발생:", error);
-            document.getElementById("status").innerText = "❌ WebSocket 오류 발생";
-        };
-
-        socket.onclose = function () {
-            console.log("❌ WebSocket 연결 종료. 3초 후 재연결 시도...");
-            document.getElementById("status").innerText = "❌ WebSocket 연결 종료, 재연결 중...";
-            setTimeout(connectWebSocket, 3000); // 3초 후 재연결 시도
-        };
-    }
-
-    function sendMessage() {
-        if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.send("테스트 메시지 전송!");
-            console.log("🚀 테스트 메시지 전송!");
-        } else {
-            console.log("⚠ WebSocket 연결 안 됨!");
+            socket.onclose = function() {
+                console.log("❌ WebSocket 연결 종료. 3초 후 재연결 시도...");
+                document.getElementById("status").innerText = "❌ WebSocket 연결 종료, 재연결 중...";
+                setTimeout(connectWebSocket, 3000); // 3초 후 재연결 시도
+            };
         }
-    }
 
-    // ✅ 모달창 닫기 기능 추가
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector(".close").addEventListener("click", function () {
-            document.getElementById("alertModal").style.display = "none";
-        });
-    });
+        function sendMessage() {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send("테스트 메시지 전송!");
+                console.log("🚀 테스트 메시지 전송!");
+            } else {
+                console.log("⚠ WebSocket 연결 안 됨!");
+            }
+        }
 
-    connectWebSocket();
-</script>
+        connectWebSocket();
+    </script>
 
 
 </body>

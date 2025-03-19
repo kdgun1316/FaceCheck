@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>출입 관리 대시보드</title>
-<script defer src="/js/header.js"></script>
 <link rel="stylesheet" href="css/main.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script defer src="/js/header.js"></script>
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
 	<%@ include file="header.jsp"%>
