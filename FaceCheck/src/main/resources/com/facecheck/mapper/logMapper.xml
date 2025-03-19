@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.facecheck.mapper.LogMapper">
+
+	<insert id="insertLog" parameterType="com.facecheck.entity.Log">
+		INSERT INTO log_info(log_time, emp_num, admin_id, status)
+		VALUES (#{log_time}, #{emp_num}, #{admin_id}, #{status})
+	</insert>
+
+	<select id="getRecentLogs" resultType="com.facecheck.entity.Log">
+		SELECT * FROM log_info ORDER BY log_idx DESC LIMIT 8
+	</select>
+
+	<delete id="deleteLog" parameterType="Long">
+		DELETE FROM log_info WHERE log_idx = #{log_idx}
+	</delete>
+
+</mapper>
