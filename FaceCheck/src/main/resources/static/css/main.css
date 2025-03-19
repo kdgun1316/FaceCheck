@@ -1,18 +1,26 @@
 @charset "UTF-8";
 
-/* 기본 레이아웃 */
+/* ✅ 기본 레이아웃 */
 .dashboard-container {
-    max-width: 1400px;
+    max-width: 1900px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* ✅ 모든 내용 오른쪽 정렬 */
+    padding-right: -10px; /* ✅ 오른쪽 여백 조정 */
+    padding-left: 320px;
+    margin-top: 30px;
 }
 
-/* 상단 통계 카드 */
+/* ✅ 상단 통계 카드 */
 .stats-cards {
     display: flex;
-    gap: 25px; /* 기존보다 간격 증가 */
+    gap: 25px;
     margin-bottom: 20px;
+    width: 100%;
 }
+
 .stat-card {
     background: white;
     border-radius: 10px;
@@ -23,85 +31,71 @@
     flex: 1;
     min-width: 150px;
 }
+
 .stat-value {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
 }
 
-/* 메인 콘텐츠 영역 */
+/* ✅ 메인 콘텐츠 영역 */
 .content-wrapper {
     display: flex;
-    gap: 25px; /* 기존보다 간격 증가 */
     flex-wrap: wrap;
-    justify-content: space-between; /* 차트 사이 균등 간격 */
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
     margin-top: 20px;
 }
 
-/* 좌측 영역: 성공/실패/인식률 */
-.metrics-section {
+/* ✅ 개별 차트 컨테이너 스타일 */
+.section-box {
+    flex: 1; /* ✅ 자동 크기 조정 */
+    max-width: calc(25% - 15px); /* ✅ 한 줄에 4개 배치 */
     background: white;
+    padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 calc(50% - 10px);
-    position: relative;
-    z-index: 1;
+    text-align: center;
+    height: 400px;
+    box-sizing: border-box;
 }
 
-/* 우측 영역: 차트와 실시간 알림을 나란히 배치 */
-.right-section {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
-    flex: 1 1 calc(50% - 10px);
-}
-
-/* 출입 로그 수 컨테이너 */
-.chart-section {
-    background: white;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 50%;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.chart-container {
-    position: relative;
-    height: 300px;
-}
+/* ✅ 차트 제목 스타일 */
 .chart-header {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 15px;
     color: #333;
-    border-bottom: 2px solid #ddd; /* 제목 아래 구분선 추가 */
+    border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
 }
 
-/* 실시간 알림 컨테이너 */
+/* ✅ 실시간 알림 컨테이너 스타일 */
 .notice-section {
+    flex: 1; /* ✅ 자동 크기 조정 */
+    max-width: calc(25% - 15px);
     background: white;
+    padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 50%;
-    height: 350px;
-    min-height: 350px;
+    height: 400px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
+/* ✅ 실시간 알림 리스트 스타일 */
 .notice-list {
-    max-height: 300px;
+    flex: 1;
+    max-height: 320px;
     overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
 }
 
+/* ✅ 실시간 알림 항목 스타일 */
 .notice-item {
     display: flex;
     gap: 15px;
@@ -113,66 +107,16 @@
     border-bottom: none;
 }
 
-.notice-profile img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.notice-content {
-    flex: 1;
-}
-
-.notice-status button {
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.notice-status button:hover {
-    background-color: #c82333;
-}
-
-/* 좌측 메트릭 스타일 */
-.metric-row {
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 10px;
-   padding-bottom: 10px;
-   border-bottom: 1px solid #eee;
-}
-
-.metric-title {
-   font-weight: bold;
-}
-
-.metric-value.green {color: green;}
-.metric-value.red {color: red;}
-.metric-value.blue {color: blue;}
-
-/* 📌 개별 차트 컨테이너 스타일 */
-.section-box {
-    width: 48%; /* 두 개의 차트가 한 줄에 정렬되도록 조정 */
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    min-height: 400px; /* 차트 높이 일정하게 유지 */
-}
-
-/* 📌 화면이 작아질 경우 (태블릿 & 모바일) */
+/* ✅ 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
-    .content-wrapper {
-        flex-direction: column; /* 세로 배치로 변경 */
-        align-items: center;
-    }
     .section-box {
-        width: 90%;
+        flex: 1 1 calc(50% - 10px); /* ✅ 한 줄에 2개 배치 */
+    }
+}
+
+/* ✅ 모바일 (768px 이하) */
+@media (max-width: 768px) {
+    .section-box {
+        flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
     }
 }

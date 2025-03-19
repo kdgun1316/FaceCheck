@@ -1,3 +1,8 @@
+// 전역 변수로 차트 인스턴스 관리
+let accessLogChart = null;
+let timeBarChart = null;
+let deptPieChart = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     // 현재 날짜 기준으로 5일 전까지의 날짜를 생성하는 함수
     function getPastDates(days) {
@@ -12,10 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return dates;
     }
 
-// 차트 생성 함수
+    // 차트 생성 함수
     function createChart(labels, datasets) {
         const ctx = document.getElementById('accessLogChart').getContext('2d');
-        new Chart(ctx, {
+        
+        // 기존 차트가 있으면 제거
+        if (accessLogChart) {
+            accessLogChart.destroy();
+        }
+        
+        accessLogChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: labels,
@@ -53,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     x: {
                         title: {
                             display: true
-                            
                         }
                     }
                 }
@@ -61,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-// 서버에서 대시보드 데이터 가져오기
+    // 서버에서 대시보드 데이터 가져오기
     fetch('/FaceCheck/api/dashboard-data')
         .then(response => {
             if (!response.ok) {
@@ -86,11 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
             createChart(defaultLabels, defaultDatasets);
         });
-});
 
-
-// 알림 닫기 버튼 이벤트
-document.addEventListener('DOMContentLoaded', function() {
+    // 알림 닫기 버튼 이벤트
     document.querySelectorAll('.notice-close').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
@@ -98,50 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
             item.style.display = 'none';
         });
     });
-});
 
-// 시간대별 출입인원 그래프
-document.addEventListener("DOMContentLoaded", function () {
-    // MySQL 데이터 가져오기 (AJAX 요청)
-    fetch("/getTimeLogData")
-        .then(response => response.json())
-        .then(data => {
-            const labels = data.map(entry => entry.hour);
-            const counts = data.map(entry => entry.count);
-
-            const timeData = {
-                labels: labels,
-                datasets: [{
-                    label: "출입 인원 수",
-                    data: counts,
-                    backgroundColor: "rgba(54, 162, 235, 0.6)",
-                    borderColor: "rgba(54, 162, 235, 1)",
-                    borderWidth: 1
-                }]
-            };
-
-            // 시간대별 출입 현황 차트 생성
-            const ctx = document.getElementById("timeBarChart").getContext("2d");
-            new Chart(ctx, {
-                type: "bar",
-                data: timeData,
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
-        })
-        .catch(error => console.error("데이터 로딩 오류:", error));
-        
-});
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
+    // 시간대별 출입인원 그래프
     fetch("/FaceCheck/api/getTimeLogData")
         .then(response => response.json())
         .then(data => {
@@ -164,7 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 차트 생성
             const ctx = document.getElementById("timeBarChart").getContext("2d");
-            new Chart(ctx, {
+            
+            // 기존 차트가 있으면 제거
+            if (timeBarChart) {
+                timeBarChart.destroy();
+            }
+            
+            timeBarChart = new Chart(ctx, {
                 type: "bar",
                 data: timeData,
                 options: {
@@ -186,9 +157,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => console.error("❌ 데이터 로딩 오류:", error));
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+    // 부서별 출입 데이터 차트
     fetch("/FaceCheck/api/getDeptLogData")
         .then(response => response.json())
         .then(data => {
@@ -208,7 +178,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 차트 생성
             const ctx = document.getElementById("deptPieChart").getContext("2d");
-            new Chart(ctx, {
+            
+            // 기존 차트가 있으면 제거
+            if (deptPieChart) {
+                deptPieChart.destroy();
+            }
+            
+            deptPieChart = new Chart(ctx, {
                 type: "pie",
                 data: pieData,
                 options: {

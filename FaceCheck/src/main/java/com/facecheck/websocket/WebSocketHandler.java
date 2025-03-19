@@ -31,14 +31,20 @@ public class WebSocketHandler extends TextWebSocketHandler {
         System.out.println("❌ WebSocket 연결 해제됨! 현재 접속자 수: " + sessions.size());
     }
 
-    // ✅ WebSocket을 통해 관리자에게 경고 메시지 전송
+    // ✅ WebSocket을 통해 관리자에게 메시지 전송 (오류 발생 가능성 확인)
     public void sendAlertToAdmins(String message) {
         synchronized (sessions) {
+            if (sessions.isEmpty()) {
+                System.out.println("⚠ WebSocket 세션이 없습니다! 메시지를 보낼 수 없습니다.");
+                return;
+            }
+            
             for (WebSocketSession session : sessions) {
                 try {
+                    System.out.println("📩 WebSocket으로 메시지 전송: " + message);
                     session.sendMessage(new TextMessage(message));
-                    System.out.println("🚀 WebSocket으로 관리자에게 메시지 전송됨: " + message);
                 } catch (IOException e) {
+                    System.err.println("❌ WebSocket 메시지 전송 실패: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
