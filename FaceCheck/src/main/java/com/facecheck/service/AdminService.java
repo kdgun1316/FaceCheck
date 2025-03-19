@@ -130,5 +130,11 @@ public class AdminService {
 		
 	}
 
+
+	public List<recode> logSelect(Integer empNum) {
+	    return recode.logSelect(empNum);
+	}
+
+
 	
 }
