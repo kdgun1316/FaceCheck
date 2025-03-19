@@ -14,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -25,6 +23,7 @@ import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
 import com.facecheck.entity.recode;
 import com.facecheck.service.AdminService;
+import com.facecheck.service.LogInfoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -137,18 +136,6 @@ public class HomeController {
     }
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-	
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
 		
@@ -194,6 +181,25 @@ public class HomeController {
 		// model.addAttribute("empselect", emp);
 		return "recode";
 	}
+	
+	 @Autowired
+	    private LogInfoService logInfoService; // @Autowired로 의존성 주입
+
+	    @GetMapping("/entry_log")
+	    public String log(@RequestParam(value = "empNum", required = false) Integer empNum, Model model) {
+//	        List<recode> rec;
+//
+//	        if (empNum != null) {
+//	            rec = logInfoService.getLogsByEmpNum(empNum);
+//	        } else {
+//	            rec = logInfoService.getAllLogs();
+//	        }
+//	        model.addAttribute("logList", rec); // logList를 모델에 추가
+	        return "entry_log"; // entry_log.jsp로 데이터 전달
+	           
+	    }
+
+    
 	
 	@GetMapping("/deleteUser")
 	public String deleteEmployee(@RequestParam String emp_num) {
