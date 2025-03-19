@@ -295,5 +295,84 @@ body {
   text-decoration: none !important;
 }
 
+
+
+
+.cont_principal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1000;
+}
+
+.cont_bgc_modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #F24541;
+  opacity: 0;
+  transition: all 0.2s;
+  display: none;
+}
+
+.cont_modal {
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: none;
+    height: 300px;
+}
+
+.cont_logo_restrigido {
+  margin-bottom: 15px;
+}
+
+.po_relative h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.po_relative p {
+  font-size: 16px;
+}
+
+.btn_proceed {
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 2px solid #F24541;
+  color: #F24541;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 40px;
+}
+
+.btn_proceed:hover {
+  background-color: #F24541;
+  color: #fff;
+}
+
+.po_relative {
+	color: white;
+	margin-top: 30px;
+}
+.danger {
+	font-size : 36px;
+}
+
+
 /* Font Awesome CDN 추가 필요 */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

@@ -67,5 +67,37 @@
     </main>
 </div>
 
+
+
+
+<!-- ✅ WebSocket 메시지를 표시할 모달창 -->
+<div id="alertModal" class="cont_principal">
+    <div class="cont_bgc_modal"></div>
+    <div class="cont_modal">
+        <div class="cont_circulo_prohibido">
+            <div class="cont_raya_divisor"></div>
+            <div class="cont_form_modal">
+                <div class="cont_logo_restrigido">
+                    <div class="cont_circulo_logo">
+                        <div class="con_raya_logo"></div>
+                    </div>
+                </div>
+                <div class="danger">
+                	<p>🚫</p>
+                </div>
+                <div class="po_relative">
+                    <h1>ALERT MESSAGE</h1>
+                    <p id="modalMessage">You have received a message.</p>
+                </div>
+                <div class="cont_btn">
+                    <button class="btn_proceed" id="closeModal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> branch 'master' of https://github.com/kdgun1316/FaceCheck.git
+
+
 </body>
 </html>
