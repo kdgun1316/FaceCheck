@@ -152,13 +152,42 @@
   color: royalblue;
 }
 
+/* 기존 select 스타일 유지 */
 .form-group select {
   width: 100%;
-  padding: 10px;
+  padding: 10px 30px 10px 10px; /* 오른쪽 패딩 추가 */
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 16px;
   margin-bottom: 10px;
+  background-color: #f8f9fa; /* input과 동일한 배경색 */
+  color: black; /* 기본 텍스트 색상 (검은색) */
+  appearance: none; /* 기본 화살표 제거 */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* 검정색 화살표 */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* 화살표 위치 조정 */
+  background-size: 25px; /* 화살표 크기 조정 */
+}
+
+/* 첫 번째 옵션(placeholder)만 회색으로 스타일링 */
+.form-group select option[value=""][disabled] {
+  color: grey; /* placeholder 색상 */
+}
+
+/* 나머지 옵션들은 검은색으로 유지 */
+.form-group select option {
+  color: black; /* 기본 텍스트 색상 (검은색) */
+}
+
+/* 선택되지 않은 상태에서 placeholder(첫 번째 옵션)만 회색으로 표시 */
+.form-group select:invalid {
+  color: grey;
+}
+
+/* select에 포커스가 갔을 때 스타일 */
+.form-group select:focus {
+  border-color: royalblue; /* input과 동일한 포커스 색상 */
+  outline: none;
 }
 
 /* 버튼 스타일 */
@@ -382,4 +411,29 @@
  box-shadow: none;
 }
 
+<style>
+.submit-btn {
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    gap: 8px; /* SVG와 텍스트 간 간격 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    border: none;
+    border-radius: 20px; /* 둥근 모서리 */
+    background-color: #e6f0fa; /* 버튼 배경색 (이미지와 유사하게) */
+    color: #333; /* 텍스트 색상 */
+    font-size: 50px; /* 텍스트 크기 */
+    cursor: pointer;
+    transition: background-color 0.3s; /* 호버 효과 부드럽게 */
+}
 
+.submit-btn svg {
+    width: 27px;
+    height: 27px;
+    stroke: #333; /* SVG 색상 텍스트와 맞춤 */
+}
+
+.submit-btn:hover {
+    background-color: #d1e0f5; /* 호버 시 색상 변화 */
+}
+</style>
