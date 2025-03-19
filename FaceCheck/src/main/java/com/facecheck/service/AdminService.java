@@ -1,6 +1,7 @@
 package com.facecheck.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
+import com.facecheck.entity.Log;
 import com.facecheck.entity.recode;
 import com.facecheck.mapper.AdminMapper;
 import com.facecheck.mapper.EmployeeMapper;
+import com.facecheck.mapper.LogMapper;
 import com.facecheck.mapper.RecodeMapper;
 import com.facecheck.mapper.RecordMapper;
 
@@ -134,6 +137,35 @@ public class AdminService {
 	public List<recode> logSelect(Integer empNum) {
 	    return recode.logSelect(empNum);
 	}
+	
+	
+	@Autowired
+	private LogMapper logMapper;
+	
+	
+    // ✅ 로그 저장 메서드
+	public void insertLog(String adminId, String status) {
+        Log log = new Log();
+        log.setAdmin_id("admin1");
+        log.setStatus(status);
+        
+        String logTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        log.setLog_time(logTime);
+        
+        log.setEmp_num(221315); // ⚠️ 실제 프로젝트에서는 emp_num 정확히 설정 필요
+
+        logMapper.insertLog(log);
+    }
+
+    public List<Log> getRecentLogs() {
+        return logMapper.getRecentLogs();
+    }
+
+    
+    public void deleteLog(Long log_idx) {
+        logMapper.deleteLog(log_idx);
+    }
+	
 
 
 	

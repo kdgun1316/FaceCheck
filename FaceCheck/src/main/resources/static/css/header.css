@@ -374,5 +374,31 @@ body {
 }
 
 
+
+
+/* ✅ 성공 메시지를 표시할 스타일 */
+.success-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 255, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;  /* 기본적으로 숨김 */
+  animation: fadeOut 3s forwards; /* 3초 후 사라지게 */
+}
+
+/* ✅ 성공 메시지가 서서히 사라지는 효과 */
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+
 /* Font Awesome CDN 추가 필요 */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

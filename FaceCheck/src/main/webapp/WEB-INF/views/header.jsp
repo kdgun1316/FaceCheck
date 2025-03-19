@@ -96,7 +96,7 @@
         </div>
     </div>
 </div>
->>>>>>> branch 'master' of https://github.com/kdgun1316/FaceCheck.git
+
 
 
 </body>

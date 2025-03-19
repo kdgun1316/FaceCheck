@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.facecheck.websocket.SuccessWebSocketHandler;
 import com.facecheck.websocket.WebSocketHandler;
 
 @RestController
@@ -12,30 +14,36 @@ import com.facecheck.websocket.WebSocketHandler;
 public class WebSocketController {
 
     @Autowired
-    private WebSocketHandler webSocketHandler;
+    private WebSocketHandler alertWebSocketHandler; // 🚨 경고 메시지 WebSocket 핸들러
 
+    @Autowired
+    private SuccessWebSocketHandler successWebSocketHandler; // ✅ 성공 메시지 WebSocket 핸들러
+
+    // 🚨 경고 메시지 처리 (미등록 사용자)
     @PostMapping("/test-alert")
     public ResponseEntity<?> sendAlertToAdmins(@RequestBody Map<String, String> payload) {
-        String message = payload.get("message");  // Flask에서 보낸 데이터 받기
+        String message = payload.get("message");
 
         if (message == null || message.isEmpty()) {
             return ResponseEntity.badRequest().body("❌ 오류: message 값이 비어있습니다.");
         }
 
         System.out.println("🚨 Flask에서 경고 요청 수신: " + message);
-        
-        try {
-            // ✅ WebSocket을 통해 관리자 페이지에 경고 메시지 전송
-            webSocketHandler.sendAlertToAdmins(message);
-            System.out.println("✅ WebSocket 메시지 전송 성공!");
-        } catch (Exception e) {
-            System.err.println("❌ WebSocket 메시지 전송 중 오류 발생: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return ResponseEntity.ok("✅ WebSocket 알림 전송 완료!");
+        alertWebSocketHandler.sendAlertToAdmins(message);
+        return ResponseEntity.ok("✅ WebSocket 경고 메시지 전송 완료!");
     }
 
+    // ✅ 성공 메시지 처리 (등록된 사용자)
+    @PostMapping("/success-alert")
+    public ResponseEntity<?> sendSuccessToAdmins(@RequestBody Map<String, String> payload) {
+        String message = payload.get("message");
+
+        if (message == null || message.isEmpty()) {
+            return ResponseEntity.badRequest().body("❌ 오류: message 값이 비어있습니다.");
+        }
+
+        System.out.println("✅ Flask에서 성공 요청 수신: " + message);
+        successWebSocketHandler.sendSuccessMessage(message);
+        return ResponseEntity.ok("✅ WebSocket 성공 메시지 전송 완료!");
+    }
 }
-
-

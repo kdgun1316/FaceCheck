@@ -197,3 +197,29 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error("❌ 부서별 데이터 로딩 오류:", error));
 });
+
+
+
+
+function deleteLog(btn, log_idx) {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    fetch('/FaceCheck/deleteLog', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'log_idx=' + log_idx
+    })
+    .then(res => res.json())
+    .then(res => {
+        if(res.success) {
+            alert('삭제되었습니다.');
+            btn.parentElement.parentElement.remove();
+        } else {
+            alert('삭제 실패.');
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('에러가 발생했습니다.');
+    });
+}

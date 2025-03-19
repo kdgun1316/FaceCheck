@@ -47,31 +47,25 @@
 				<canvas id="accessLogChart"></canvas>
 			</div>
 			<!-- 실시간 알림 - section-box 클래스 제거 -->
-			<div class="notice-section">
-				<h3 class="chart-header">실시간 알림</h3>
-				<div class="notice-list">
-					<%
-					for (int i = 0; i < 8; i++) {
-					%>
-					<div class="notice-item">
-						<div class="notice-profile">
-							<img src="images/face_recognition.jpg" alt="얼굴인식">
-						</div>
-						<div class="notice-content">
-							<div class="notice-text">얼굴 인증 성공</div>
-							<div class="notice-date">2022-03-26 16:22:05</div>
-						</div>
-						<div class="notice-status">
-							<button class="notice-close">닫기</button>
-						</div>
-					</div>
-					<%
-					}
-					%>
+			<div class="notice-list">
+    <c:forEach var="log" items="${logList}">
+        <div class="notice-item">
+            <div class="notice-profile">
+                <img src="images/face_recognition.jpg" alt="얼굴인식">
+            </div>
+            <div class="notice-content">
+                <div class="notice-text">${log.status}: ${log.admin_id}</div>
+                <div class="notice-date">${log.log_time}</div>
+            </div>
+				<div class="notice-status">
+					<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">닫기</button>
 				</div>
-			</div>
+					</div>
+    </c:forEach>
+</div>
+
 		</div>
 	</div>
-	<script src="js/main.js"></script>
+	<script src="js/main.js"></script>z
 </body>
 </html>

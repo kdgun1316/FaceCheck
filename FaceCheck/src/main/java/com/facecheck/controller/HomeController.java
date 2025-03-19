@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
+import com.facecheck.entity.Log;
 import com.facecheck.entity.recode;
 import com.facecheck.service.AdminService;
 import com.facecheck.service.LogInfoService;
@@ -96,7 +98,7 @@ public class HomeController {
     }
     
     
-    @PostMapping("/user") 
+    @PostMapping("/user")
     @ResponseBody
     public Map<String, Object> recognizeUser(@RequestParam(value = "face_imgs", required = false) List<MultipartFile> images) {
         Map<String, Object> result = new HashMap<>();
@@ -104,48 +106,68 @@ public class HomeController {
         try {
             MultipartBodyBuilder builder = new MultipartBodyBuilder();
 
-            // ✅ 받은 이미지 로그 출력 (디버깅)
             if (images == null || images.isEmpty()) {
-                System.out.println("❌ 오류: 받은 이미지 없음!");
                 result.put("success", false);
                 result.put("message", "이미지 파일이 없습니다.");
                 return result;
             }
 
-            System.out.println("✅ 받은 이미지 개수: " + images.size());
-
             for (MultipartFile img : images) {
-                System.out.println("✅ 받은 이미지 이름: " + img.getOriginalFilename());
-                System.out.println("✅ 받은 이미지 크기: " + img.getSize() + " bytes");
-                System.out.println("✅ 이미지 타입: " + img.getContentType());
                 builder.part("images", new ByteArrayResource(img.getBytes()))
                        .filename(img.getOriginalFilename())
                        .contentType(MediaType.IMAGE_JPEG);
             }
 
-            // ✅ Flask로 전송 및 응답 받기
+            // Flask 호출 및 응답처리 (여기서 수정!)
             ResponseEntity<String> response = webClient.post()
                     .uri("/userFace")
                     .contentType(MediaType.MULTIPART_FORM_DATA)
-                    .bodyValue(builder.build()) // Multipart 데이터 전송
+                    .bodyValue(builder.build())
                     .retrieve()
                     .toEntity(String.class)
-                    .block();  // 동기 처리
+                    .block();
 
-            System.out.println("📡 Flask 응답: " + response.getBody());
+            JSONObject flaskResult = new JSONObject(response.getBody());
+            boolean success = flaskResult.getBoolean("success");
+            String message = flaskResult.getString("message");
+            String user = flaskResult.optString("user", "알수없음");
 
-            // 응답 확인
-            result.put("success", true);
-            result.put("flask_response", response.getBody());
+            // 성공 or 실패 DB 저장 (여기가 중요!)
+            adminservice.insertLog(user, success ? "성공" : "실패");
+
+            result.put("success", success);
+            result.put("message", message);
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // 실패했을 때 DB 저장 로직 추가 (실패로 강제 저장)
+            adminservice.insertLog("알수없음", "실패");  // 중요 수정사항!
+
             result.put("success", false);
-            result.put("message", "Flask 서버로 요청 중 오류 발생");
+            result.put("message", "얼굴 인식 실패");
         }
 
         return result;
     }
+    
+    
+    
+    @PostMapping("/deleteLog")
+    @ResponseBody
+    public Map<String, Object> deleteLog(@RequestParam("log_idx") Long log_idx) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            adminservice.deleteLog(log_idx);
+            result.put("success", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("success", false);
+        }
+        return result;
+    }
+
+
 
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
@@ -164,8 +186,19 @@ public class HomeController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
+		
+		
+		
+		
+		
+		
+		
+		
 		int empNumCount = adminservice.getEmpNumCount();
         model.addAttribute("empNumCount", empNumCount); // JSP로 데이터 전달
+        
+        List<Log> logList = adminservice.getRecentLogs();
+        model.addAttribute("logList", logList);
         return "main"; // main.jsp로 매핑
 	}
 	
