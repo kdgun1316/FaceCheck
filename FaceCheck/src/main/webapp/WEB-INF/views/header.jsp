@@ -74,7 +74,7 @@
 	<div id="alertModal" class="modal">
 		<div class="modal-content">
 			<span class="close">&times;</span>
-			<p id="modalMessage"></p>
+			<p id="modalMessage">🚨 여기에 메시지가 들어갑니다!</p>
 		</div>
 	</div>
 
