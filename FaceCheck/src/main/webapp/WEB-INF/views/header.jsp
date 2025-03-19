@@ -67,5 +67,17 @@
     </main>
 </div>
 
+
+
+
+	<!-- ✅ WebSocket 메시지를 표시할 모달창 -->
+	<div id="alertModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p id="modalMessage"></p>
+		</div>
+	</div>
+
+
 </body>
 </html>
