@@ -50,7 +50,7 @@
 				%>
 				<tr>
 					<td><%=rec.getLog_idx()%></td>
-					<td><%=rec.getEmp_name()%></td>
+					<td><a href="entry_log?emp_num=<%=rec.getEmp_num()%>"><%=rec.getEmp_name()%></a></td>
 					<td><%=rec.getEmp_num()%></td>
 					<td><%=rec.getDept()%></td>
 					<td><%=rec.getEmp_birthdate()%></td>
