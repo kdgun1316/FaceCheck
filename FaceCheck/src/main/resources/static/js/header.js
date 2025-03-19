@@ -42,64 +42,35 @@ try {
 
 
 let socket;
+function connectWebSocket() {
+    socket = new WebSocket("ws://localhost:8083/FaceCheck/ws/alert");
 
-		function connectWebSocket() {
-			socket = new WebSocket("ws://localhost:8083/FaceCheck/ws/alert");
+    socket.onopen = function() {
+        console.log("✅ WebSocket 연결 성공!");
+    };
 
-			socket.onopen = function() {
-				console.log("✅ WebSocket 연결 성공!");
-				document.getElementById("status").innerText = "✅ WebSocket 연결 성공!";
-			};
+    socket.onmessage = function(event) {
+        console.log("📩 서버로부터 메시지:", event.data);
+        document.getElementById("modalMessage").innerText = event.data;
+        document.querySelector(".cont_principal").style.display = "block";
+        document.querySelector(".cont_modal").style.display = "block";
+    };
 
-			socket.onmessage = function(event) {
-				console.log("📩 서버로부터 메시지:", event.data);
+    socket.onerror = function(error) {
+        console.error("❌ WebSocket 오류 발생:", error);
+    };
 
-				// ✅ 모달창 메시지 업데이트
-				document.getElementById("modalMessage").innerText = event.data;
+    socket.onclose = function() {
+        console.log("❌ WebSocket 연결 종료. 3초 후 재연결 시도...");
+        setTimeout(connectWebSocket, 3000);
+    };
+}
 
-				// ✅ 모달창 표시
-				document.getElementById("alertModal").style.display = "block";
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("closeModal").addEventListener("click", function() {
+        document.querySelector(".cont_principal").style.display = "none";
+        document.querySelector(".cont_modal").style.display = "none";
+    });
+});
 
-				// ✅ 메시지 로그 업데이트
-				document.getElementById("messages").innerHTML += "<br>"
-						+ event.data;
-			};
-
-			socket.onerror = function(error) {
-				console.error("❌ WebSocket 오류 발생:", error);
-				document.getElementById("status").innerText = "❌ WebSocket 오류 발생";
-			};
-
-			socket.onclose = function() {
-				console.log("❌ WebSocket 연결 종료. 3초 후 재연결 시도...");
-				document.getElementById("status").innerText = "❌ WebSocket 연결 종료, 재연결 중...";
-				setTimeout(connectWebSocket, 3000); // 3초 후 재연결 시도
-			};
-		}
-
-		function sendMessage() {
-			if (socket && socket.readyState === WebSocket.OPEN) {
-				socket.send("테스트 메시지 전송!");
-				console.log("🚀 테스트 메시지 전송!");
-			} else {
-				console.log("⚠ WebSocket 연결 안 됨!");
-			}
-		}
-
-		// ✅ 모달창 닫기 기능 추가
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							document
-									.querySelector(".close")
-									.addEventListener(
-											"click",
-											function() {
-												document
-														.getElementById("alertModal").style.display = "none";
-											});
-						});
-
-		connectWebSocket();
-
+connectWebSocket();
