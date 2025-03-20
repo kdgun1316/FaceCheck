@@ -4,7 +4,7 @@
 .dashboard-container {
     max-width: 1900px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px;c
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* ✅ 모든 내용 오른쪽 정렬 */
@@ -158,4 +158,13 @@
     .notice-section {
         flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
     }
+}
+
+.notice-close {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
 }
