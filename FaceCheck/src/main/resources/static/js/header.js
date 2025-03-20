@@ -112,7 +112,7 @@ function connectAlertWebSocket() {
         document.querySelector(".cont_modal").style.display = "block";
 
         // 실시간 알림창에도 추가
-        addNewNotice("실패 🚨: " + event.data);
+        addNewNotice(`<span style="color:red">${event.data}</span>`);
     };
 
     alertSocket.onerror = function(error) {
@@ -141,7 +141,7 @@ function connectSuccessWebSocket() {
         showSuccessMessage(event.data);
 
         // 실시간 알림창에도 추가
-        addNewNotice("성공 ✅: " + event.data);
+       addNewNotice(`<span style="color:blue">${event.data}</span>`);
     };
 
     successSocket.onerror = function(error) {
