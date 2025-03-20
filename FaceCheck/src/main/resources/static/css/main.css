@@ -4,7 +4,7 @@
 .dashboard-container {
     max-width: 1900px;
     margin: 0 auto;
-    padding: 20px;c
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* ✅ 모든 내용 오른쪽 정렬 */
@@ -57,7 +57,7 @@
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    height: 400px;
+    height: 450px;
     box-sizing: border-box;
     position: relative; /* ✅ 내부 요소 위치 조정 가능하도록 */
 }
@@ -80,14 +80,14 @@
 
 /* ✅ 실시간 알림 컨테이너 스타일 */
 .notice-section {
-    flex: 1; /* ✅ 자동 크기 조정 */
-    max-width: calc(33.33% - 15px); /* ✅ 한 줄에 3개 배치로 변경 */
+    flex: 1; /* 자동 크기 조정 */
+    max-width: calc(33.33% - 15px); /* 한 줄에 3개 배치 */
     background: white;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 400px;
+    height: 450px; /* ✅ 차트와 높이 맞춤 */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -96,18 +96,46 @@
 /* ✅ 실시간 알림 리스트 스타일 */
 .notice-list {
     flex: 1;
-    max-height: 320px;
+    max-height: 380px; /* ✅ 컨테이너 내부 크기 조절 */
     overflow-y: auto;
     padding-right: 10px;
     margin-top: 10px;
 }
 
-/* ✅ 실시간 알림 항목 스타일 */
+/* ✅ 실시간 알림 개별 항목 스타일 */
 .notice-item {
     display: flex;
-    gap: 15px;
+    align-items: center; /* ✅ 내부 요소 수직 정렬 */
+    justify-content: space-between; /* ✅ 요소 간 간격 균등 배분 */
+    gap: 15px; /* ✅ 요소 간 간격 */
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.notice-close:hover {
+    background-color: #d32f2f;
+}
+/* ✅ 텍스트 정렬 */
+.notice-content {
+    flex-grow: 1;
+    padding: 5px 10px;
+}
+/* ✅ 삭제 버튼 스타일 */
+.notice-close {
+    width: 50px;
+    height: 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.notice-item .notice-content {
+    flex-grow: 1;
+    padding: 5px 10px;  /* ✅ 내부 여백 추가 */
 }
 
 .notice-item:last-child {
@@ -167,4 +195,36 @@
     align-items: center;
     width: 30px;
     height: 30px;
+}
+
+/* ✅ 날짜 컨테이너 스타일 */
+.date-container {
+    overflow: hidden; /* 컨테이너 밖으로 내용이 넘어가지 않도록 설정 */
+    padding: 5px; /* 여백 조정 */
+    width: 100%; /* 컨테이너 너비 설정 */
+    box-sizing: border-box; /* padding과 border를 포함한 너비 계산 */
+}
+
+.date-item {
+    white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden; /* 내용이 넘어가지 않도록 설정 */
+    text-overflow: ellipsis; /* 내용이 넘어갈 경우 '...' 표시 */
+}
+
+/* ✅ 달력 아이콘 스타일 */
+.calendar-icon {
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.calendar-icon:hover {
+    color: #333;
+}
+
+/* ✅ 날짜 선택 필드 숨기기 */
+.date-picker {
+    display: none;
 }

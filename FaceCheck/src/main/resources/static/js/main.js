@@ -171,7 +171,6 @@ fetch("/FaceCheck/api/getTimeLogData")
                     title: {
                         display: true,
                         
-                        
                     }
                 },
                 animation: {
@@ -195,10 +194,7 @@ fetch("/FaceCheck/api/getTimeLogData")
         });
     })
     .catch(error => console.error("❌ 데이터 로딩 오류:", error));
-	
-	
-	
-	
+
     // 부서별 출입 데이터 차트
     fetch("/FaceCheck/api/getDeptLogData")
         .then(response => response.json())

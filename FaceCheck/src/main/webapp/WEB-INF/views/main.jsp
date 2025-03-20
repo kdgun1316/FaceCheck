@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script defer src="/js/header.js"></script>
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
 <body>
@@ -46,26 +46,34 @@
 				<h3 class="chart-header">일별 출입 인원 수</h3>
 				<canvas id="accessLogChart"></canvas>
 			</div>
-			<!-- 실시간 알림 - section-box 클래스 제거 -->
-			<div class="notice-list">
-    <c:forEach var="log" items="${logList}">
-        <div class="notice-item">
-            <div class="notice-profile">
-                <img src="images/face_recognition.jpg" alt="얼굴인식">
-            </div>
-            <div class="notice-content">
-                <div class="notice-text" style="color: ${log.status eq '성공' ? 'blue' : 'red'}">얼굴 인증 ${log.status}<%-- : ${log.admin_id} --%></div>
-                <div class="notice-date">${log.log_time}</div>
-            </div>
-				<div class="notice-status">
-					<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">삭제</button>
+			<!-- 실시간 알림 섹션 -->
+			<div class="section-box notice-section">
+				<h3 class="chart-header">실시간 알림</h3>
+				<!-- ✅ 실시간 알림 제목 추가 -->
+				<div class="notice-list">
+					<c:forEach var="log" items="${logList}">
+						<div class="notice-item">
+							<div class="notice-profile">
+								<img src="images/face_recognition.jpg" alt="얼굴인식">
+							</div>
+							<div class="notice-content">
+								<div class="notice-text"
+									style="color: ${log.status eq '성공' ? 'blue' : 'red'}">얼굴
+									인증 ${log.status}</div>
+								<div class="notice-date">${log.log_time}</div>
+							</div>
+							<div class="notice-status">
+								<button class="notice-close"
+									onclick="deleteLog(this, ${log.log_idx})">삭제</button>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
-					</div>
-    </c:forEach>
-</div>
+			</div>
 
 		</div>
 	</div>
-	<script src="js/main.js"></script>z
+	<script src="js/main.js"></script>
+	z
 </body>
 </html>
