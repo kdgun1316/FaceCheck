@@ -81,9 +81,8 @@
                         <div class="con_raya_logo"></div>
                     </div>
                 </div>
-                <div class="danger">
-                	<p>🚫</p>
-                </div>
+                <div class="danger"><img
+                src="${pageContext.request.contextPath}/images/warning.png" alt="금지"></div>
                 <div class="po_relative">
                     <h1>ALERT MESSAGE</h1>
                     <p id="modalMessage">You have received a message.</p>

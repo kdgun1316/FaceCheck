@@ -295,7 +295,7 @@
   left: 0;
   top: 0;
   transition: all 0.5s ease-in-out;
-  background-color: #4169e1; /* 로얄블루 */
+  background-color: black; /* 로얄블루 */
   border-radius: 30px;
   visibility: hidden;
   height: 10px;
@@ -331,8 +331,8 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: #7e97b8;
-  background-color: #e0e8ef;
+  color: black;
+  background-color: white;
   border-style: solid;
   border-width: 2px 2px 2px 2px;
   border-color: rgba(255, 255, 255, 0.333);
@@ -343,6 +343,7 @@
   box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgba(95, 157, 231, 0.48);
   cursor: pointer;
   margin: 20px auto;
+  width: 100%;
 }
 
 .submit-btn:hover {
