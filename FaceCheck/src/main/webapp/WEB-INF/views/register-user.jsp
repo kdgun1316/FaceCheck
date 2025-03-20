@@ -38,6 +38,7 @@
 			<span class="btn-txt">다음</span>
 		</button>
 	</section>
+	<%@ include file="header.jsp"%>
 
 	<!-- 2. 사용자 정보 입력 섹션 -->
 	<section class="register-section">
