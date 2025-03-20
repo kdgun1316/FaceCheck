@@ -69,11 +69,12 @@
 						</div>
 					</c:forEach>
 				</div>
+
 			</div>
 
 		</div>
 	</div>
 	<script src="js/main.js"></script>
-	z
+
 </body>
 </html>

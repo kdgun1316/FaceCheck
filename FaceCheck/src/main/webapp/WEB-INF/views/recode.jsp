@@ -9,16 +9,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>사용자 관리</title>
+<title>출입 기록 관리</title>
 <link rel="stylesheet" href="css/user-management.css" />
 <script defer src="js/user-management.js"></script>
 <script defer src="/js/header.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-/* 페이지 내에 직접 스타일 추가 */
 .management {
   width: 80% !important;
   margin: 0 auto;
+  padding-top: 60px;
 }
 .user-table {
   width: 80% !important;
@@ -37,7 +37,7 @@
       <button id="customButton" class="cta-button" onclick="handleButtonClick()">CSV로 내보내기</button>
     </div>
     <table class="user-table" style="margin: 0 auto;">
-      <tr>
+      <tr class="tr">
         <th>index</th>
         <th>이름</th>
         <th>사번</th>

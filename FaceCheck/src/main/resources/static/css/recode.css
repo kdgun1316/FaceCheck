@@ -114,3 +114,11 @@
 .cta-button:hover {
   background-color: #45a049;
 }
+
+.user-table th {
+    background-color: lightblue; /* 원하는 배경색 */
+    color: white; /* 글자색 */
+    padding: 10px;
+    text-align: center;
+}
+

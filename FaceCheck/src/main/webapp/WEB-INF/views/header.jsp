@@ -53,10 +53,9 @@
             <a href="main" class="logo"><img
                 src="${pageContext.request.contextPath}/images/logo.jpg" alt="로고"></a>
             <div class="icons">
-                <input type="text" placeholder="Search"> <span
-                    class="notification-icon">🔔</span>
+                <input type="text" placeholder="Search"> 
                 <div class="user-icon-container">
-                    <span class="user-icon">👤</span>
+                    <span class="user-icon"><a href="main" class="logo"><img src="${pageContext.request.contextPath}/images/user-lock.png" style="width:30px; height:auto;"></a></span>
                     <div class="dropdown-menu1">
                         <a href="login"><span>🚪</span> 로그아웃</a>
                     </div>
@@ -82,9 +81,8 @@
                         <div class="con_raya_logo"></div>
                     </div>
                 </div>
-                <div class="danger">
-                	<p>🚫</p>
-                </div>
+                <div class="danger"><img
+                src="${pageContext.request.contextPath}/images/warning.png" alt="금지"></div>
                 <div class="po_relative">
                     <h1>ALERT MESSAGE</h1>
                     <p id="modalMessage">You have received a message.</p>
