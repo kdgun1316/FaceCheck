@@ -1,71 +1,99 @@
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function() {
+    // Camera elements
     const video = document.getElementById("camera-feed");
+    const canvas = document.getElementById("canvas");
     const captureButton = document.getElementById("capture-button");
     const nextButton = document.getElementById("next-button");
-    const submitButton = document.getElementById("submit-btn");
-    const canvas = document.getElementById("canvas");
     const imageContainer = document.getElementById("image-container");
-    const previewImage = document.getElementById("preview-image");
-
+    const submitButton = document.getElementById("submit-btn");
+    
+    // Variables for capturing
     const maxCaptures = 5;
     let capturedImages = [];
+    let stream = null;
 
-    // ✅ 카메라 활성화
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-    } catch (err) {
-        alert("카메라를 활성화할 수 없습니다!");
-        console.error("카메라 오류:", err);
+    // Initialize camera
+    async function initCamera() {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: "user" }
+            });
+            video.srcObject = stream;
+        } catch (err) {
+            console.error("카메라 접근 오류:", err);
+            alert("카메라 접근에 실패했습니다. 권한을 확인해주세요.");
+        }
     }
 
-    // ✅ 촬영 버튼 클릭 시 최대 5장까지 저장
-    captureButton.addEventListener("click", function () {
-        if (capturedImages.length < maxCaptures) {
-            captureImage();
+    // Initialize camera on page load
+    initCamera();
 
-            if (capturedImages.length === maxCaptures) {
-                captureButton.style.display = "none";
-                nextButton.style.display = "block";
-                video.style.display = "none";
-            }
+    // Capture button event
+    captureButton.addEventListener("click", function() {
+        if (capturedImages.length >= maxCaptures) {
+            alert("이미 5장의 사진을 촬영했습니다!");
+            return;
         }
-        console.log(`현재까지 촬영된 이미지 수: ${capturedImages.length}`);
-    });
 
-    // ✅ 이미지 캡처 및 저장
-    function captureImage() {
-        const context = canvas.getContext("2d");
+        // Draw video to canvas and get image data
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        const imageData = canvas.toDataURL("image/png"); // 🔥 Base64 변환
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        const imageData = canvas.toDataURL("image/png");
         capturedImages.push(imageData);
 
-        // 첫 번째 이미지를 미리보기로 설정
-        if (capturedImages.length === 1) {
-            previewImage.src = imageData;
-        }
-
-        // 이미지 미리보기 추가
+        // Create and display the captured image
         const imgElement = document.createElement("img");
         imgElement.src = imageData;
+        imgElement.className = "captured-image";
         imageContainer.appendChild(imgElement);
-    }
 
-// ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
-nextButton.addEventListener("click", function () {
-    const registerSection = document.querySelector(".register-section");
-    registerSection.style.display = "flex"; // "block"이 아닌 "flex"로 변경
-    nextButton.style.display = "none";
-    
-    // 카메라 섹션 숨기기 (선택적)
-    document.querySelector(".main-content").style.display = "none";
-});
+        // Show next button after capturing all images
+        if (capturedImages.length === maxCaptures) {
+            nextButton.style.display = "block";
+        }
+    });
+
+    // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
+    nextButton.addEventListener("click", function() {
+        const registerSection = document.querySelector(".register-section");
+        registerSection.style.display = "flex"; // "block"이 아닌 "flex"로 변경
+        nextButton.style.display = "none";
+        
+        // 카메라 섹션 숨기기 (선택적)
+        document.querySelector(".main-content").style.display = "none";
+        
+        // Important: Stop the camera stream to free resources
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+        
+        // Re-initialize header styling if needed
+        if (typeof initHeader === 'function') {
+            initHeader(); // Call header initialization function if it exists
+        }
+        
+        // Update the preview image with the first captured photo
+        if (capturedImages.length > 0) {
+            document.getElementById("preview-image").src = capturedImages[0];
+        }
+    });
+
+    // File upload handling
+    const imageUpload = document.getElementById("image-upload");
+    imageUpload.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("preview-image").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
     // ✅ "등록" 버튼 클릭 시, 데이터 서버 전송
-    submitButton.addEventListener("click", function () {
+    submitButton.addEventListener("click", function() {
         if (capturedImages.length !== maxCaptures) {
             alert("5장의 사진을 모두 촬영해야 합니다!");
             return;
@@ -78,7 +106,7 @@ nextButton.addEventListener("click", function () {
         formData.append("emp_birthdate", document.querySelector("[name='emp_birthdate']").value);
         formData.append("emp_phone", document.getElementById("phone").value);
 
-        // ✅ Base64 → Blob 변환 후 `FormData`에 추가
+        // ✅ Base64 → Blob 변환 후 FormData에 추가
         capturedImages.forEach((base64, index) => {
             const byteString = atob(base64.split(",")[1]);
             const mimeString = base64.split(",")[0].split(":")[1].split(";")[0];
@@ -89,7 +117,8 @@ nextButton.addEventListener("click", function () {
             }
 
             const blob = new Blob([arrayBuffer], { type: mimeString });
-            formData.append("emp_face_imgs", new File([blob], `${document.getElementById("id").value}_${index + 1}.png`));
+            const empId = document.getElementById("id").value;
+            formData.append("emp_face_imgs", new File([blob], `${empId}_${index + 1}.png`));
         });
 
         fetch("/FaceCheck/register-user", {
@@ -114,3 +143,16 @@ nextButton.addEventListener("click", function () {
         });
     });
 });
+
+
+// In header.js
+function initHeader() {
+  // Your header initialization code here
+  // This should include any sidebar initialization
+}
+
+// Call on page load
+document.addEventListener("DOMContentLoaded", initHeader);
+
+// Make the function available globally
+window.initHeader = initHeader;
