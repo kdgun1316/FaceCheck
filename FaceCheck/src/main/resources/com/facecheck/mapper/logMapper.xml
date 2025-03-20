@@ -10,7 +10,7 @@
 	</insert>
 
 	<select id="getRecentLogs" resultType="com.facecheck.entity.Log">
-		SELECT * FROM log_info ORDER BY log_idx DESC LIMIT 8
+		SELECT * FROM log_info ORDER BY log_idx DESC
 	</select>
 
 	<delete id="deleteLog" parameterType="Long">

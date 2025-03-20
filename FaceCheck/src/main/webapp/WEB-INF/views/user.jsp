@@ -34,6 +34,24 @@
         <div class="countdown" id="countdown">5</div> <!-- ✅ 촬영 카운트다운 -->
     </section>
 
+
+<!-- 이 HTML 부분은 body 제일 아래쪽에 추가해줘 -->
+<div id="centerMessage" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    display: none;
+    z-index: 2000;">
+</div>
+
+
+
 	<script>
     
         const video = document.getElementById("video");
@@ -66,10 +84,26 @@
             }
         }
 
+        function showCenterMessage(message, success = true) {
+            const msg = document.getElementById("centerMessage");
+            msg.innerText = message;
+            msg.style.background = success ? "rgba(76,175,80,0.9)" : "rgba(244,67,54,0.9)";
+            msg.style.display = "block";
+            msg.style.opacity = 1;
+
+            setTimeout(() => {
+                msg.style.transition = "opacity 0.5s ease";
+                msg.style.opacity = 0;
+            }, 2000);
+
+            setTimeout(() => {
+                msg.style.display = "none";
+            }, 2500);
+        }
+
         function sendImagesToServer() {
             const formData = new FormData();
 
-            // ✅ Base64 → Blob 변환 후 `FormData`에 추가
             capturedImages.forEach((base64, index) => {
                 const byteString = atob(base64.split(",")[1]);
                 const mimeString = base64.split(",")[0].split(":")[1].split(";")[0];
@@ -80,12 +114,10 @@
                 }
 
                 const blob = new Blob([arrayBuffer], { type: mimeString });
-                formData.append("face_imgs", new File([blob], `face_${index + 1}.png`));  // ✅ `face_imgs`로 설정
+                formData.append("face_imgs", new File([blob], `face_${index + 1}.png`));
             });
 
-            console.log("✅ 서버로 전송할 데이터:", formData);  // 콘솔에서 데이터 확인
-
-            fetch("user", {  // ✅ 사용자 전용 URL로 요청 보내기
+            fetch("user", {
                 method: "POST",
                 body: formData,
             })
@@ -95,17 +127,18 @@
             })
             .then((result) => {
                 if (result.success) {
-                    alert("인식 성공!");
+                    showCenterMessage("✅ 인증 성공!", true);
                     console.log("✅ 서버 응답:", result);
                 } else {
-                    alert("인식 실패!");
+                    showCenterMessage("❌ 인식 실패, 다시 시도해주세요.", false);
                 }
             })
             .catch((err) => {
                 console.error("❌ 서버 전송 오류:", err);
-                alert("서버 오류 발생");
+                showCenterMessage("⚠️ 서버 오류가 발생했습니다.", false);
             });
         }
+
 
         // ✅ 1초마다 한 장씩, 총 5장 촬영
         let interval = setInterval(() => {
@@ -116,5 +149,10 @@
             }
         }, 1000); // 1초마다 촬영
     </script>
+    
+    
+    
+    
+    
 </body>
 </html>
