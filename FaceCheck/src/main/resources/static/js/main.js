@@ -106,58 +106,99 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 시간대별 출입인원 그래프
-    fetch("/FaceCheck/api/getTimeLogData")
-        .then(response => response.json())
-        .then(data => {
-            console.log("📊 받은 데이터:", data);
+// 시간대별 출입 인원 그래프
+fetch("/FaceCheck/api/getTimeLogData")
+    .then(response => response.json())
+    .then(data => {
+        console.log("📊 받은 데이터:", data);
 
-            // X축: 0시 ~ 23시
-            const labels = data.map(entry => entry.hour + ":00");
-            const counts = data.map(entry => entry.count);
+        // X축: 0시 ~ 23시
+        const labels = data.map(entry => entry.hour + ":00");
+        const counts = data.map(entry => entry.count);
 
-            const timeData = {
-                labels: labels,
-                datasets: [{
-                    label: "출입 인원 수",
-                    data: counts,
-                    backgroundColor: "rgba(54, 162, 235, 0.6)",
-                    borderColor: "rgba(54, 162, 235, 1)",
-                    borderWidth: 1
-                }]
-            };
+        // 최대 출입 시간대 강조를 위한 데이터 분석
+        const maxCount = Math.max(...counts);
+        const maxIndex = counts.indexOf(maxCount);
 
-            // 차트 생성
-            const ctx = document.getElementById("timeBarChart").getContext("2d");
-            
-            // 기존 차트가 있으면 제거
-            if (timeBarChart) {
-                timeBarChart.destroy();
+        // 색상 그라데이션 생성
+        const getBackgroundColor = (index) => {
+            if (index === maxIndex) {
+                return "rgba(255, 99, 132, 0.9)"; // 최대 출입 시간대(강조, 붉은색)
             }
-            
-            timeBarChart = new Chart(ctx, {
-                type: "bar",
-                data: timeData,
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1, // Y축을 정수 단위로 설정
-                                callback: function(value) { return Number.isInteger(value) ? value : null; }
-                            },
-                            title: { display: true, text: "출입 인원 수" }
-                        },
-                        x: {
-                            title: { display: true, text: "시간대" }
+            const base = 54 + (index / labels.length) * 200; // 색상 밝기 조절
+            return `rgba(${base}, 162, 235, 0.6)`;
+        };
+        const backgroundColors = counts.map((_, index) => getBackgroundColor(index));
+
+        const timeData = {
+            labels: labels,
+            datasets: [{
+                label: "출입 인원 수",
+                data: counts,
+                backgroundColor: backgroundColors,
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        // 차트 생성
+        const ctx = document.getElementById("timeBarChart").getContext("2d");
+
+        // 기존 차트가 있으면 제거
+        if (timeBarChart) {
+            timeBarChart.destroy();
+        }
+
+        // 새 차트 생성
+        timeBarChart = new Chart(ctx, {
+            type: "bar",
+            data: timeData,
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const total = counts.reduce((sum, val) => sum + val, 0); // 총 출입 인원
+                                const percentage = ((counts[tooltipItem.dataIndex] / total) * 100).toFixed(1); // 비율 계산
+                                return `출입 인원: ${tooltipItem.raw}명 (${percentage}%)`;
+                            }
                         }
+                    },
+                    legend: {
+                        display: false // 범례 제거 (필요시 true로 설정)
+                    },
+                    title: {
+                        display: true,
+                        
+                        
+                    }
+                },
+                animation: {
+                    duration: 1000, // 애니메이션 시간 (1초)
+                    easing: "easeInOutQuart"
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) { return Number.isInteger(value) ? value : null; }
+                        },
+                        title: { display: true, text: "출입 인원 수" }
+                    },
+                    x: {
+                        
                     }
                 }
-            });
-        })
-        .catch(error => console.error("❌ 데이터 로딩 오류:", error));
-
+            }
+        });
+    })
+    .catch(error => console.error("❌ 데이터 로딩 오류:", error));
+	
+	
+	
+	
     // 부서별 출입 데이터 차트
     fetch("/FaceCheck/api/getDeptLogData")
         .then(response => response.json())

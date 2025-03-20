@@ -43,7 +43,7 @@
 			</div>
 			<!-- 출입 로그 수 -->
 			<div class="section-box">
-				<h3 class="chart-header">출입 로그 수</h3>
+				<h3 class="chart-header">일별 출입 인원 수</h3>
 				<canvas id="accessLogChart"></canvas>
 			</div>
 			<!-- 실시간 알림 - section-box 클래스 제거 -->
