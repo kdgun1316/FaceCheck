@@ -53,8 +53,7 @@
             <a href="main" class="logo"><img
                 src="${pageContext.request.contextPath}/images/logo.jpg" alt="로고"></a>
             <div class="icons">
-                <input type="text" placeholder="Search"> <span
-                    class="notification-icon">🔔</span>
+                <input type="text" placeholder="Search"> 
                 <div class="user-icon-container">
                     <span class="user-icon">👤</span>
                     <div class="dropdown-menu1">
