@@ -54,11 +54,11 @@
                 <img src="images/face_recognition.jpg" alt="얼굴인식">
             </div>
             <div class="notice-content">
-                <div class="notice-text">${log.status}: ${log.admin_id}</div>
+                <div class="notice-text" style="color: ${log.status eq '성공' ? 'blue' : 'red'}">얼굴 인증 ${log.status}<%-- : ${log.admin_id} --%></div>
                 <div class="notice-date">${log.log_time}</div>
             </div>
 				<div class="notice-status">
-					<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">닫기</button>
+					<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">삭제</button>
 				</div>
 					</div>
     </c:forEach>
