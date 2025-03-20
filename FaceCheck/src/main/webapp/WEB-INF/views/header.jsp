@@ -56,7 +56,7 @@
                 <input type="text" placeholder="Search"> <span
                     class="notification-icon">🔔</span>
                 <div class="user-icon-container">
-                    <span class="user-icon">👤</span>
+                    <span class="user-icon"><a href="main" class="logo"><img src="${pageContext.request.contextPath}/images/user-lock.png" style="width:30px; height:auto;"></a></span>
                     <div class="dropdown-menu1">
                         <a href="login"><span>🚪</span> 로그아웃</a>
                     </div>

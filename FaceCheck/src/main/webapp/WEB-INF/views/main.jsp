@@ -48,24 +48,26 @@
 			</div>
 			<!-- 실시간 알림 - section-box 클래스 제거 -->
 			<div class="notice-list">
-    <c:forEach var="log" items="${logList}">
-        <div class="notice-item">
-            <div class="notice-profile">
-                <img src="images/face_recognition.jpg" alt="얼굴인식">
-            </div>
-            <div class="notice-content">
-                <div class="notice-text" style="color: ${log.status eq '성공' ? 'blue' : 'red'}">얼굴 인증 ${log.status}<%-- : ${log.admin_id} --%></div>
-                <div class="notice-date">${log.log_time}</div>
-            </div>
-				<div class="notice-status">
-					<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">삭제</button>
-				</div>
+				<c:forEach var="log" items="${logList}">
+					<div class="notice-item">
+						<div class="notice-profile">
+							<img src="images/face_recognition.jpg" alt="얼굴인식">
+						</div>
+						<div class="notice-content">
+							<div class="notice-text" style="color: ${log.status eq '성공' ? 'blue' : 'red'}"> 
+								얼굴 인증 ${log.status} : ${log.admin_id}
+							</div>
+							<div class="notice-date">${log.log_time}</div>
+						</div>
+						<div class="notice-status">
+							<button class="notice-close" onclick="deleteLog(this, ${log.log_idx})">삭제</button>
+						</div>
 					</div>
-    </c:forEach>
-</div>
+				</c:forEach>
+			</div>
 
 		</div>
 	</div>
-	<script src="js/main.js"></script>z
+	<script src="js/main.js"></script>
 </body>
 </html>
