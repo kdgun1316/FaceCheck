@@ -17,7 +17,7 @@ public interface TimeLogMapper {
         SELECT h.hour, COALESCE(COUNT(l.log_time), 0) AS count
         FROM hours h
         LEFT JOIN log_info l ON HOUR(l.log_time) = h.hour
-        AND DATE(l.log_time) = CURDATE() - INTERVAL 1 DAY
+        AND DATE(l.log_time) = CURDATE()  -- 오늘 날짜로 변경
         GROUP BY h.hour
         ORDER BY h.hour
     """)
