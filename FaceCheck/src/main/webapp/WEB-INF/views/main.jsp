@@ -51,11 +51,11 @@
 				<c:forEach var="log" items="${logList}">
 					<div class="notice-item">
 						<div class="notice-profile">
-							<img src="images/face_recognition.jpg" alt="얼굴인식">
+							<!-- <img src="images/face_recognition.jpg" alt="얼굴인식"> -->
 						</div>
 						<div class="notice-content">
 							<div class="notice-text" style="color: ${log.status eq '성공' ? 'blue' : 'red'}"> 
-								얼굴 인증 ${log.status} : ${log.admin_id}
+								얼굴 인증 ${log.status} <%-- : ${log.admin_id} --%>
 							</div>
 							<div class="notice-date">${log.log_time}</div>
 						</div>
