@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!res.ok) throw new Error(`서버 응답 오류: ${res.status}`);
             return res.json();
         })
-        .then((result) => {
+        .then((result) => {-
             if (result.success) {
                 alert("등록 성공!");
                 location.href = "/FaceCheck/user-management"; 
