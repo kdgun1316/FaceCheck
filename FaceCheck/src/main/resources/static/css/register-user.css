@@ -411,3 +411,26 @@ body.sidebar-open .register-section {
 .register-section {
   transition: margin-left 0.3s ease, width 0.3s ease;
 }
+
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.capturing-message  {
+	display: none;
+	margin-top: 15px;
+	font-size: 16px;
+	color: #007bff;
+	animation: blink 1s infinite;
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.7);
+	color: white;
+	padding: 12px 24px;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	z-index: 1000;}

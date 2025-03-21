@@ -20,24 +20,37 @@
 
 
 	<!-- 1. 이미지 캡처 섹션 -->
-	<section class="main-content">
-		<div class="camera-container">
-			<video id="camera-feed" autoplay playsinline></video>
-			<div class="face-guidance">
-				<div class="face-guidance-oval"></div>
-				<div class="face-guidance-text">얼굴을 타원 안에 맞춰주세요</div>
-			</div>
-		</div>
-		<!-- <button id="capture-button">촬영</button> -->
-		<button id="capture-button" class="capture-button">
-			<span class="btn-txt">촬영</span>
-		</button>
-		<canvas id="canvas" style="display: none;"></canvas>
-		<div id="image-container"></div>
-		<button id="next-button" class="next-button">
-			<span class="btn-txt">다음</span>
-		</button>
-	</section>
+<section class="main-content">
+    <div class="camera-container">
+        <video id="camera-feed" autoplay playsinline></video>
+        <div class="face-guidance">
+            <div class="face-guidance-oval"></div>
+            <div class="face-guidance-text">얼굴을 타원 안에 맞춰주세요</div>
+        </div>
+    </div>
+
+    <button id="capture-button" class="capture-button">
+        <span class="btn-txt">촬영</span>
+    </button>
+
+    <div id="capturing-message" style="
+        display: none; 
+        margin-top: 15px; 
+        font-size: 16px; 
+        color: #007bff; 
+        animation: blink 1s infinite;
+    ">
+        📸 촬영 중입니다...
+    </div>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <!-- 이미지 미리보기 삭제 (기존의 image-container 삭제됨) -->
+
+    <button id="next-button" class="next-button" style="display:none;">
+        <span class="btn-txt">다음</span>
+    </button>
+</section>
 	<%@ include file="header.jsp"%>
 
 	<!-- 2. 사용자 정보 입력 섹션 -->

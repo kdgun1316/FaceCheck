@@ -1,108 +1,87 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Camera elements
     const video = document.getElementById("camera-feed");
     const canvas = document.getElementById("canvas");
     const captureButton = document.getElementById("capture-button");
     const nextButton = document.getElementById("next-button");
-    const imageContainer = document.getElementById("image-container");
     const submitButton = document.getElementById("submit-btn");
-    
-    // Variables for capturing
-    const maxCaptures = 5;
+    const maxCaptures = 30;
     let capturedImages = [];
     let stream = null;
 
-    // Initialize camera
+    // 카메라 초기화
     async function initCamera() {
         try {
-            stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: "user" }
-            });
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }});
             video.srcObject = stream;
         } catch (err) {
             console.error("카메라 접근 오류:", err);
-            alert("카메라 접근에 실패했습니다. 권한을 확인해주세요.");
+            alert("카메라 접근 실패! 권한을 확인해주세요.");
         }
     }
-
-    // Initialize camera on page load
     initCamera();
 
-    // Capture button event
-   captureButton.addEventListener("click", function() {
-    if (capturedImages.length >= maxCaptures) {
-        alert("이미 5장의 사진을 촬영했습니다!");
-        return;
-    }
-
-    let captureCount = 0; // 촬영 횟수 초기화
-    captureButton.disabled = true; // 촬영 버튼 비활성화 (중복 방지)
-
-    const captureInterval = setInterval(() => {
-        // 사진 촬영 시작
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext("2d").drawImage(video, 0, 0);
-        const imageData = canvas.toDataURL("image/png");
-        capturedImages.push(imageData);
-
-        // 이미지 화면에 추가
-        const imgElement = document.createElement("img");
-        imgElement.src = imageData;
-        imgElement.className = "captured-image";
-        imageContainer.appendChild(imgElement);
-
-        captureCount++;
-
-        if (captureCount >= maxCaptures) {
-            clearInterval(captureInterval); // 촬영 종료
-            nextButton.style.display = "block"; // 다음 버튼 표시
-            captureButton.disabled = false; // 촬영 버튼 다시 활성화
+    // 촬영 버튼 클릭 이벤트
+    captureButton.addEventListener("click", function() {
+        if (capturedImages.length >= maxCaptures) {
+            alert("이미 30장 촬영 완료!");
+            return;
         }
-    }, 1000); // ✅ 1초 간격으로 사진 촬영
-});
-    // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
+
+        let captureCount = 0;
+        captureButton.disabled = true;
+
+        // 촬영중 메시지 표시
+        const capturingMessage = document.getElementById("capturing-message");
+        capturingMessage.style.display = "block";
+
+        const captureInterval = setInterval(() => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext("2d").drawImage(video, 0, 0);
+            const imageData = canvas.toDataURL("image/png");
+            capturedImages.push(imageData);
+
+            captureCount++;
+
+            if (captureCount >= maxCaptures) {
+                clearInterval(captureInterval);
+                nextButton.style.display = "block";
+                captureButton.disabled = false;
+
+                // 촬영 완료 시 메시지 숨기기
+                capturingMessage.style.display = "none";
+                captureButton.style.display = "none";
+            }
+        }, 100); // 0.1초 간격으로 빠르게 촬영
+    });
+
+    // 다음 버튼 클릭 시 이벤트 처리
     nextButton.addEventListener("click", function() {
-        const registerSection = document.querySelector(".register-section");
-        registerSection.style.display = "flex"; // "block"이 아닌 "flex"로 변경
+        document.querySelector(".register-section").style.display = "flex";
         nextButton.style.display = "none";
-        
-        // 카메라 섹션 숨기기 (선택적)
         document.querySelector(".main-content").style.display = "none";
-        
-        // Important: Stop the camera stream to free resources
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-        }
-        
-        // Re-initialize header styling if needed
-        if (typeof initHeader === 'function') {
-            initHeader(); // Call header initialization function if it exists
-        }
-        
-        // Update the preview image with the first captured photo
+        if (stream) stream.getTracks().forEach(track => track.stop());
+        if (typeof initHeader === 'function') initHeader();
         if (capturedImages.length > 0) {
             document.getElementById("preview-image").src = capturedImages[0];
         }
     });
 
-    // File upload handling
+    // 이미지 업로드 처리
     const imageUpload = document.getElementById("image-upload");
     imageUpload.addEventListener("change", function() {
         const file = this.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById("preview-image").src = e.target.result;
-            };
+            reader.onload = (e) => document.getElementById("preview-image").src = e.target.result;
             reader.readAsDataURL(file);
         }
     });
 
-    // ✅ "등록" 버튼 클릭 시, 데이터 서버 전송
+    // 등록 버튼 클릭 이벤트 (서버로 데이터 전송)
     submitButton.addEventListener("click", function() {
         if (capturedImages.length !== maxCaptures) {
-            alert("5장의 사진을 모두 촬영해야 합니다!");
+            alert("30장 촬영이 완료되지 않았습니다!");
             return;
         }
 
@@ -113,16 +92,11 @@ document.addEventListener("DOMContentLoaded", function() {
         formData.append("emp_birthdate", document.querySelector("[name='emp_birthdate']").value);
         formData.append("emp_phone", document.getElementById("phone").value);
 
-        // ✅ Base64 → Blob 변환 후 FormData에 추가
         capturedImages.forEach((base64, index) => {
             const byteString = atob(base64.split(",")[1]);
             const mimeString = base64.split(",")[0].split(":")[1].split(";")[0];
             const arrayBuffer = new Uint8Array(byteString.length);
-
-            for (let i = 0; i < byteString.length; i++) {
-                arrayBuffer[i] = byteString.charCodeAt(i);
-            }
-
+            for (let i = 0; i < byteString.length; i++) arrayBuffer[i] = byteString.charCodeAt(i);
             const blob = new Blob([arrayBuffer], { type: mimeString });
             const empId = document.getElementById("id").value;
             formData.append("emp_face_imgs", new File([blob], `${empId}_${index + 1}.png`));
@@ -132,34 +106,26 @@ document.addEventListener("DOMContentLoaded", function() {
             method: "POST",
             body: formData,
         })
-        .then((res) => {
+        .then(res => {
             if (!res.ok) throw new Error(`서버 응답 오류: ${res.status}`);
             return res.json();
         })
-        .then((result) => {-
+        .then(result => {
             if (result.success) {
                 alert("등록 성공!");
                 location.href = "/FaceCheck/user-management"; 
-            } else {
-                alert("등록 실패!");
-            }
+            } else alert("등록 실패!");
         })
-        .catch((err) => {
+        .catch(err => {
             console.error("서버 전송 오류:", err);
             alert("서버 오류 발생");
         });
     });
 });
 
-
-// In header.js
+// 헤더 초기화
 function initHeader() {
-  // Your header initialization code here
-  // This should include any sidebar initialization
+    // 헤더 초기화 코드
 }
-
-// Call on page load
 document.addEventListener("DOMContentLoaded", initHeader);
-
-// Make the function available globally
 window.initHeader = initHeader;
