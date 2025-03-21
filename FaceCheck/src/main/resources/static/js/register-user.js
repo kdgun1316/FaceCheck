@@ -61,8 +61,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, 1000); // ✅ 1초 간격으로 사진 촬영
 });
-
-
     // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
     nextButton.addEventListener("click", function() {
         const registerSection = document.querySelector(".register-section");
