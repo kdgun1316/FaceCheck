@@ -29,30 +29,39 @@ document.addEventListener("DOMContentLoaded", function() {
     initCamera();
 
     // Capture button event
-    captureButton.addEventListener("click", function() {
-        if (capturedImages.length >= maxCaptures) {
-            alert("이미 5장의 사진을 촬영했습니다!");
-            return;
-        }
+   captureButton.addEventListener("click", function() {
+    if (capturedImages.length >= maxCaptures) {
+        alert("이미 5장의 사진을 촬영했습니다!");
+        return;
+    }
 
-        // Draw video to canvas and get image data
+    let captureCount = 0; // 촬영 횟수 초기화
+    captureButton.disabled = true; // 촬영 버튼 비활성화 (중복 방지)
+
+    const captureInterval = setInterval(() => {
+        // 사진 촬영 시작
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         canvas.getContext("2d").drawImage(video, 0, 0);
         const imageData = canvas.toDataURL("image/png");
         capturedImages.push(imageData);
 
-        // Create and display the captured image
+        // 이미지 화면에 추가
         const imgElement = document.createElement("img");
         imgElement.src = imageData;
         imgElement.className = "captured-image";
         imageContainer.appendChild(imgElement);
 
-        // Show next button after capturing all images
-        if (capturedImages.length === maxCaptures) {
-            nextButton.style.display = "block";
+        captureCount++;
+
+        if (captureCount >= maxCaptures) {
+            clearInterval(captureInterval); // 촬영 종료
+            nextButton.style.display = "block"; // 다음 버튼 표시
+            captureButton.disabled = false; // 촬영 버튼 다시 활성화
         }
-    });
+    }, 1000); // ✅ 1초 간격으로 사진 촬영
+});
+
 
     // ✅ "다음" 버튼 클릭 시, 사용자 정보 입력 창 표시
     nextButton.addEventListener("click", function() {
