@@ -28,7 +28,7 @@
       <td align="center"><img src="#" "width="100px;"/></td>
       <td align="center"><img src="#" "width="100px;"/></td>
       <td align="center"><img src="#" "width="100px;"/></td>
-      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="200" height="400"/></td>
+      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
       <td align="center"><img src="#" "width="100px;"/></td>
     </tr>
     <tr>
