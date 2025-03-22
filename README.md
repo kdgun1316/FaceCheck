@@ -35,8 +35,7 @@
        <td align="center"><a href="#"></a></td>
        <td align="center"><a href="#"></a></td>
        <td align="center"><a href="#"></a></td>
-       <td align="center">[kdgun1316](https://github.com/kdgun1316)</td>
-      
+       <td align="center">[@kdgun1316](https://github.com/kdgun1316)</td>
        <td align="center"><a href="#"></a></td> 
     </tr> 
     <tr>
