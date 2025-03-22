@@ -37,15 +37,13 @@
        <td align="center"><a href="#"></a></td>
        <td align="center"><a href="#"></a></td>
        <td align="center"><a href="#"></a></td> 
-    </tr>
-    
+    </tr> 
     <tr>
       <td align="center">PM & Modeling</td>
       <td align="center">Modeling & Back-end</td>
       <td align="center">Modeling</td>
       <td align="center">Back-end & Front-end</td>
       <td align="center">Back-end & Front-end</td>
-     
     </tr>
   </tbody>
 </table>
