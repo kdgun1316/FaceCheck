@@ -87,6 +87,7 @@
 ![](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white)
 
 ## 🏷E-R Diagram
+![Image](https://github.com/user-attachments/assets/b4c0c6c0-a82b-46e8-bca0-5fbd63b7021a)
 
 
 
