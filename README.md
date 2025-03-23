@@ -25,9 +25,9 @@
       <th align="center"> 문가영 </th>
     </tr>
     <tr>
-      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
-      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
-      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
+      <td align="center"><img src="https://github.com/user-attachments/assets/51fafb40-df6e-46c5-98b1-627732e66ca6"width="150" height="200"/></td>
+      <td align="center"><img src="https://github.com/user-attachments/assets/aa26297b-b0c1-4f54-8f64-51c32d0254ce"width="150" height="200"/></td>
+      <td align="center"><img src="https://github.com/user-attachments/assets/a079c344-57b2-4749-853d-ca88f53b70ca"width="150" height="200"/></td>
       <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
       <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
     </tr>
@@ -144,5 +144,9 @@
 1. 실시간 성능 최적화
 2. AI 모델 정확도 향상
 3. 모바일 앱/기기 연동
+
+## 💝 감사의 말씀
+
+"지금까지 The Chill팀 프로젝트를 끝까지 함께 해준 팀원들 모두 고생하셨고 진심으로 감사드립니다.🫶"
 
 
