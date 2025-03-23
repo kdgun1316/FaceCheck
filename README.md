@@ -51,6 +51,7 @@
 
 ## 🎥시연 영상
 
+영상넣기
 
 
 ## 🗓프로젝트 기간
@@ -88,6 +89,53 @@
 
 ## 🏷E-R Diagram
 ![Image](https://github.com/user-attachments/assets/b4c0c6c0-a82b-46e8-bca0-5fbd63b7021a)
+
+
+## DataSet
+데이터 출처, 전처리, 라벨 등 내용추가 이미지 및 표 활용해서 내용추가
+
+
+## 📚주요 기능
+**1. ai관련내용용**
+- ai관련내용
+- ai관련내용
+
+  
+**2. WebSocket 기반 실시간 관리자 알림 시스템**
+- 출입 인식 결과(성공/실패)를 **Spring Boot ↔ htmp로 실시간 전송**
+- 인식 실패 시 **경고 메시지 + DB 로그 자동 저장**
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/21a25aed-21a3-47e8-b3b1-59ede24492d2" width="450" />
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/1c6f8ffc-b4e2-4ae6-b7ea-a6e05053b91d" width="450" /> 
+    </td>
+  </tr>
+</table>
+
+
+## ⚒ 트러블슈팅 & 기술구현
+**1. 이미지 전송 실패**
+
+**문제 :** 브라우저에서 여러 장의 사진을 찍고 전송 시 이미지가 전송되지 않음
+
+**원인 :** 브라우저에서 촬영한 이미지를 Base64 형식으로 바로 서버에 전송하려 했지만, 서버는 이를 파일 데이터로 인식하지 못해 처리 불가.
+
+**해결 :** Base64 → Blob → File로 변환 후 FormData.append()를 사용해 실제 이미지 파일처럼 전송하여 서버에서 MultipartFile로 정상 수신되도록 처리
+
+
+
+**2. train, test, validation 값 문제**
+
+**문제 :** ArcFace 모델을 학습시켰으나 Accuracy가 비정상적으로 낮게 측정됨.
+
+**원인 :** 학습에 사용된 DataSet.json, Train.json, Valid.json, Test.json 파일에서 라벨(Label) 값이 int가 아니라 string 형태로 저장되어 있었음. 즉, 데이터 라벨링이 코드에서 요구하는 형식과 맞지 않음.
+
+**해결 :** 라벨 값을 string에서 int로 변환한 후 다시 학습을 진행한 결과, Accuracy가 정상적으로 측정됨.
+
+
 
 
 
