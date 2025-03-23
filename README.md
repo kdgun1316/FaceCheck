@@ -117,25 +117,32 @@
 
 
 ## ⚒ 트러블슈팅 & 기술구현
-**1. 이미지 전송 실패**
+**🖼️ 1. 이미지 전송 실패**
 
-**문제 :** 브라우저에서 여러 장의 사진을 찍고 전송 시 이미지가 전송되지 않음
+<table> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/cc28fcb8-33d7-4327-afcc-cdb8e0f8ee22" width="500"/> </td> </tr> </table>
 
-**원인 :** 브라우저에서 촬영한 이미지를 Base64 형식으로 바로 서버에 전송하려 했지만, 서버는 이를 파일 데이터로 인식하지 못해 처리 불가.
+**문제 :** 브라우저에서 여러 장의 사진을 찍고 전송 시, 이미지가 서버에 도달하지 않음
 
-**해결 :** Base64 → Blob → File로 변환 후 FormData.append()를 사용해 실제 이미지 파일처럼 전송하여 서버에서 MultipartFile로 정상 수신되도록 처리
+**원인 :** 라우저에서는 이미지를 Base64 형식으로 전송했지만, 서버에서는 이를 실제 MultipartFile로 인식하지 못해 에러 발생
 
-
-
-**2. train, test, validation 값 문제**
-
-**문제 :** ArcFace 모델을 학습시켰으나 Accuracy가 비정상적으로 낮게 측정됨.
-
-**원인 :** 학습에 사용된 DataSet.json, Train.json, Valid.json, Test.json 파일에서 라벨(Label) 값이 int가 아니라 string 형태로 저장되어 있었음. 즉, 데이터 라벨링이 코드에서 요구하는 형식과 맞지 않음.
-
-**해결 :** 라벨 값을 string에서 int로 변환한 후 다시 학습을 진행한 결과, Accuracy가 정상적으로 측정됨.
+**해결 :** Base64 → Blob → File 변환 후 FormData.append()를 사용하여 실제 이미지 파일처럼 전송하도록 수정 → 서버에서 정상 수신 ✅
 
 
 
+**🧪 2. Train/Test/Validation 값 문제**
+
+<table> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/255ec0ef-631b-4586-8ee2-edf15e983097" width="500"  height="300"/> </td> </tr> </table>
+
+- **문제 :** ArcFace 모델 학습 시 Accuracy가 비정상적으로 낮게 출력됨
+
+- **원인 :** train.json, valid.json, test.json에 저장된 라벨 값이 string 타입이라 학습 과정에서 클래스 분류가 정상적으로 동작하지 않음
+
+- **해결 :** 라벨 값을 string → int 타입으로 변환 후 재학습 → Accuracy가 정상적으로 측정됨 ✅
+
+
+## 📉 향후 확장 계획
+1. 실시간 성능 최적화
+2. AI 모델 정확도 향상
+3. 모바일 앱/기기 연동
 
 
