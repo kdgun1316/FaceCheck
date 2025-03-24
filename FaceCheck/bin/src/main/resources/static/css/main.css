@@ -1,22 +1,31 @@
 @charset "UTF-8";
-/* 기본 레이아웃 */
+
+/* ✅ 기본 레이아웃 */
 .dashboard-container {
-    max-width: 1400px;
+    max-width: 1900px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* ✅ 모든 내용 오른쪽 정렬 */
+    padding-right: 0; /* ✅ 음수 값은 작동하지 않으므로 0으로 수정 */
+    padding-left: 320px;
+    margin-top: 30px;
 }
 
-/* 상단 통계 카드 */
+/* ✅ 상단 통계 카드 */
 .stats-cards {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .stat-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
     flex: 1;
@@ -24,122 +33,198 @@
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
 }
 
-/* 메인 콘텐츠 영역 */
+/* ✅ 메인 콘텐츠 영역 */
 .content-wrapper {
     display: flex;
-    gap: 20px;
     flex-wrap: wrap;
-}
-
-/* 좌측 영역: 성공/실패/인식률 */
-.metrics-section {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 calc(50% - 10px);
-}
-
-/* 우측 영역: 차트와 실시간 알림을 나란히 배치 */
-.right-section {
-    display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
     gap: 20px;
-    flex: 1 1 calc(50% - 10px);
+    margin-top: 20px;
 }
 
-/* 출입 로그 수 컨테이너 */
-.chart-section {
+/* ✅ 개별 차트 컨테이너 스타일 (수정) */
+.section-box {
+    flex: 1; /* ✅ 자동 크기 조정 */
+    max-width: calc(33.33% - 15px); /* ✅ 한 줄에 3개 배치로 변경 (기존 25%에서 33.33%로 확대) */
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    flex: 1 1 50%;
-    height: 350px; /* 고정 높이 */
-}
-
-.chart-container {
-    position: relative;
-    height: 300px;
-}
-
-.chart-header {
-    margin-bottom: 20px;
-}
-
-.chart-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* 실시간 알림 컨테이너 */
-.notice-section {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    flex: 1 1 50%;
-    height: 350px; /* 고정 높이 */
-    min-height: 350px; /* 알림이 없어도 최소 높이 유지 */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 450px;
+    box-sizing: border-box;
+    position: relative; /* ✅ 내부 요소 위치 조정 가능하도록 */
 }
 
+/* ✅ 차트 내부 날짜 레이블 조정 (차트 라이브러리 의존) */
+.section-box canvas {
+    width: 100% !important; /* ✅ 차트가 컨테이너에 맞게 조정 */
+    height: auto; /* ✅ 높이 자동 조정 */
+}
+
+/* ✅ 차트 제목 스타일 */
+.chart-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* ✅ 실시간 알림 컨테이너 스타일 */
+.notice-section {
+    flex: 1; /* 자동 크기 조정 */
+    max-width: calc(33.33% - 15px); /* 한 줄에 3개 배치 */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 450px; /* ✅ 차트와 높이 맞춤 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ✅ 실시간 알림 리스트 스타일 */
 .notice-list {
-    max-height: 300px; /* notice-section 높이에서 padding 등을 고려 */
+    flex: 1;
+    max-height: 380px; /* ✅ 컨테이너 내부 크기 조절 */
     overflow-y: auto;
+    padding-right: 10px;
+    margin-top: 10px;
 }
 
+/* ✅ 실시간 알림 개별 항목 스타일 */
 .notice-item {
     display: flex;
-    gap: 15px;
+    align-items: center; /* ✅ 내부 요소 수직 정렬 */
+    justify-content: space-between; /* ✅ 요소 간 간격 균등 배분 */
+    gap: 15px; /* ✅ 요소 간 간격 */
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.notice-close:hover {
+    background-color: #d32f2f;
+}
+/* ✅ 텍스트 정렬 */
+.notice-content {
+    flex-grow: 1;
+    padding: 5px 10px;
+}
+/* ✅ 삭제 버튼 스타일 */
+.notice-close {
+    width: 50px;
+    height: 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.notice-item .notice-content {
+    flex-grow: 1;
+    padding: 5px 10px;  /* ✅ 내부 여백 추가 */
 }
 
 .notice-item:last-child {
     border-bottom: none;
 }
 
-.notice-profile img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.notice-content {
-    flex: 1;
-}
-
-.notice-status button {
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.notice-status button:hover {
-    background: #c82333;
-}
-
-/* 좌측 메트릭 스타일 */
-.metric-row {
+/* ✅ 등록 버튼 스타일 */
+.submit-btn {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    gap: 8px; /* SVG와 텍스트 간 간격 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    border: none;
+    border-radius: 20px; /* 둥근 모서리 */
+    background-color: #e6f0fa; /* 버튼 배경색 */
+    color: #333; /* 텍스트 색상 */
+    font-size: 16px; /* 텍스트 크기 */
+    cursor: pointer;
+    transition: background-color 0.3s; /* 호버 효과 부드럽게 */
 }
 
-.metric-title {
-    font-weight: bold;
+.submit-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #333; /* SVG 색상 텍스트와 맞춤 */
 }
 
-.metric-value.green { color: green; }
-.metric-value.red { color: red; }
-.metric-value.blue { color: blue; }
+.submit-btn:hover {
+    background-color: #d1e0f5; /* 호버 시 색상 변화 */
+}
+
+/* ✅ 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+    .section-box {
+        flex: 1 1 calc(50% - 10px); /* ✅ 한 줄에 2개 배치 */
+    }
+    .notice-section {
+        flex: 1 1 calc(50% - 10px); /* ✅ 한 줄에 2개 배치 */
+    }
+}
+
+/* ✅ 모바일 (768px 이하) */
+@media (max-width: 768px) {
+    .section-box {
+        flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
+    }
+    .notice-section {
+        flex: 1 1 100%; /* ✅ 한 줄에 1개 배치 */
+    }
+}
+
+.notice-close {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+/* ✅ 날짜 컨테이너 스타일 */
+.date-container {
+    overflow: hidden; /* 컨테이너 밖으로 내용이 넘어가지 않도록 설정 */
+    padding: 5px; /* 여백 조정 */
+    width: 100%; /* 컨테이너 너비 설정 */
+    box-sizing: border-box; /* padding과 border를 포함한 너비 계산 */
+}
+
+.date-item {
+    white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden; /* 내용이 넘어가지 않도록 설정 */
+    text-overflow: ellipsis; /* 내용이 넘어갈 경우 '...' 표시 */
+}
+
+/* ✅ 달력 아이콘 스타일 */
+.calendar-icon {
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.calendar-icon:hover {
+    color: #333;
+}
+
+/* ✅ 날짜 선택 필드 숨기기 */
+.date-picker {
+    display: none;
+}

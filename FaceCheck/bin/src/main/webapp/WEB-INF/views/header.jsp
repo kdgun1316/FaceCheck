@@ -11,12 +11,12 @@
 <body>
 	<div class="container">
     <aside class="sidebar">
-        <div class="avatar">
+<!--         <div class="avatar">
             <div class="avatar__img">
                 <img src="https://picsum.photos/70" alt="avatar">
             </div>
-            <div class="avatar__name">사용자</div>
-        </div>
+            <div class="avatar__name">관리자</div>
+        </div> -->
         <nav class="menu">
             <a class="menu__item" href="main">
                 <i class="menu__icon fa fa-home"></i>
@@ -53,10 +53,9 @@
             <a href="main" class="logo"><img
                 src="${pageContext.request.contextPath}/images/logo.jpg" alt="로고"></a>
             <div class="icons">
-                <input type="text" placeholder="Search"> <span
-                    class="notification-icon">🔔</span>
+                <input type="text" placeholder="Search"> 
                 <div class="user-icon-container">
-                    <span class="user-icon">👤</span>
+                    <span class="user-icon"><a href="main" class="logo"><img src="${pageContext.request.contextPath}/images/user-lock.png" style="width:30px; height:auto;"></a></span>
                     <div class="dropdown-menu1">
                         <a href="login"><span>🚪</span> 로그아웃</a>
                     </div>
@@ -66,6 +65,37 @@
         <!-- Main content goes here -->
     </main>
 </div>
+
+
+
+
+<!-- ✅ WebSocket 메시지를 표시할 모달창 -->
+<div id="alertModal" class="cont_principal">
+    <div class="cont_bgc_modal"></div>
+    <div class="cont_modal">
+        <div class="cont_circulo_prohibido">
+            <div class="cont_raya_divisor"></div>
+            <div class="cont_form_modal">
+                <div class="cont_logo_restrigido">
+                    <div class="cont_circulo_logo">
+                        <div class="con_raya_logo"></div>
+                    </div>
+                </div>
+                <div class="danger"><img
+                src="${pageContext.request.contextPath}/images/warning.png" alt="금지"></div>
+                <div class="po_relative">
+                    <h1>ALERT MESSAGE</h1>
+                    <p id="modalMessage">You have received a message.</p>
+                </div>
+                <div class="cont_btn">
+                    <button class="btn_proceed" id="closeModal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 </body>
 </html>

@@ -1,113 +1,234 @@
 @charset "UTF-8";
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+/* 전체 배경 스타일 */
+.management {
+  max-width: 2000px;
+  margin: 0 auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 20px;
 }
 
-
-.user-management h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.user-management h2 {
-  font-size: 20px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.user-management ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.user-management ul li {
-  margin-bottom: 5px;
-}
-
-/* 표 스타일 */
-.management {
-    padding-top: 10px; /* ✅ 너무 큰 여백 줄이기 */
-    max-width: 1200px; /* ✅ 너무 큰 값(5000px) 조정 */
-    margin: 0 auto; /* 중앙 정렬 */
-    min-height: 100vh; /* ✅ 화면 전체 높이 유지 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-center; /* ✅ 중앙 정렬 */
-}
-
-
+/* 테이블 스타일 */
 .user-table {
-  width: 1500px;
+  width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .user-table th,
 .user-table td {
-  padding: 12px;
+  padding: 12px 20px;
   text-align: left;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .user-table th {
   background-color: #f4f4f4;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .user-table tbody tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-.user-table tbody tr:hover {
-  background-color: #f1f1f1;
+.user-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
 }
 
-/* 점 3개 스타일 */
+.user-table tbody tr:hover {
+  background-color: #e9f5ff;
+  cursor: pointer;
+}
+
+/* 드롭다운 메뉴 스타일 */
 .dots {
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
   padding: 5px;
-  display: inline-block;
+  color: #333;
+  transition: all 0.3s ease-in-out;
 }
 
-/* 드롭다운 스타일 */
-.dropdown- {
-  position: relative;
-  display: inline-block;
+.dots:hover {
+  color: royalblue;
 }
 
-/* 드롭다운 스타일 */
+.user-action-dropdown { 
+  position: relative; 
+  display: inline-block; 
+} 
+
+.user-action-dropdown-menu { 
+  display: none; 
+  position: absolute; 
+  top: 100%; 
+  left: 50%; /* 드롭다운을 중앙에 배치 */
+  transform: translateX(-50%); /* 가운데 정렬을 위한 변환 */
+  background-color: #fff; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); 
+  padding: 10px 0; 
+  z-index: 10; 
+  width: 150px; 
+} 
+
+.user-action-dropdown-menu button { 
+  width: 100%; 
+  padding: 10px; 
+  text-align: left; 
+  border: none; 
+  background: none; 
+  color: #333; 
+  cursor: pointer; 
+  font-size: 14px; 
+} 
+
+.user-action-dropdown-menu button:hover { 
+  background-color: #f4f4f4; 
+  color: royalblue; 
+}
+
+
+/* 아래 코드로 대체하세요 */
+/* 버튼 컨테이너를 위한 새로운 클래스 */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* 우측 정렬 */
+    margin-bottom: 20px; /* 테이블과 간격 */
+    width: 100%;
+}
+.cta-button {
+    background-color: #16a4fa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.cta-button:hover {
+    background-color: #0f8dd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 드롭다운 관련 스타일 */
+.dropdown- .dropdown-menu {
+  display: block; /* 클릭 시 드롭다운 보이기 */
+}
+/* 애니메이션 */
 .dropdown-menu {
-  display: none; /* 기본적으로 숨김 */
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.dropdown-:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 제목 스타일 */
+.manage {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+/* 검색 컨테이너 스타일 */
+.search-container {
+  display: flex;
+  justify-content: flex-end; /* 우측 정렬 */
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+#searchInput {
+  width: 300px;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  padding: 5px; /* 여백 추가 */
-  white-space: nowrap; /* 줄바꿈 방지 */
+  font-size: 16px;
 }
 
-.dropdown-menu button {
+.cta-button {
+  background-color: #16a4fa;
+  color: white;
   border: none;
-  background: none;
-  text-align: center;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  color: black;
-  padding: 8px 12px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.dropdown-menu button:hover {
-  background-color: #f0f0f0;
+.cta-button:hover {
+  background-color: #0f8dd8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* 테이블 스타일 */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 400px; /* 전체 테이블 높이 고정 */
+  min-height: 200px; /* 테이블의 최소 높이 설정 */
+  overflow-y: auto; /* 스크롤 추가 */
+}
+.user-table th,
+.user-table td {
+  padding: 12px 20px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  min-width: 100px; /* 셀의 최소 너비 설정 */
+}
+
+.user-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.user-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.user-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.user-table tbody tr:hover {
+  background-color: #e9f5ff;
+  cursor: pointer;
+}
