@@ -152,7 +152,7 @@ public class AdminService {
         String logTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         log.setLog_time(logTime);
         
-        log.setEmp_num(221315); // ⚠️ 실제 프로젝트에서는 emp_num 정확히 설정 필요
+        log.setEmp_num(80808); // ⚠️ 실제 프로젝트에서는 emp_num 정확히 설정 필요
 
         logMapper.insertLog(log);
     }

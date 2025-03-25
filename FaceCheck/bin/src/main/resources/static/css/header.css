@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -11,7 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Pretendard-Regular';
+  font-family: 'NEXON Lv1 Gothic OTF';
 }
 
 body {
@@ -44,9 +44,9 @@ body {
 
 /* ✅ 사이드바 */
 .sidebar {
-  width: 250px;
+  width: 300px;
   background-color: white;
-  color: #A8B2B9;
+  color: #595959;
   box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
   height: calc(100vh - 85px);
   position: fixed;
@@ -151,7 +151,7 @@ body {
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: 16px 20px;
+  padding: 20px 20px;;
   border-left: 4px solid transparent;
   transition: all 0.3s ease;
 }
@@ -182,7 +182,7 @@ body {
 
 .dropdown-content a {
   display: block;
-  color: #A8B2B9;
+  color: #595959;
   text-decoration: none;
   font-size: 0.75rem;
   padding: 12px 20px 12px 55px;
@@ -229,7 +229,6 @@ body {
   flex-grow: 1;
   margin-left: 250px; /* 사이드바 너비만큼 이동 */
   background-color: #FCFBFC;
-  padding: 20px;
 }
 
 /* 아이콘 스타일 */
@@ -243,15 +242,16 @@ body {
   padding: 8px 12px;
   border: 1px solid #e1e1e1;
   border-radius: 4px;
+  width: 350px;
 }
 
-.notification-icon, .user-icon {
+.user-icon {
   cursor: pointer;
   font-size: 1.2rem;
   transition: transform 0.2s ease;
 }
 
-.notification-icon:hover, .user-icon:hover {
+.user-icon:hover {
   transform: scale(1.1);
 }
 
@@ -295,6 +295,112 @@ body {
 .sidebar a:active {
   text-decoration: none !important;
 }
+
+
+
+
+.cont_principal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1000;
+}
+
+.cont_bgc_modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #F24541;
+  opacity: 0;
+  transition: all 0.2s;
+  display: none;
+}
+
+.cont_modal {
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: none;
+    height: 300px;
+}
+
+.cont_logo_restrigido {
+  margin-bottom: 15px;
+}
+
+.po_relative h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.po_relative p {
+  font-size: 16px;
+}
+
+.btn_proceed {
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: 2px solid #F24541;
+  color: #F24541;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 15px;
+}
+
+.btn_proceed:hover {
+  background-color: #F24541;
+  color: #fff;
+}
+
+.po_relative {
+	color: white;
+	margin-top: 10px;
+}
+
+.danger img{
+	width: 100px;
+    height: 100px;
+}
+
+
+
+/* ✅ 성공 메시지를 표시할 스타일 */
+.success-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 255, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;  /* 기본적으로 숨김 */
+  animation: fadeOut 3s forwards; /* 3초 후 사라지게 */
+}
+
+/* ✅ 성공 메시지가 서서히 사라지는 효과 */
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
 
 /* Font Awesome CDN 추가 필요 */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

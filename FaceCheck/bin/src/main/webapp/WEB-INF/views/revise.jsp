@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/revise.css" />
 <script defer src="/js/header.js"></script>
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
 
@@ -36,8 +39,8 @@
                 <div class="form-group">
                     <label for="dept">부서</label>
                     <select class="form-control" id="gender" name="dept" required>
-                        <option value="accountion">회계</option>
-                        <option value="personnel">인사</option>
+                        <option value="회계">회계</option>
+                        <option value="인사">인사</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -49,7 +52,13 @@
                     <input class="form-control" type="tel" id="phone" name="emp_phone" required>
                 </div>
             
-                <button type="submit" class="register-btn">등록</button>
+<!--                 <button type="submit" class="register-btn">등록</button>
+ -->                <button class="register-btn">
+					  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+					    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+					  </svg>
+					  등록
+					</button>
             </form>
 
          </div>
