@@ -259,8 +259,60 @@ function deleteLog(btn, log_idx) {
         console.error(err);
         alert('에러가 발생했습니다.');
     });
+    
+   
+}
+// ✅ WebSocket 상태 체크 함수는 deleteLog 함수 밖에 선언해야 합니다!
+function checkWebSocketStatus() {
+    fetch('/FaceCheck/api/status')
+        .then(res => res.json())
+        .then(data => {
+            const circle = document.querySelector('#ws-status-circle');
+            const text = document.querySelector('#ws-status-text');
 
+            if (data.online) {
+                circle.style.backgroundColor = 'green';
+                text.textContent = '정상';
+            } else {
+                circle.style.backgroundColor = 'red';
+                text.textContent = '연결 끊김';
+            }
+        })
+        .catch(err => {
+            const circle = document.querySelector('#ws-status-circle');
+            const text = document.querySelector('#ws-status-text');
+            circle.style.backgroundColor = 'gray';
+            text.textContent = '서버 응답 없음';
+        });
 }
 
+// ✅ 페이지 진입 즉시 상태 확인 + 주기적 갱신
+checkWebSocketStatus();
+setInterval(checkWebSocketStatus, 3000);
 
+// ✅ WebSocket 연결 코드 (장치관리 상태 감지를 위해 반드시 필요)
+let dashboardSocket;
 
+function connectDashboardWebSocket() {
+    const wsUrl = `ws://${location.host}/FaceCheck/ws/alert`;
+    dashboardSocket = new WebSocket(wsUrl);
+
+    dashboardSocket.onopen = () => {
+        console.log("🟢 WebSocket 연결 성공 (대시보드)");
+    };
+
+    dashboardSocket.onclose = () => {
+        console.log("🔴 WebSocket 연결 종료됨 (대시보드)");
+    };
+
+    dashboardSocket.onerror = (error) => {
+        console.error("❌ WebSocket 오류 발생:", error);
+    };
+
+    dashboardSocket.onmessage = (event) => {
+        console.log("📩 WebSocket 메시지 수신 (대시보드):", event.data);
+    };
+}
+
+// 페이지 로드 시 바로 WebSocket 연결
+connectDashboardWebSocket();

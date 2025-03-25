@@ -30,6 +30,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
         sessions.remove(session);
         System.out.println("❌ WebSocket 연결 해제됨! 현재 접속자 수: " + sessions.size());
     }
+    
+    // 웹소켓 확인 정상작동 확인코드
+    
+    
 
     // ✅ WebSocket을 통해 관리자에게 메시지 전송 (오류 발생 가능성 확인)
     public void sendAlertToAdmins(String message) {
@@ -50,4 +54,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
             }
         }
     }
+    public static boolean isServerRunning() {
+        return !sessions.isEmpty();
+    }
+    
 }

@@ -1,5 +1,6 @@
 package com.facecheck.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,18 @@ public class WebSocketController {
 
     @Autowired
     private SuccessWebSocketHandler successWebSocketHandler; // ✅ 성공 메시지 WebSocket 핸들러
-
+    
+    @GetMapping("/status")
+    public Map<String, Object> getWebSocketStatus() {
+        boolean online = WebSocketHandler.isServerRunning();
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", online ? "정상" : "연결 끊김");
+        response.put("online", online);
+        return response;
+    }
+    
+    
+    
     // 🚨 경고 메시지 처리 (미등록 사용자)
     @PostMapping("/test-alert")
     public ResponseEntity<?> sendAlertToAdmins(@RequestBody Map<String, String> payload) {
