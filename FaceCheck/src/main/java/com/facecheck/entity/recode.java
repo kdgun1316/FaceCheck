@@ -18,5 +18,6 @@ public class recode extends Employee {
     private String log_time;
     private int emp_num;
     private String admin_id;
-    private String emp_image;
+    private byte[] emp_image;
+    private String base64Image;
 }

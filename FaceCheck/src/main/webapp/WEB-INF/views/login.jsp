@@ -12,7 +12,6 @@
     <div class="background-effect"></div>
     <div class="particles"></div>
     <div class="login-container">
-    	<div class="particles-border">
         
         
         <h2>ADMIN LOGIN</h2>

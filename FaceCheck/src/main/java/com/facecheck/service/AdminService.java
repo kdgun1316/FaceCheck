@@ -1,5 +1,9 @@
 package com.facecheck.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -165,6 +169,57 @@ public class AdminService {
     public void deleteLog(Long log_idx) {
         logMapper.deleteLog(log_idx);
     }
+
+    
+    public Long insertLogWithImage(String empNum, String status, String imageUrl) {
+        Log log = new Log();
+
+        // ✅ empNum이 실패한 경우(-1)이거나 null일 때 안전 처리
+        try {
+            int empNumInt = Integer.parseInt(empNum);
+            if (empNumInt != -1) {
+                log.setEmp_num(empNumInt);  // 정상 emp_num
+            } else {
+                log.setEmp_num(null);       // 실패일 경우 null
+            }
+        } catch (Exception e) {
+            log.setEmp_num(null);  // 파싱 오류 시도 안전 처리
+        }
+
+        log.setStatus(status);
+        log.setLog_time(null); // DB에서 NOW()로 처리
+        log.setAdmin_id("admin1");
+
+        // ✅ 이미지 경로 → byte[] 변환해서 저장
+        byte[] imageBytes = null;
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            imageBytes = readImageFromPath(imageUrl);
+        }
+        log.setEmp_image(imageBytes);
+
+        logMapper.insertLog(log);
+        return log.getLog_idx();
+    }
+
+
+
+
+
+    private byte[] readImageFromPath(String path) {
+        try {
+            Path imagePath = Paths.get(path);
+            return Files.readAllBytes(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public Log selectLogByIdx(Long logIdx) {
+        return logMapper.selectLogByIdx(logIdx);
+    }
+	
 	
 
 

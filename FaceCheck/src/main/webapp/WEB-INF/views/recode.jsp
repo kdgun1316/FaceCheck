@@ -38,7 +38,8 @@
     </div>
     <table class="user-table" style="margin: 0 auto;">
       <tr class="tr">
-        <th>index</th>
+
+        <th>이미지</th>
         <th>이름</th>
         <th>사번</th>
         <th>부서</th>
@@ -53,7 +54,21 @@
           recode rec = recList.get(i);
       %>
       <tr>
-        <td><%=rec.getLog_idx()%></td>
+  
+        <td>
+          <%
+            String base64Image = rec.getBase64Image();
+            if (base64Image != null) {
+          %>
+            <img src="data:image/jpeg;base64,<%= base64Image %>" width="60" height="60" />
+          <%
+            } else {
+          %>
+            <img src="images/face_recognition.jpg" width="60" height="60" />
+          <%
+            }
+          %>
+        </td>
         <td><a href="entry_log?emp_num=<%=rec.getEmp_num()%>"><%=rec.getEmp_name()%></a></td>
         <td><%=rec.getEmp_num()%></td>
         <td><%=rec.getDept()%></td>

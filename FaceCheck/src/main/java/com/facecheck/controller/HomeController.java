@@ -1,5 +1,6 @@
 package com.facecheck.controller;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.facecheck.entity.Admin;
 import com.facecheck.entity.Employee;
 import com.facecheck.entity.Log;
 import com.facecheck.entity.recode;
+import com.facecheck.mapper.LogMapper;
 import com.facecheck.service.AdminService;
 import com.facecheck.service.LogInfoService;
 
@@ -189,21 +191,33 @@ public class HomeController {
 	    return result;
 	}
 
+	@Autowired
+	private LogMapper logMapper;
 
+	/*
+	 * @PostMapping("/deleteLog")
+	 * 
+	 * @ResponseBody public Map<String, Object> deleteLog(@RequestParam("log_idx")
+	 * Long log_idx) { Map<String, Object> result = new HashMap<>();
+	 * 
+	 * try { adminservice.deleteLog(log_idx); result.put("success", true); } catch
+	 * (Exception e) { e.printStackTrace(); result.put("success", false); } return
+	 * result; }
+	 */
 	@PostMapping("/deleteLog")
 	@ResponseBody
-	public Map<String, Object> deleteLog(@RequestParam("log_idx") Long log_idx) {
-		Map<String, Object> result = new HashMap<>();
-		try {
-			adminservice.deleteLog(log_idx);
-			result.put("success", true);
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("success", false);
-		}
-		return result;
+	public ResponseEntity<Map<String, Object>> deleteLog(@RequestParam("log_idx") Long logIdx) {
+		System.out.println("📌 [삭제 요청 수신] log_idx = " + logIdx);
+	    int result = logMapper.deleteLog(logIdx);
+
+	    if (result > 0) {
+	        return ResponseEntity.ok(Map.of("success", true));
+	    } else {
+	        return ResponseEntity.ok(Map.of("success", false));
+	    }
 	}
 
+	
 	@PostMapping("/login")
 	public String login(Admin admin, HttpSession session) {
 
@@ -224,10 +238,22 @@ public class HomeController {
 		model.addAttribute("empNumCount", empNumCount); // JSP로 데이터 전달
 
 		List<Log> logList = adminservice.getRecentLogs();
+		for (Log log : logList) {
+		    byte[] imageBytes = log.getEmp_image();
+		    if (imageBytes != null) {
+		        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+		        log.setBase64Image(base64Image);  // ✅ 엔티티에 넣어줘야 JSP에서 쓸 수 있음
+		    }
+		}
+
+		
 		model.addAttribute("logList", logList);
 		return "main"; // main.jsp로 매핑
 	}
 
+	
+	
+	
 	@GetMapping("/user-management")
 	public String select(Model model) {
 		List<Employee> emp = adminservice.empselect();
@@ -239,17 +265,19 @@ public class HomeController {
 
 	@GetMapping("/recode")
 	public String select2(Model model) {
+	    List<recode> rec = adminservice.recselect();
 
-		List<recode> rec = adminservice.recselect();
-		// List<Employee> emp = adminservice.empselect();
+	    for (recode r : rec) {
+	        if (r.getEmp_image() != null) {
+	            String base64 = java.util.Base64.getEncoder().encodeToString(r.getEmp_image());
+	            r.setBase64Image(base64);
+	        }
+	    }
 
-		// 1. SQL구문으로 join해서 불러오는 방법 1개 (java 로직으로 해결하는 것도 방법)
-
-		System.out.println(rec.toString());
-		model.addAttribute("recselect", rec);
-		// model.addAttribute("empselect", emp);
-		return "recode";
+	    model.addAttribute("recselect", rec);
+	    return "recode";
 	}
+
 
 	/*
 	 * @Autowired private LogInfoService logInfoService; // @Autowired로 의존성 주입
@@ -269,15 +297,20 @@ public class HomeController {
 
 	@GetMapping("/entry_log")
 	public String log(@RequestParam(value = "emp_num", required = false) Integer empNum, Model model) {
-		System.out.println(empNum);
+	    List<recode> logList = adminservice.logSelect(empNum);
 
-		List<recode> logList = adminservice.logSelect(empNum);
+	    for (recode rec : logList) {
+	        byte[] imageBytes = rec.getEmp_image();
+	        if (imageBytes != null) {
+	            String base64 = Base64.getEncoder().encodeToString(imageBytes);
+	            rec.setBase64Image(base64);
+	        }
+	    }
 
-		System.out.println(logList.toString());
-		model.addAttribute("logList", logList);
-
-		return "entry_log";
+	    model.addAttribute("logList", logList);
+	    return "entry_log";
 	}
+
 
 	@GetMapping("/deleteUser")
 	public String deleteEmployee(@RequestParam String emp_num) {
