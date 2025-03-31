@@ -31,12 +31,12 @@
       <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
       <td align="center"><img src="https://github.com/user-attachments/assets/b920227a-cbd4-488a-b757-bf7358726ab6"width="150" height="200"/></td>
     </tr>
-    <tr>
-       <td align="center"><a href="#"></a></td>
-       <td align="center"><a href="#"></a></td>
-       <td align="center"><a href="#"></a></td>
+    <tr>     
+       <td align="center"><a href="https://github.com/Limsumin24">@Limsumin24</a></td>
+       <td align="center"><a href="https://github.com/Park-yong-woo">@Park-yong-woo</a></td>
+       <td align="center"><a href="https://github.com/kimhyunman">@kimhyunman</a></td>
        <td align="center"><a href="https://github.com/kdgun1316">@kdgun1316</a></td>
-       <td align="center"><a href="#"></a></td> 
+       <td align="center"><a href="https://github.com/moon-ga-young">@moon-ga-young</a></td> 
     </tr> 
     <tr>
       <td align="center">PM & Modeling</td>
