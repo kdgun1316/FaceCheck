@@ -1,6 +1,6 @@
 ## 📷 FaceCheck : 실전프로젝트
 
-![image](https://github.com/user-attachments/assets/1bda2da5-c845-4334-b391-ee1fdeb1bb5e)
+![Image](https://github.com/user-attachments/assets/98c10205-b803-47da-b76a-a989228ee088)
 
 ## 📃 프로젝트 소개
 **주제 : ArcFace 모델을 활용한 출입 관리 시스템**
@@ -29,7 +29,7 @@
       <td align="center"><img src="https://github.com/user-attachments/assets/aa26297b-b0c1-4f54-8f64-51c32d0254ce"width="150" height="200"/></td>
       <td align="center"><img src="https://github.com/user-attachments/assets/a079c344-57b2-4749-853d-ca88f53b70ca"width="150" height="200"/></td>
       <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
-      <td align="center"><img src="https://github.com/user-attachments/assets/47d9d46c-0035-44e3-ade5-6ca2643aba6f"width="150" height="200"/></td>
+      <td align="center"><img src="https://github.com/user-attachments/assets/b920227a-cbd4-488a-b757-bf7358726ab6"width="150" height="200"/></td>
     </tr>
     <tr>
        <td align="center"><a href="#"></a></td>
@@ -51,14 +51,14 @@
 
 ## 🎥시연 영상
 
-영상넣기
+https://github.com/user-attachments/assets/91aedef2-7fd4-40f6-88b6-0e0a48421e42
 
 
 ## 🗓프로젝트 기간
 
 | 구분               | 기간                                         |
 |--------------------|----------------------------------------------|
-| **계획 / 분석 / 설계** | 25. 03. 04 ~ 25. 03. 25                   |
+| **계획 / 분석 / 설계** | 25. 02. 11 ~ 25. 03. 04                   |
 | **구현**               | 25. 03. 04 ~ 25. 03. 25                   |
 
 ## 🔨 사용기술
@@ -90,16 +90,62 @@
 ## 🏷E-R Diagram
 ![Image](https://github.com/user-attachments/assets/b4c0c6c0-a82b-46e8-bca0-5fbd63b7021a)
 
+## 📊 데이터 출처 및 구성
 
-## DataSet
-데이터 출처, 전처리, 라벨 등 내용추가 이미지 및 표 활용해서 내용추가
+본 프로젝트에서는 **얼굴 인식 기반 출입 시스템 개발**을 위해 다양한 출처에서 수집된 얼굴 이미지를 사용하였습니다.
+
+| 출처 | 설명 |
+|------|------|
+| 🧠 **AI Hub - 얼굴 이미지 데이터셋** | 한국정보화진흥원이 공개한 공공 데이터로, 다양한 연령대·표정·각도 등의 얼굴 이미지 포함 |
+| 🌍 **Kaggle - 얼굴 인식용 데이터셋** | 비상업적 사용이 가능한 Kaggle의 얼굴 이미지 데이터셋 활용 (예: LFW, VGGFace 등) |
+| 🧑‍💻 **직접 촬영한 이미지** | 교육생 및 팀원들이 직접 촬영한 고유 얼굴 이미지. 등록 및 출입 테스트용으로 활용 |
+| 🏫 **스마트인재개발원 제공 이미지** | 교육 실습용으로 제공된 학습 이미지. 내부 프로젝트에 한해 사용 |
+
+## 📁 데이터 구성 및 형식
+
+- **이미지 포맷**: `.jpg`, `.png`  
+- **총 이미지 수**: 외국인 1600장 + 한국인 1100장 = 2700장 
+- **디렉토리 구조**: /dataset ├── 1111/ (사용자 사번) │ ├── 1111.jpg
+
+**- **라벨링 기준**: 폴더명(사번)을 기준으로 자동 라벨링
+
+## 🧹 데이터 전처리
+
+- 얼굴 이미지 정규화 및 (244x244 resize)
+- OpenCV 기반 얼굴 정렬 및 crop 처리
+- ArcFace 임베딩 추출을 위한 전처리 적용
+- 학습/등록/실시간 테스트 데이터 구분 저장
+
+## 🧪 사용 목적 및 적용
+
+- ArcFace 임베딩 학습 및 유사도 기반 비교 검증
+- 출입 요청자와 등록 사용자의 **코사인 유사도 비교**
+- 관리자 페이지에 **WebSocket 기반 실시간 알림 전송**
+- 출입 성공/실패 로그 및 이미지 DB 저장 기능 구현
+
+## ⚠️ 유의사항
+
+- 모든 데이터는 비상업적 연구 및 교육 목적에 한해 사용됩니다.
+- 직접 촬영한 이미지의 경우 사전 동의를 받은 후 내부 프로젝트에만 사용되었으며, 외부로 공개되지 않습니다.
+- AI Hub 및 Kaggle 데이터는 각 사이트의 라이선스 조건을 준수하여 활용하였습니다.
+**
+
 
 
 ## 📚주요 기능
-**1. ai관련내용용**
-- ai관련내용
-- ai관련내용
-
+**1. 출입 성공 및 실패**
+- 비인가자가 출입을 시도할 시 인식 실패 알림이 띄어짐
+- 등록된 사용자가 출입을 시도할 시 인증 성공 알림이 띄어짐
+ <table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/bdedc65f-9305-43f0-b5d7-a858ad3b4c1e" width="450" />
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/1047b970-7a8a-4a74-8abe-07b2d2ab9f79" width="450" /> 
+    </td>
+  </tr>
+</table>
   
 **2. WebSocket 기반 실시간 관리자 알림 시스템**
 - 출입 인식 결과(성공/실패)를 **Spring Boot ↔ htmp로 실시간 전송**
